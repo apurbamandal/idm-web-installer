@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
+import { Router } from '@angular/router';
+import { WebService } from '../webservices/webservices.services';
 
 @Component({
   selector: 'app-install',
@@ -7,9 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InstallComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: Http, private router: Router, private webservice: WebService) { }
 
-  ngOnInit() {
+  public ngOnInit() {
+    this.webservice.isAuthenticated();
   }
 
 }
