@@ -33,3 +33,7 @@ def create_user(app):
             email=app.config['ADMIN_USER'],
             password=utils.encrypt_password(app.config['ADMIN_PASSWORD']))
     db.session.commit()
+
+def get_all_user():
+   user= User.query.all();
+   print(user);

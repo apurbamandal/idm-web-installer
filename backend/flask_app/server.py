@@ -13,7 +13,7 @@ from flask_jwt_simple import (
 )
 
 from .http_codes import Status
-from .factory import create_app, create_user
+from .factory import create_app, create_user,get_all_user
 
 logger = logging.getLogger(__name__)
 app = create_app()
@@ -24,6 +24,7 @@ jwt = JWTManager(app)
 def init():
     """Initialize the application with defaults."""
     create_user(app)
+    get_all_user()
 
 
 @jwt.jwt_data_loader
@@ -51,6 +52,7 @@ def logout():
     # TODO: handle this logout properly, very weird implementation.
     identity = get_jwt_identity()
     if not identity:
+        print("Session Expired")
         return jsonify({"msg": "Token invalid"}), Status.HTTP_BAD_UNAUTHORIZED
     logger.info('Logged out user !!')
     return 'logged out successfully', Status.HTTP_OK_BASIC
@@ -85,6 +87,7 @@ def login():
 def get_data():
     """Get dummy data returned from the server."""
     jwt_data = get_jwt()
+    print("Session Expired")
     if jwt_data['roles'] != 'admin':
         return jsonify(msg="Permission denied"), Status.HTTP_BAD_FORBIDDEN
 
