@@ -33,6 +33,7 @@ import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 
 import '../styles/style.css';
+import { InstallComponent } from './install/install.component';
 // import '../styles/headings.css';
 
 // Application wide providers
@@ -59,7 +60,8 @@ type StoreType = {
     LoginFormComponent,
     SessionExpiredComponent,
     ErrorMessageComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    InstallComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
