@@ -15,7 +15,7 @@ The current build is using `nginx` to serve static files.
 
 1.  `backend` directory contains the flask backend with simple authentication methods
 
-2.  `front` directory contains the angular2 frontend based on [angular-webpack-starter](https://github.com/AngularClass/angular2-webpack-starter)
+2.  `front` directory contains the angular2 frontend based on [angular-webpack-starter](https://github.com/apurbamandal/idm-web-installer.git)
 
 ## Usage
 ---
@@ -23,8 +23,8 @@ The current build is using `nginx` to serve static files.
 1.  Clone the repo
 
     ```bash
-    git clone --depth 1 https://github.com/ansrivas/angular2-flask.git
-    cd angular2-flask
+    git clone --depth 1 https://github.com/apurbamandal/idm-web-installer.git
+    cd idm-web-installer
     ```
 
 2.  Install the backend related requirements and run. The following will start a flask-server on `localhost:8080`
