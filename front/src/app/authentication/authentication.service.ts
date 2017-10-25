@@ -70,10 +70,10 @@ export class AuthenticationService {
     return this.http.post(url, body, options)
       .catch(this.handleError2);
   }
-   handleError2 (error: any) {
+   private handleError2 (error: any) {
     // In a real world app, we might use a remote logging infrastructure
     // We"d also dig deeper into the error to get a better message
-    if(error.status=='401'){
+    if ( error.status === '401' ) {
       localStorage.clear();
       this.router.navigate(['/login']);
     }

@@ -11,6 +11,13 @@ export class WebService {
     return this.authService.getResource('/api/protected');
   }
 
+  public install() {
+    return this.authService.postResource({},'/api/install' );
+  }
+  public download() {
+    return this.authService.postResource({},'/api/download' );
+  }
+
   public isAuthenticated() {
     if (!this.authService.isAuthenticated()) {
       this.authService.clearUserDataAndRedirect();

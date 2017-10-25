@@ -21,3 +21,4 @@ class Status(object):
     HTTP_BAD_CONFLICT = 409
     HTTP_SERVICE_UNAVAILABLE = 503
     HTTP_INTERNAL_TIMEOUT = 504
+    HTTP_Failed = 489
