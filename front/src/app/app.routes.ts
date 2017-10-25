@@ -6,6 +6,7 @@ import { NoContentComponent } from './no-content';
 import { LoginFormComponent } from './login';
 import { NotFoundComponent } from './utils';
 import { DataResolver } from './app.resolver';
+import { InstallComponent } from './install/install.component';
 
 export const ROUTES: Routes = [
   {
@@ -17,5 +18,6 @@ export const ROUTES: Routes = [
   // { path: 'sessionexpired', component: SessionExpiredComponent },
   // { path: 'forgot-password', component: ErrorMessage },
   { path: 'home', component: HomeComponent },
+  { path: 'install', component: InstallComponent },
   { path: '**', component: NotFoundComponent }
 ];
