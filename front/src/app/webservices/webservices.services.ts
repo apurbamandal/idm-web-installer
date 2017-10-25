@@ -1,10 +1,14 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { AuthenticationService } from '../authentication';
 import { Router } from '@angular/router';
+
+
 import { Http, Response } from '@angular/http';
+import {jsonHeader} from "../utils/headers/xhrheaders";
 
 @Injectable()
 export class WebService {
+
   constructor(private authService: AuthenticationService) { }
 
   public getDataFromBackend() {
@@ -16,6 +20,11 @@ export class WebService {
   }
   public download() {
     return this.authService.postResource({},'/api/download' );
+  }
+  public save(body: object) {
+
+    return this.authService.postResource(<String>body,'/api/save' );
+
   }
 
   public isAuthenticated() {
