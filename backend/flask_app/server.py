@@ -163,3 +163,32 @@ def install():
     return Response(json_response,
                     status=sendStat,
                     mimetype='application/json')
+
+
+@app.route('/api/save', methods=['POST'])
+def save():
+
+    logger.info('api called')
+
+    params = request.get_json()
+    a = params.get('a', None)
+    b = params.get('b', None)
+
+    if not a:
+        return jsonify({"msg": "Missing a parameter"}), Status.HTTP_BAD_REQUEST
+    if not b:
+        return jsonify({"msg": "Missing b parameter"}), Status.HTTP_BAD_REQUEST
+
+    hostname = '164.99.162.153'
+    port = 22
+    username = 'root'
+    password = 'novell'
+    command1='touch /home/silent.properties'
+    command2='echo '+a+' > /home/silent.properties'
+    client = SSHClient()
+    client.set_missing_host_key_policy(AutoAddPolicy())
+    client.connect(hostname=hostname, username=username,password=password, port=port)
+    channel = client.get_transport().open_session()
+    channel.exec_command(command1+"\n"+command2)
+    ret=a+"sucees  "+b
+    return jsonify(ret), 200
