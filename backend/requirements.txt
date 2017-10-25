@@ -5,3 +5,4 @@ Flask-Security==3.0.0
 Flask-SQLAlchemy==2.2
 git+https://github.com/ansrivas/pylogging.git
 flask-jwt-simple[asymmetric_crypto]
+paramiko==2.3.1

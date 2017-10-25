@@ -40,6 +40,17 @@ export class HomeComponent implements OnInit, OnDestroy {
       () => console.log('got data')
       );
   }
+
+  public  download() {
+    this.webservice.download()
+      .subscribe(
+        (data) => {
+          console.log('got data');
+        },
+        (err) => this.logError(err),
+        () => console.log('got data')
+      );
+  }
   private handleData(data: Response) {
     if (data.status === 200) {
       let receivedData = data.json();
