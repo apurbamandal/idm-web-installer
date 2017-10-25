@@ -17,6 +17,9 @@ export class WebService {
   public download() {
     return this.authService.postResource({},'/api/download' );
   }
+  public copyIso() {
+    return this.authService.postResource({},'/api/copyIso' );
+  }
 
   public isAuthenticated() {
     if (!this.authService.isAuthenticated()) {
