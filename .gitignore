@@ -3,3 +3,11 @@
 .idea/*
 .idea/vcs.xml
 
+.idea/workspace.xml
+
+.idea/workspace.xml
+.idea/workspace.xml
+!/backend/.idea/
+idm-web-installer.properties
+idm-web-installer.xml
+.idea/workspace.xml
