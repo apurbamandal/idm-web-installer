@@ -21,6 +21,9 @@ export class WebService {
   public download() {
     return this.authService.postResource({},'/api/download' );
   }
+  public copyIso() {
+    return this.authService.postResource({},'/api/copyIso' );
+  }
   public save(body: object) {
 
     return this.authService.postResource(<String>body,'/api/save' );

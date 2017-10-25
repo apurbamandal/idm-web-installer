@@ -11,8 +11,13 @@ from gevent.wsgi import WSGIServer
 from flask_jwt_simple import (
     JWTManager, jwt_required, create_jwt, get_jwt_identity, get_jwt
 )
-from paramiko import SSHClient, AutoAddPolicy
-import select
+import paramiko
+import socket
+
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 from .http_codes import Status
 from .factory import create_app, create_user,get_all_user
@@ -124,7 +129,74 @@ def main():
 
 @app.route('/api/download',methods=['POST'])
 @jwt_required
-def install():
+# def download():
+#     jwt_data = get_jwt()
+#     print("Session Expired")
+#     if jwt_data['roles'] != 'admin':
+#         return jsonify(msg="Permission denied"), Status.HTTP_BAD_FORBIDDEN
+#
+#     identity = get_jwt_identity()
+#     if not identity:
+#         return jsonify({"error": "Token invalid"}), Status.HTTP_BAD_UNAUTHORIZED
+#
+#     hostname = '164.99.91.35'
+#     port = 22
+#     username = 'root'
+#     password = 'novell'
+#     ssh = paramiko.SSHClient()
+#     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+#     ssh.connect(hostname, username=username,password=password)
+#
+#     chan = ssh.get_transport().open_session()
+#     chan.settimeout(10800)
+#     status =False;
+#
+#     output=""
+#     msg='Download Failed'
+#     sendStat = Status.HTTP_Failed
+#     logger.info("Downloading ... ")
+#     try:
+#         # Execute the given command
+#         # chan.exec_command("wget -P /home/ http://164.99.91.109:8080/job/IDMLinuxInstaller_idm4.7.0/80/artifact/Identity_Manager_4.7_Linux_Framework.iso")
+#         chan.exec_command("wget -P /home/ http://164.99.91.109:8080/job/IDMLinuxInstaller_idm4.7.0/80/artifact/Identity_Manager_4.7_Linux.iso")
+#         contents = StringIO()
+#         error = StringIO()
+#
+#         while not chan.exit_status_ready():
+#             if chan.recv_ready():
+#                 data = chan.recv(1024)
+#                 print (data)
+#                 while data:
+#                     contents.write(data)
+#                     data = chan.recv(1024)
+#
+#             if chan.recv_stderr_ready():
+#                 error_buff = chan.recv_stderr(1024)
+#                 while error_buff:
+#                     error.write("error")
+#                     error_buff = chan.recv_stderr(1024)
+#
+#         exit_status = chan.recv_exit_status()
+#
+#     except socket.timeout:
+#         raise socket.timeout
+#     ssh.close()
+#
+#
+#
+#
+#
+#     output = contents.getvalue()
+#     error_value = error.getvalue()
+#     logger.info(output)
+#     logger.info(exit_status)
+#
+#     data = {"sucess":status,'result':msg}
+#     json_response = json.dumps(data)
+#     return Response(json_response,
+#                     status=sendStat,
+#                     mimetype='application/json')
+def download():
     jwt_data = get_jwt()
     print("Session Expired")
     if jwt_data['roles'] != 'admin':
@@ -132,31 +204,176 @@ def install():
 
     identity = get_jwt_identity()
     if not identity:
-        return jsonify({"msg": "Token invalid"}), Status.HTTP_BAD_UNAUTHORIZED
+        return jsonify({"error": "Token invalid"}), Status.HTTP_BAD_UNAUTHORIZED
+
+    params = request.get_json()
+    hostname = params.get('hostname', None)
+    username = params.get('hostUsername', None)
+    password = params.get('hostPassword', None)
+    buildISO = params.get('buildLocation', None)
+
+    if (hostname == None or username == None or password == None or buildISO == None):
+        logger.info("Params Missing ")
+        # return jsonify(msg="Params Missing"), Status.HTTP_BAD_CONFLICT
 
     hostname = '164.99.91.35'
     port = 22
     username = 'root'
     password = 'novell'
-    command = 'wget http://164.99.91.109:8080/job/IDMLinuxInstaller_idm4.7.0/80/artifact/Identity_Manager_4.7_Linux_Framework.iso -o /home/iso/idmadmin.iso'
-    client = SSHClient()
-    client.set_missing_host_key_policy(AutoAddPolicy())
-    client.connect(hostname=hostname, username=username,password=password, port=port)
-    channel = client.get_transport().open_session()
-    channel.exec_command(command)
-    status =False;
-    msg='Download Failed'
-    sendStat = Status.HTTP_Failed
-    print ("Downloading ... ")
-    while True:
-        if channel.exit_status_ready():
-            break
-        rl, wl, xl = select.select([channel], [], [], 0.0)
-        if len(rl) > 0:
-            print ("Downloaded !")
-            msg='Downloaded !'
-            status =True
-            sendStat = Status.HTTP_OK_BASIC
+    buildISO='http://164.99.91.109:8080/job/IDMLinuxInstaller_idm4.7.0/80/artifact/Identity_Manager_4.7_Linux.iso'
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh.connect(hostname, username=username,password=password)
+    chan = ssh.get_transport().open_session()
+    chan.settimeout(10800)
+    status = False;
+    msg = 'Downloaded'
+    sendStat = Status.HTTP_OK_BASIC
+    logger.info("Downloading ... ")
+    try:
+        # Execute the given command
+        # chan.exec_command("wget -P /home/ http://164.99.91.109:8080/job/IDMLinuxInstaller_idm4.7.0/80/artifact/Identity_Manager_4.7_Linux_Framework.iso")
+        chan.exec_command("wget -P /home/ http://164.99.91.109:8080/job/IDMLinuxInstaller_idm4.7.0/80/artifact/Identity_Manager_4.7_Linux.iso")
+        contents = StringIO()
+        error = StringIO()
+        while not chan.exit_status_ready():
+            if chan.recv_ready():
+                data = chan.recv(1024)
+                print (data)
+                while data:
+                    contents.write(data)
+                    data = chan.recv(1024)
+            if chan.recv_stderr_ready():
+                error_buff = chan.recv_stderr(1024)
+                while error_buff:
+                    error.write("error")
+                    error_buff = chan.recv_stderr(1024)
+        exit_status = chan.recv_exit_status()
+
+    except socket.timeout:
+        raise socket.timeout
+
+    ssh.close()
+    data = {"sucess":status,'result':msg}
+    json_response = json.dumps(data)
+    return Response(json_response,
+                    status=sendStat,
+                    mimetype='application/json')
+
+@app.route('/api/copyIso',methods=['POST'])
+@jwt_required
+def copyIso():
+    jwt_data = get_jwt()
+    if jwt_data['roles'] != 'admin':
+        return jsonify(msg="Permission denied"), Status.HTTP_BAD_FORBIDDEN
+
+    identity = get_jwt_identity()
+    if not identity:
+        return jsonify({"error": "Token invalid"}), Status.HTTP_BAD_UNAUTHORIZED
+
+    # params = request.get_json()
+    # hostname = params.get('hostname', None)
+    # username = params.get('hostUsername', None)
+    # password = params.get('hostPassword', None)
+
+    # if (hostname == None or username == None or password == None ):
+    #     logger.info("Params Missing ")
+    #     # return jsonify(msg="Params Missing"), Status.HTTP_BAD_CONFLICT
+
+    hostname = '164.99.91.35'
+    port = 22
+    username = 'root'
+    password = 'novell'
+    mkdirCommand = ' mkdir /mnt/idm'
+    mountCommand = ' mount -o loop /home/Identity_Manager_4.7_Linux.iso /mnt/idm'
+    copyCommand = ' cp -r /mnt/idm  /home/idm'
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh.connect(hostname, username=username,password=password)
+    chan = ssh.get_transport().open_session()
+    chan.settimeout(10800)
+    status = False;
+    msg = 'Copping'
+    sendStat = Status.HTTP_OK_BASIC
+    logger.info("Copping ... ")
+    try:
+        # Execute the given command
+        # chan.exec_command("wget -P /home/ http://164.99.91.109:8080/job/IDMLinuxInstaller_idm4.7.0/80/artifact/Identity_Manager_4.7_Linux_Framework.iso")
+        chan.exec_command("mkdir /mnt/idm")
+        contents = StringIO()
+        error = StringIO()
+        while not chan.exit_status_ready():
+            if chan.recv_ready():
+                data = chan.recv(1024)
+                print (data)
+                while data:
+                    contents.write(data)
+                    data = chan.recv(1024)
+            if chan.recv_stderr_ready():
+                error_buff = chan.recv_stderr(1024)
+                while error_buff:
+                    error.write("error")
+                    error_buff = chan.recv_stderr(1024)
+        exit_status = chan.recv_exit_status()
+
+    except socket.timeout:
+        raise socket.timeout
+    ssh.close()
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh.connect(hostname, username=username,password=password)
+    chan = ssh.get_transport().open_session()
+    chan.settimeout(10800)
+    try:
+        # Execute the given command
+        # chan.exec_command("wget -P /home/ http://164.99.91.109:8080/job/IDMLinuxInstaller_idm4.7.0/80/artifact/Identity_Manager_4.7_Linux_Framework.iso")
+        chan.exec_command("mount -o loop /home/Identity_Manager_4.7_Linux.iso /mnt/idm")
+        contents = StringIO()
+        error = StringIO()
+        while not chan.exit_status_ready():
+            if chan.recv_ready():
+                data = chan.recv(1024)
+                print (data)
+                while data:
+                    contents.write(data)
+                    data = chan.recv(1024)
+            if chan.recv_stderr_ready():
+                error_buff = chan.recv_stderr(1024)
+                while error_buff:
+                    error.write("error")
+                    error_buff = chan.recv_stderr(1024)
+        exit_status = chan.recv_exit_status()
+
+    except socket.timeout:
+        raise socket.timeout
+    ssh.close()
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh.connect(hostname, username=username,password=password)
+    chan = ssh.get_transport().open_session()
+    chan.settimeout(10800)
+    try:
+        # Execute the given command
+        # chan.exec_command("wget -P /home/ http://164.99.91.109:8080/job/IDMLinuxInstaller_idm4.7.0/80/artifact/Identity_Manager_4.7_Linux_Framework.iso")
+        chan.exec_command("cp -r /mnt/idm  /home/idm")
+        contents = StringIO()
+        error = StringIO()
+        while not chan.exit_status_ready():
+            if chan.recv_ready():
+                data = chan.recv(1024)
+                print (data)
+                while data:
+                    contents.write(data)
+                    data = chan.recv(1024)
+            if chan.recv_stderr_ready():
+                error_buff = chan.recv_stderr(1024)
+                while error_buff:
+                    error.write("error")
+                    error_buff = chan.recv_stderr(1024)
+        exit_status = chan.recv_exit_status()
+
+    except socket.timeout:
+        raise socket.timeout
 
     data = {"sucess":status,'result':msg}
     json_response = json.dumps(data)

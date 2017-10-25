@@ -24,7 +24,7 @@ class BaseConfig(object):
                                     [%(levelname)-6s] %(message)s"
     LOGGING_LOCATION = 'web.log'
     LOGGING_LEVEL = logging.DEBUG
-    SECURITY_TOKEN_MAX_AGE = 60 * 30
+    SECURITY_TOKEN_MAX_AGE = 600 * 30
     SECURITY_CONFIRMABLE = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     CACHE_TYPE = 'simple'
@@ -39,7 +39,7 @@ class BaseConfig(object):
     # Change it based on your admin user, should ideally read from DB.
     ADMIN_USER = 'admin'
     ADMIN_PASSWORD = 'admin'
-    JWT_EXPIRES = timedelta(minutes=10)
+    JWT_EXPIRES = timedelta(minutes=130)
 
 
 class DevelopmentConfig(BaseConfig):
