@@ -11,3 +11,4 @@
 idm-web-installer.properties
 idm-web-installer.xml
 .idea/workspace.xml
+/backend/.idea/
