@@ -53,7 +53,7 @@ The current build is using `nginx` to serve static files.
     npm run server:dev:hmr
     ```
 
-4.  Now navigate to `http://localhost:3000` and login using default credential : `admin:admin`
+4.  Now navigate to `http://localhost:9000` and login using default credential : `admin:admin`
 
 5.  Extra Note: To create a production build
 
