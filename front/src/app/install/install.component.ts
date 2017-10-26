@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { WebService } from '../webservices/webservices.services';
 import { AuthenticationService } from '../authentication/authentication.service';
 import {getInputValues} from "@angularclass/hmr";
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { InstallSchema } from '../utils/headers/schema/install';
 
 @Component({
   selector: 'app-install',
@@ -15,14 +18,20 @@ import {getInputValues} from "@angularclass/hmr";
 export class InstallComponent implements OnInit {
 
   @ViewChild('vaultadminname') input:ElementRef;
-  constructor(private http: Http, private router: Router, private webservice: WebService) { }
+  public vaultadminpass=" adaddadad ";
+   installForm : InstallSchema;
+  constructor(private http: Http, private router: Router, private webservice: WebService) {
+    this.installForm = new InstallSchema();
+    console.log(this.installForm);
+  }
 
   public ngOnInit() {
     this.webservice.isAuthenticated();
   }
 
   public  save() {
-    console.log("saved");
+
+    console.log(this.vaultadminpass);
     let body = {
       a: "admin",
       b: "asd"
@@ -35,6 +44,10 @@ export class InstallComponent implements OnInit {
         () => console.log('got data'));
   }
 
+  public  save2() {
+    // console.log(val.value);
+    console.log(this.installForm);
+  }
   private logError(err: Response) {
     console.log('There was an error: ' + err.status);
     if (err.status === 0) {
