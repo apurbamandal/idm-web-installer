@@ -1,8 +1,10 @@
+import { FormControl, Validators } from '@angular/forms';
+
 export class InstallSchema {
-  public vaultadminname: any="apurba";
-  public vaultadminpass: any;
-  public vaultip: any;
-  public appsip: any;
-  public ssopass: any;
-  public appsadminname: any;
+   vaultip = new FormControl('', []);
+   ssopass = new FormControl('', []);
+   appsip = new FormControl('', []);
+   appsadminname = new FormControl('cn=admin,ou=sa,o=system', [Validators.required]);
+   vaultadminpass = new FormControl('', []);
+   vaultadminname = new FormControl('cn=admin,ou=sa,o=system', [Validators.required]);
 }
