@@ -1,6 +1,6 @@
 <div class="container">
 
-  <form class="well form-horizontal"  id="contact_form">
+  <form class="well form-horizontal"  novalidate [formGroup]="installFormGroup" (ngSubmit)="save2()" id="contact_form">
     <fieldset>
 
       <!-- Form Name -->
@@ -12,11 +12,13 @@
       <div class="form-group">
         <label class="col-md-4 control-label">Enter Identity Vault Administrator name.</label>
         <div class="col-md-4 inputGroupContainer">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input  name="vaultadminname" placeholder="cn=admin,ou=sa,o=system" class="form-control"  [(ngModel)]="installForm.vaultadminname"    type="text">
-          </div>
-        </div>
+          <span *ngIf="!vaultadminname" [ngClass]="{'has-error' : installForm.vaultadminname?.errors && (installForm.vaultadminname?.dirty || installForm.vaultadminname?.touched), 'has-success':!installForm.vaultadminname?.errors && (installForm.vaultadminname?.dirty || installForm.vaultadminname?.touched)}">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                  <input name="vaultadminname" placeholder="cn=admin,ou=sa,o=system" class="form-control"   type="text"   formControlName="vaultadminname" required/>
+            </div>
+          </span>
+      </div>
       </div>
 
       <!-- Text input-->
@@ -24,10 +26,12 @@
       <div class="form-group">
         <label class="col-md-4 control-label" >Enter Identity Vault Administrator password</label>
         <div class="col-md-4 inputGroupContainer">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-            <input name="vaultadminpass" placeholder="password" class="form-control" [(ngModel)]="installForm.vaultadminpass"  type="password">
-          </div>
+          <span *ngIf="!vaultadminpass" [ngClass]="{'has-error' : installForm.vaultadminpass?.errors && (installForm.vaultadminpass?.dirty || installForm.vaultadminpass?.touched), 'has-success':!installForm.vaultadminpass?.errors && (installForm.vaultadminpass?.dirty || installForm.vaultadminpass?.touched)}">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+              <input name="vaultadminpass" placeholder="password" class="form-control" formControlName="vaultadminpass"  type="password">
+            </div>
+          </span>
         </div>
       </div>
 
@@ -35,40 +39,48 @@
       <div class="form-group">
         <label class="col-md-4 control-label">Enter Identity Vault hostname/IP address</label>
         <div class="col-md-4 inputGroupContainer">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-            <input name="vaultip" placeholder="127.0.0.1" class="form-control"  [(ngModel)]="installForm.vaultip" type="text">
-          </div>
+          <span *ngIf="!vaultip" [ngClass]="{'has-error' : installForm.vaultip?.errors && (installForm.vaultip?.dirty || installForm.vaultip?.touched), 'has-success':!installForm.vaultip?.errors && (installForm.vaultip?.dirty || installForm.vaultip?.touched)}">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+              <input name="vaultip" placeholder="127.0.0.1" class="form-control"  formControlName="vaultip" type="text">
+            </div>
+          </span>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-md-4 control-label">Enter Identity Applications DNS/IP address</label>
         <div class="col-md-4 inputGroupContainer">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-            <input name="appsip" placeholder="127.0.0.1" class="form-control"   [(ngModel)]="installForm.appsip" type="text">
-          </div>
+          <span *ngIf="!appsip" [ngClass]="{'has-error' : installForm.appsip?.errors && (installForm.appsip?.dirty || installForm.appsip?.touched), 'has-success':!installForm.appsip?.errors && (installForm.appsip?.dirty || installForm.appsip?.touched)}">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+              <input name="appsip" placeholder="127.0.0.1" class="form-control"   formControlName="appsip" type="text">
+            </div>
+          </span>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-md-4 control-label" >Enter SSPR/One SSO configuration password</label>
         <div class="col-md-4 inputGroupContainer">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-            <input name="ssopass" placeholder="password" class="form-control" [(ngModel)]="installForm.ssopass"  type="password">
-          </div>
+          <span *ngIf="!ssopass" [ngClass]="{'has-error' : installForm.ssopass?.errors && (installForm.ssopass?.dirty || installForm.ssopass?.touched), 'has-success':!installForm.ssopass?.errors && (installForm.ssopass?.dirty || installForm.ssopass?.touched)}">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+              <input name="ssopass" placeholder="password" class="form-control" formControlName="ssopass"  type="password">
+            </div>
+          </span>
         </div>
       </div>
 
       <div class="form-group">
       <label class="col-md-4 control-label">Enter Identity Applications Administrator name.</label>
       <div class="col-md-4 inputGroupContainer">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-          <input  name="appsadminname" placeholder="cn=uaadmin,ou=sa,o=data" class="form-control" [(ngModel)]="installForm.appsadminname"  type="text">
-        </div>
+        <span *ngIf="!appsadminname" [ngClass]="{'has-error' : installForm.appsadminname?.errors && (installForm.appsadminname?.dirty || installForm.appsadminname?.touched), 'has-success':!installForm.appsadminname?.errors && (installForm.appsadminname?.dirty || installForm.appsadminname?.touched)}">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input  name="appsadminname" placeholder="cn=uaadmin,ou=sa,o=data" class="form-control" formControlName="appsadminname"  type="text">
+          </div>
+        </span>
       </div>
       </div>
 
@@ -201,7 +213,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label"></label>
         <div class="col-md-4">
-          <button type="submit" (click)="save2()" class="btn btn-warning" >Submit <span class="glyphicon glyphicon-send"></span></button>
+          <button type="submit" [disabled]="!isFormValid()" class="btn btn-warning" >Submit <span class="glyphicon glyphicon-send"></span></button>
 
         </div>
       </div>

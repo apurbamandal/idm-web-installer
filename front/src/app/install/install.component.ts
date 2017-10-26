@@ -5,8 +5,9 @@ import { WebService } from '../webservices/webservices.services';
 import { AuthenticationService } from '../authentication/authentication.service';
 import {getInputValues} from "@angularclass/hmr";
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { InstallSchema } from '../utils/headers/schema/install';
+import { VariableService } from "../utils/services/variable.service";
 
 @Component({
   selector: 'app-install',
@@ -17,25 +18,30 @@ import { InstallSchema } from '../utils/headers/schema/install';
 })
 export class InstallComponent implements OnInit {
 
-  @ViewChild('vaultadminname') input:ElementRef;
-  public vaultadminpass=" adaddadad ";
-   installForm : InstallSchema;
-  constructor(private http: Http, private router: Router, private webservice: WebService) {
-    this.installForm = new InstallSchema();
-    console.log(this.installForm);
+
+  private installFormGroup: FormGroup;
+  private installForm: InstallSchema = new InstallSchema();
+  constructor(private http: Http, private router: Router, private webservice: WebService,private variableService:VariableService) {
+    this.createForm();
   }
 
   public ngOnInit() {
+
     this.webservice.isAuthenticated();
+  }
+  public createForm() {
+    this.installFormGroup = new FormGroup({
+      vaultadminname: this.installForm.vaultadminname,
+      vaultadminpass: this.installForm.vaultadminpass,
+      appsadminname: this.installForm.appsadminname,
+      appsip: this.installForm.appsip,
+      vaultip: this.installForm.vaultip,
+      ssopass: this.installForm.ssopass
+    });
   }
 
   public  save() {
-
-    console.log(this.vaultadminpass);
-    let body = {
-      a: "admin",
-      b: "asd"
-    };
+    let body = { };
     this.webservice.save(body)
       .subscribe((data) => {
           console.log('got data');
@@ -56,6 +62,11 @@ export class InstallComponent implements OnInit {
     if (err.status === 401) {
       this.router.navigate(['/sessionexpired']);
     }
+  }
+
+  public isFormValid() {
+    let isValid:boolean = this.installFormGroup.valid && !(this.variableService.isEmptyArray(this.installForm.vaultadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.appsadminname.value));
+    return isValid;
   }
 
 }
