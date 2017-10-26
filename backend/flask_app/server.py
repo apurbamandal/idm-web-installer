@@ -400,12 +400,14 @@ def save():
     port = 22
     username = 'root'
     password = 'novell'
-    command1='touch /home/silent.properties'
-    command2='echo '+a+' > /home/silent.properties'
-    client = SSHClient()
-    client.set_missing_host_key_policy(AutoAddPolicy())
+    command1='sed -i -e "/ID_VAULT_PASSWORD=/ s/=.*/=novell@123/" -e "/CONFIGURATION_PWD=/ s/=.*/=novell@123/" /home/a/silent.properties'
+    command2='sed -i -e "/MIN_CPU=/ s/=.*/=0/" -e "/MIN_MEM=/ s/=.*/=0/" -e "/MIN_DISK_OPT=/ s/=.*/=0/" -e "/MIN_DISK_VAR=/ s/=.*/=0/" -e "/MIN_DISK_ETC=/ s/=.*/=0/" -e "/MIN_DISK_TMP=/ s/=.*/=0/" -e "/MIN_DISK_ROOT=/ s/=.*/=0/" /home/build/IDM/sys_req.sh'
+    command3='sed -i -e "/MIN_CPU=/ s/=.*/=0/" -e "/MIN_MEM=/ s/=.*/=0/" -e "/MIN_DISK_OPT=/ s/=.*/=0/" -e "/MIN_DISK_VAR=/ s/=.*/=0/" -e "/MIN_DISK_ETC=/ s/=.*/=0/" -e "/MIN_DISK_TMP=/ s/=.*/=0/" -e "/MIN_DISK_ROOT=/ s/=.*/=0/" /home/build/user_application/sys_req.sh'
+    client = paramiko.SSHClient()
+
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=hostname, username=username,password=password, port=port)
     channel = client.get_transport().open_session()
-    channel.exec_command(command1+"\n"+command2)
+    channel.exec_command(command1+"\n"+command2+"\n"+command3)
     ret=a+"sucees  "+b
     return jsonify(ret), 200

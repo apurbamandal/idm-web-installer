@@ -52,6 +52,20 @@ export class HomeComponent implements OnInit, OnDestroy {
         () => console.log('got data')
       );
   }
+  public  save() {
+    console.log("saved");
+    let body = {
+      a: "admin",
+      b: "asd"
+    };
+    this.webservice.save(body)
+      .subscribe((data) => {
+          console.log('got data');
+        },
+        (err) => this.logError(err),
+        () => console.log('got data'));
+  }
+
   public  copyIso() {
     this.webservice.copyIso()
       .subscribe(
