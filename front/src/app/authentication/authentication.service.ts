@@ -62,7 +62,7 @@ export class AuthenticationService {
    * Extracts the current token from the local storage else redirects to
    * session expired modal.
    */
-  public postResource(body: String, url: string) {
+  public postResource(body: any, url: string) {
     let token = this.getToken();
     let postHeader = new Headers({ Authorization: 'Bearer ' + token });
     postHeader.append('Content-Type', 'application/json');
