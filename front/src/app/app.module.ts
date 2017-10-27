@@ -35,6 +35,7 @@ import { NoContentComponent } from './no-content';
 
 import '../styles/style.css';
 import { InstallComponent } from './install/install.component';
+import { VariableService } from './utils/services/variable.service';
 // import '../styles/headings.css';
 
 // Application wide providers
@@ -73,7 +74,8 @@ type StoreType = {
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    VariableService
   ]
 })
 export class AppModule {

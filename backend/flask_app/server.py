@@ -323,7 +323,7 @@ def copyIso():
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh.connect(hostname, username=username,password=password)
     chan = ssh.get_transport().open_session()
-    chan.settimeout(10800)
+    chan.settimeout(108000)
     try:
         # Execute the given command
         # chan.exec_command("wget -P /home/ http://164.99.91.109:8080/job/IDMLinuxInstaller_idm4.7.0/80/artifact/Identity_Manager_4.7_Linux_Framework.iso")
@@ -351,7 +351,7 @@ def copyIso():
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh.connect(hostname, username=username,password=password)
     chan = ssh.get_transport().open_session()
-    chan.settimeout(10800)
+    chan.settimeout(108000)
     try:
         # Execute the given command
         # chan.exec_command("wget -P /home/ http://164.99.91.109:8080/job/IDMLinuxInstaller_idm4.7.0/80/artifact/Identity_Manager_4.7_Linux_Framework.iso")
@@ -391,12 +391,12 @@ def save():
     a = params.get('a', None)
     b = params.get('b', None)
 
-    if not a:
-        return jsonify({"msg": "Missing a parameter"}), Status.HTTP_BAD_REQUEST
-    if not b:
-        return jsonify({"msg": "Missing b parameter"}), Status.HTTP_BAD_REQUEST
+    # if not a:
+    #     return jsonify({"msg": "Missing a parameter"}), Status.HTTP_BAD_REQUEST
+    # if not b:
+    #     return jsonify({"msg": "Missing b parameter"}), Status.HTTP_BAD_REQUEST
 
-    hostname = '164.99.162.153'
+    hostname = '164.99.91.35'
     port = 22
     username = 'root'
     password = 'novell'
@@ -411,5 +411,5 @@ def save():
     client.connect(hostname=hostname, username=username,password=password, port=port)
     channel = client.get_transport().open_session()
     channel.exec_command(command1+"\n"+command2+"\n"+command3+"\n"+command4)
-    ret=a+"sucees  "+b
+    ret="sucees  "
     return jsonify(ret), 200
