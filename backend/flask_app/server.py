@@ -400,14 +400,16 @@ def save():
     port = 22
     username = 'root'
     password = 'novell'
-    command1='sed -i -e "/ID_VAULT_PASSWORD=/ s/=.*/=novell@123/" -e "/CONFIGURATION_PWD=/ s/=.*/=novell@123/" /home/a/silent.properties'
+    command1='sed -i -e "/ID_VAULT_PASSWORD=/ s/=.*/=novell@123/" -e "/CONFIGURATION_PWD=/ s/=.*/=novell/" /home/a/silent.properties'
     command2='sed -i -e "/MIN_CPU=/ s/=.*/=0/" -e "/MIN_MEM=/ s/=.*/=0/" -e "/MIN_DISK_OPT=/ s/=.*/=0/" -e "/MIN_DISK_VAR=/ s/=.*/=0/" -e "/MIN_DISK_ETC=/ s/=.*/=0/" -e "/MIN_DISK_TMP=/ s/=.*/=0/" -e "/MIN_DISK_ROOT=/ s/=.*/=0/" /home/idm/IDM/sys_req.sh'
     command3='sed -i -e "/MIN_CPU=/ s/=.*/=0/" -e "/MIN_MEM=/ s/=.*/=0/" -e "/MIN_DISK_OPT=/ s/=.*/=0/" -e "/MIN_DISK_VAR=/ s/=.*/=0/" -e "/MIN_DISK_ETC=/ s/=.*/=0/" -e "/MIN_DISK_TMP=/ s/=.*/=0/" -e "/MIN_DISK_ROOT=/ s/=.*/=0/" /home/idm/user_application/sys_req.sh'
+    command4='cd /home/idm/'
+    command5='./install.sh -s -f /home/a/silent.properties'
     client = paramiko.SSHClient()
 
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=hostname, username=username,password=password, port=port)
     channel = client.get_transport().open_session()
-    channel.exec_command(command1+"\n"+command2+"\n"+command3)
-    ret = "sucees"
+    channel.exec_command(command1+"\n"+command2+"\n"+command3+"\n"+command4)
+    ret="sucees  "
     return jsonify(ret), 200
