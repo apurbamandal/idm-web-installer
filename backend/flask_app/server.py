@@ -388,19 +388,49 @@ def save():
     logger.info('api called')
 
     params = request.get_json()
-    a = params.get('a', None)
-    b = params.get('b', None)
+    vaultip = params.get('vaultip', None)
+    boxpass = params.get('boxpass', None)
+    vaultadminname = params.get('vaultadminname', None)
+    vaultadminpass = params.get('vaultadminpass', None)
+    ssopass = params.get('ssopass', None)
+    appsadminname = params.get('appsadminname', None)
+    appsadminpass = params.get('appsadminpass', None)
+    postgresusername = params.get('postgresusername', None)
+    postgresuserpass = params.get('postgresuserpass', None)
+    postgresadminpass = params.get('postgresadminpass', None)
+    sentinelip = params.get('sentinelip', None)
 
-    # if not a:
-    #     return jsonify({"msg": "Missing a parameter"}), Status.HTTP_BAD_REQUEST
-    # if not b:
-    #     return jsonify({"msg": "Missing b parameter"}), Status.HTTP_BAD_REQUEST
+    logger.info(vaultip)
 
-    hostname = '164.99.91.35'
+    if not vaultip:
+        return jsonify({"msg": "Missing vaultip parameter"}), Status.HTTP_BAD_REQUEST
+    # if not boxpass:
+    #    return jsonify({"msg": "Missing boxpass parameter"}), Status.HTTP_BAD_REQUEST
+    # if not vaultadminname:
+    #    return jsonify({"msg": "Missing vaultadminname parameter"}), Status.HTTP_BAD_REQUEST
+    # if not appsadminname:
+    #    return jsonify({"msg": "Missing appsadminname parameter"}), Status.HTTP_BAD_REQUEST
+    if vaultadminpass == None:
+        vaultadminpass = "novell"
+    if ssopass == None:
+        ssopass = "novell"
+    if appsadminpass == None:
+        appsadminpass = "novell"
+    if postgresusername == None:
+        postgresusername = "idmadmin"
+    if postgresuserpass == None:
+        postgresuserpass = "novell"
+    if postgresadminpass == None:
+        postgresadminpass = "novell"
+    if sentinelip == None:
+        sentinelip = "127.0.0.1"
+
+    hostname = vaultip
     port = 22
     username = 'root'
     password = 'novell'
-    command1='sed -i -e "/ID_VAULT_PASSWORD=/ s/=.*/=novell@123/" -e "/CONFIGURATION_PWD=/ s/=.*/=novell/" /home/a/silent.properties'
+    command1 = 'sed -i -e "/ID_VAULT_ADMIN_LDAP=/ s/=.*/=' + vaultadminname + '/" -e "/ID_VAULT_ADMIN=/ s/=.*/=' + vaultadminname + '/" -e "/ID_VAULT_PASSWORD=/ s/=.*/=' + vaultadminpass + '/" -e "/ID_VAULT_HOST=/ s/=.*/=' + vaultip + '/" -e "/TOMCAT_SERVLET_HOSTNAME=/ s/=.*/=' + vaultip + '/" -e "/SSO_SERVER_HOST=/ s/=.*/=' + vaultip + '/" -e "/SSO_SERVER_HOST=/ s/=.*/=' + vaultip + '/" -e "/CONFIGURATION_PWD=/ s/=.*/=' + ssopass + '/" -e "/SSO_SERVICE_PWD=/ s/=.*/=' + ssopass + '/" -e "/UA_ADMIN=/ s/=.*/=' + appsadminname + '/" -e "/UA_ADMIN_PWD=/ s/=.*/=' + appsadminpass + '/" -e "/UA_DATABASE_USER=/ s/=.*/=' + postgresusername + '/" -e "/UA_DATABASE_PWD=/ s/=.*/=' + postgresusername + '/" -e "/UA_DATABASE_ADMIN_PWD=/ s/=.*/=' + postgresadminpass + '/" -e "/SENTINEL_AUDIT_SERVER=/ s/=.*/=' + sentinelip + '/" /home/a/silent.properties'
+    print(command1)
     command2='sed -i -e "/MIN_CPU=/ s/=.*/=0/" -e "/MIN_MEM=/ s/=.*/=0/" -e "/MIN_DISK_OPT=/ s/=.*/=0/" -e "/MIN_DISK_VAR=/ s/=.*/=0/" -e "/MIN_DISK_ETC=/ s/=.*/=0/" -e "/MIN_DISK_TMP=/ s/=.*/=0/" -e "/MIN_DISK_ROOT=/ s/=.*/=0/" /home/idm/IDM/sys_req.sh'
     command3='sed -i -e "/MIN_CPU=/ s/=.*/=0/" -e "/MIN_MEM=/ s/=.*/=0/" -e "/MIN_DISK_OPT=/ s/=.*/=0/" -e "/MIN_DISK_VAR=/ s/=.*/=0/" -e "/MIN_DISK_ETC=/ s/=.*/=0/" -e "/MIN_DISK_TMP=/ s/=.*/=0/" -e "/MIN_DISK_ROOT=/ s/=.*/=0/" /home/idm/user_application/sys_req.sh'
     command4='cd /home/idm/'
@@ -410,6 +440,7 @@ def save():
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=hostname, username=username,password=password, port=port)
     channel = client.get_transport().open_session()
-    channel.exec_command(command1+"\n"+command2+"\n"+command3+"\n"+command4)
-    ret="sucees  "
+    channel.exec_command(command1 +"\n" + command2 +"\n" + command3 +"\n" + command4)
+    ret = "Identity Manager successfully installed in " + vaultip
+    print(ret)
     return jsonify(ret), 200
