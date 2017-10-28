@@ -33,12 +33,18 @@ export class InstallComponent implements OnInit {
 
   public createForm() {
     this.installFormGroup = new FormGroup({
+      vaultip: this.installForm.vaultip,
+      boxusername: this.installForm.boxusername,
+      boxpass: this.installForm.boxpass,
       vaultadminname: this.installForm.vaultadminname,
       vaultadminpass: this.installForm.vaultadminpass,
+      ssopass: this.installForm.ssopass,
       appsadminname: this.installForm.appsadminname,
-      appsip: this.installForm.appsip,
-      vaultip: this.installForm.vaultip,
-      ssopass: this.installForm.ssopass
+      appsadminpass: this.installForm.appsadminpass,
+      postgresusername: this.installForm.postgresusername,
+      postgresuserpass: this.installForm.postgresuserpass,
+      postgresadminpass: this.installForm.postgresadminpass,
+      sentinelip: this.installForm.sentinelip
     });
   }
 
@@ -49,6 +55,7 @@ export class InstallComponent implements OnInit {
       vaultadminname: this.installForm.vaultadminname.value,
       vaultadminpass: this.installForm.vaultadminpass.value,
       ssopass: this.installForm.ssopass.value,
+      boxusername: this.installForm.boxusername.value,
       appsadminname: this.installForm.appsadminname.value,
       appsadminpass: this.installForm.appsadminpass.value,
       postgresusername: this.installForm.postgresusername.value,
@@ -81,7 +88,7 @@ export class InstallComponent implements OnInit {
   }
 
   public isFormValid() {
-    let isValid: boolean = this.installFormGroup.valid && !(this.variableService.isEmptyArray(this.installForm.vaultadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.appsadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.vaultip.value));
+    let isValid: boolean = this.installFormGroup.valid && !(this.variableService.isEmptyArray(this.installForm.vaultadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.appsadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.vaultip.value)) && !(this.variableService.isEmptyArray(this.installForm.boxusername.value));
     return isValid;
   }
 

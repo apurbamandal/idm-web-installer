@@ -390,6 +390,7 @@ def save():
     params = request.get_json()
     vaultip = params.get('vaultip', None)
     boxpass = params.get('boxpass', None)
+    boxusername = params.get('boxusername', None)
     vaultadminname = params.get('vaultadminname', None)
     vaultadminpass = params.get('vaultadminpass', None)
     ssopass = params.get('ssopass', None)
@@ -404,12 +405,14 @@ def save():
 
     if not vaultip:
         return jsonify({"msg": "Missing vaultip parameter"}), Status.HTTP_BAD_REQUEST
-    # if not boxpass:
-    #    return jsonify({"msg": "Missing boxpass parameter"}), Status.HTTP_BAD_REQUEST
-    # if not vaultadminname:
-    #    return jsonify({"msg": "Missing vaultadminname parameter"}), Status.HTTP_BAD_REQUEST
-    # if not appsadminname:
-    #    return jsonify({"msg": "Missing appsadminname parameter"}), Status.HTTP_BAD_REQUEST
+    if not boxusername:
+        return jsonify({"msg": "Missing vaultip parameter"}), Status.HTTP_BAD_REQUEST
+    if not boxpass:
+        return jsonify({"msg": "Missing boxpass parameter"}), Status.HTTP_BAD_REQUEST
+    if not vaultadminname:
+        return jsonify({"msg": "Missing vaultadminname parameter"}), Status.HTTP_BAD_REQUEST
+    if not appsadminname:
+        return jsonify({"msg": "Missing appsadminname parameter"}), Status.HTTP_BAD_REQUEST
     if vaultadminpass == None:
         vaultadminpass = "novell"
     if ssopass == None:
@@ -427,8 +430,8 @@ def save():
 
     hostname = vaultip
     port = 22
-    username = 'root'
-    password = 'novell'
+    username = boxusername
+    password = boxpass
     command1 = 'sed -i -e "/ID_VAULT_ADMIN_LDAP=/ s/=.*/=' + vaultadminname + '/" -e "/ID_VAULT_ADMIN=/ s/=.*/=' + vaultadminname + '/" -e "/ID_VAULT_PASSWORD=/ s/=.*/=' + vaultadminpass + '/" -e "/ID_VAULT_HOST=/ s/=.*/=' + vaultip + '/" -e "/TOMCAT_SERVLET_HOSTNAME=/ s/=.*/=' + vaultip + '/" -e "/SSO_SERVER_HOST=/ s/=.*/=' + vaultip + '/" -e "/SSO_SERVER_HOST=/ s/=.*/=' + vaultip + '/" -e "/CONFIGURATION_PWD=/ s/=.*/=' + ssopass + '/" -e "/SSO_SERVICE_PWD=/ s/=.*/=' + ssopass + '/" -e "/UA_ADMIN=/ s/=.*/=' + appsadminname + '/" -e "/UA_ADMIN_PWD=/ s/=.*/=' + appsadminpass + '/" -e "/UA_DATABASE_USER=/ s/=.*/=' + postgresusername + '/" -e "/UA_DATABASE_PWD=/ s/=.*/=' + postgresusername + '/" -e "/UA_DATABASE_ADMIN_PWD=/ s/=.*/=' + postgresadminpass + '/" -e "/SENTINEL_AUDIT_SERVER=/ s/=.*/=' + sentinelip + '/" /home/a/silent.properties'
     print(command1)
     command2='sed -i -e "/MIN_CPU=/ s/=.*/=0/" -e "/MIN_MEM=/ s/=.*/=0/" -e "/MIN_DISK_OPT=/ s/=.*/=0/" -e "/MIN_DISK_VAR=/ s/=.*/=0/" -e "/MIN_DISK_ETC=/ s/=.*/=0/" -e "/MIN_DISK_TMP=/ s/=.*/=0/" -e "/MIN_DISK_ROOT=/ s/=.*/=0/" /home/idm/IDM/sys_req.sh'
@@ -442,5 +445,51 @@ def save():
     channel = client.get_transport().open_session()
     channel.exec_command(command1 +"\n" + command2 +"\n" + command3 +"\n" + command4)
     ret = "Identity Manager successfully installed in " + vaultip
+    print(ret)
+    return jsonify(ret), 200
+
+
+@app.route('/api/s_install', methods=['POST'])
+def s_install():
+    logger.info('s_install api called')
+    hostname = '164.99.162.153'
+    port = 22
+    username = 'root'
+    password = 'novell'
+
+    # command2='sed -i -e "/MIN_CPU=/ s/=.*/=0/" -e "/MIN_MEM=/ s/=.*/=0/" -e "/MIN_DISK_OPT=/ s/=.*/=0/" -e "/MIN_DISK_VAR=/ s/=.*/=0/" -e "/MIN_DISK_ETC=/ s/=.*/=0/" -e "/MIN_DISK_TMP=/ s/=.*/=0/" -e "/MIN_DISK_ROOT=/ s/=.*/=0/" /home/idm/IDM/sys_req.sh'
+    # command3='sed -i -e "/MIN_CPU=/ s/=.*/=0/" -e "/MIN_MEM=/ s/=.*/=0/" -e "/MIN_DISK_OPT=/ s/=.*/=0/" -e "/MIN_DISK_VAR=/ s/=.*/=0/" -e "/MIN_DISK_ETC=/ s/=.*/=0/" -e "/MIN_DISK_TMP=/ s/=.*/=0/" -e "/MIN_DISK_ROOT=/ s/=.*/=0/" /home/idm/user_application/sys_req.sh'
+    command1 = 'cd /home/idm/'
+    command2 = './install.sh -s -f /home/a/silent.properties'
+    client = paramiko.SSHClient()
+
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.connect(hostname=hostname, username=username, password=password, port=port)
+    channel = client.get_transport().open_session()
+    channel.exec_command(command1 + "\n" + command2)
+    ret = "Identity Manager successfully installed in " + hostname
+    print(ret)
+    return jsonify(ret), 200
+
+
+@app.route('/api/s_configure', methods=['POST'])
+def s_install():
+    logger.info('s_install api called')
+    hostname = '164.99.162.153'
+    port = 22
+    username = 'root'
+    password = 'novell'
+
+    # command2='sed -i -e "/MIN_CPU=/ s/=.*/=0/" -e "/MIN_MEM=/ s/=.*/=0/" -e "/MIN_DISK_OPT=/ s/=.*/=0/" -e "/MIN_DISK_VAR=/ s/=.*/=0/" -e "/MIN_DISK_ETC=/ s/=.*/=0/" -e "/MIN_DISK_TMP=/ s/=.*/=0/" -e "/MIN_DISK_ROOT=/ s/=.*/=0/" /home/idm/IDM/sys_req.sh'
+    # command3='sed -i -e "/MIN_CPU=/ s/=.*/=0/" -e "/MIN_MEM=/ s/=.*/=0/" -e "/MIN_DISK_OPT=/ s/=.*/=0/" -e "/MIN_DISK_VAR=/ s/=.*/=0/" -e "/MIN_DISK_ETC=/ s/=.*/=0/" -e "/MIN_DISK_TMP=/ s/=.*/=0/" -e "/MIN_DISK_ROOT=/ s/=.*/=0/" /home/idm/user_application/sys_req.sh'
+    command1 = 'cd /home/idm/'
+    command2 = './configure.sh -s -f /home/a/silent.properties'
+    client = paramiko.SSHClient()
+
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.connect(hostname=hostname, username=username, password=password, port=port)
+    channel = client.get_transport().open_session()
+    channel.exec_command(command1 + "\n" + command2)
+    ret = "Identity Manager successfully installed in " + hostname
     print(ret)
     return jsonify(ret), 200

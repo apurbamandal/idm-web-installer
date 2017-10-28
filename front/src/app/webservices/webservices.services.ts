@@ -24,6 +24,14 @@ export class WebService {
   public copyIso() {
     return this.authService.postResource({}, '/api/copyIso');
   }
+
+  public s_install() {
+    return this.authService.postResource({}, '/api/s_install');
+  }
+
+  public s_configure() {
+    return this.authService.postResource({}, '/api/s_configure');
+  }
   public save(body: object) {
     return this.authService.postResource(body, '/api/save');
   }

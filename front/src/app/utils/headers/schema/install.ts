@@ -4,6 +4,7 @@ export class InstallSchema {
   vaultip = new FormControl('', []);
   boxpass = new FormControl('', []);
   ssopass = new FormControl('', []);
+  boxusername = new FormControl('', []);
   appsip = new FormControl('', []);
   appsadminpass = new FormControl('', []);
   appsadminname = new FormControl('cn=uaadmin,ou=sa,o=data', [Validators.required]);
