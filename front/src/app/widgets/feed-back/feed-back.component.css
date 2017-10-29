@@ -1,0 +1,12 @@
+.accordion-toggle:after {
+  font-family: 'FontAwesome';
+  content: "\F146";
+  margin-right: 4px;
+  float: left;
+  position: relative;
+}
+
+.accordion-toggle.collapsed:after {
+  content: "\F0FE";
+}
+

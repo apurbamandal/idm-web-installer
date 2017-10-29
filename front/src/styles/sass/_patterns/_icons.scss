@@ -1,0 +1,612 @@
+@charset "utf-8";
+
+@import "../_globals/variables";
+@import "../_globals/mixins";
+// @import "../../../../../../grunt/node_modules/font-awesome/scss/font-awesome";
+
+//-----------------------
+// Iconography
+//-----------------------
+
+// Icon font face definition
+@include font-face($icon-font-name, $icon-font-url, $file-formats: ttf eot svg woff);
+
+.icon {
+    font-family: 'mf-icons' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    vertical-align: middle;
+    margin-right: 6px;
+
+    &.icon-only {
+        margin-right: 0 !important;
+    }
+}
+
+.icon-size {
+    &-md {
+        font-size: 20px;
+    }
+
+    &-lg {
+        font-size: 24px;
+    }
+
+    &-xxl {
+        font-size: 42px;
+    }
+}
+
+// Control with icons
+.form-control {
+    &.icon-beside {
+        float: left;
+        width: calc(100% - 36px);
+    }
+}
+
+
+// Dashboard Layout Icon
+.icon-dashboard {
+    @extend .fa-dashboard;
+}
+
+.icon-applications:before {
+    content: "\e961";
+}
+
+.icon-tasks {
+    @extend .fa-check-square-o;
+}
+
+.icon-gears {
+    @extend .fa-gears;
+}
+
+.icon-layout {
+    @extend .fa-columns;
+}
+
+// User Icon
+.icon-user:before {
+    content: "\e91d";
+}
+
+// User Profile
+.icon-user-profile:before {
+    content: "\e91e";
+}
+
+// Logout Icon
+.icon-power-off {
+    @extend .fa-power-off;
+}
+
+// Help Icon
+.icon-help:before {
+    content: "\e950";
+}
+
+// Home Icon
+.icon-home {
+    @extend .fa-home;
+}
+
+// Old app icon
+.icon-app {
+    @extend .fa-cube;
+}
+
+// external link
+.icon-external-link {
+    @extend .fa-external-link;
+}
+
+// Double arrow right icon
+.icon-angle-double-right {
+    @extend .fa-angle-double-right;
+}
+
+// Double arrow left icon
+.icon-angle-double-left {
+    @extend .fa-angle-double-left;
+}
+
+// Success
+.icon-success:before {
+    content: "\e93a";
+}
+
+// Success - Filled
+.icon-success-fill:before {
+    content: "\e93b";
+}
+
+// Warning
+.icon-warning:before {
+    content: "\e955";
+}
+
+// Warning filled
+.icon-warning-fill:before {
+    content: "\e945";
+}
+
+// Danger / Error
+.icon-danger:before {
+    content: "\e955";
+}
+
+// Info
+.icon-info:before {
+    content: "\e94d";
+}
+
+// Cross
+.icon-cross:before {
+    content: "\e904";
+}
+
+
+// Bell
+.icon-bell-outline:before {
+    content: "\e969";
+}
+
+// Refresh
+.icon-refresh:before {
+    content: "\e90c";
+}
+
+// Pending
+.icon-pending:before {
+    content: "\e93f";
+}
+
+// Denied
+.icon-denied:before {
+    content: "\e93e";
+}
+
+// Backward
+.icon-backward {
+    @extend .fa-backward;
+}
+
+// Forward
+.icon-forward {
+    @extend .fa-forward;
+}
+
+// Fast Backward
+.icon-step-backward {
+    @extend .fa-step-backward;
+}
+
+// Fast Forward
+.icon-step-forward {
+    @extend .fa-step-forward;
+}
+
+// Square outline
+.icon-square-outline {
+    @extend .fa;
+    @extend .fa-square-o;
+}
+
+// Checkbox square
+.icon-checkbox-square {
+    @extend .fa;
+    @extend .fa-check-square;
+}
+
+// Checkbox Normal
+.icon-checkbox-normal {
+    @extend .fa;
+    @extend .fa-square-o;
+}
+
+// Checkbox Checked
+.icon-checkbox-checked {
+    @extend .fa;
+    @extend .fa-check-square;
+}
+
+
+
+// Sort Icon
+.icon-sortable:before {
+    content: "\e935";
+}
+
+// Users Icon
+.icon-users:before {
+    content: "\e960";
+}
+
+// All Users
+.icon-allusers:before {
+    content: "\e96f";
+}
+
+// Relationship
+.icon-relationship:before {
+    content: "\e970";
+}
+
+// Group Icon
+.icon-group:before {
+    content: "\e960";
+}
+
+// Pencil Icon
+.icon-pencil:before {
+    content: "\e952";
+}
+
+// Comment
+.icon-comment-outline {
+    content: "\e966";
+}
+
+// Save
+.icon-save:before {
+    content: "\e953";
+}
+
+// Cancel
+.icon-cancel:before {
+    content: "\e938";
+}
+
+// Undo
+.icon-undo {
+    @extend .fa-undo;
+}
+
+// Hide
+.icon-hide {
+    @extend .fa-eye-slash;
+}
+
+// Radio default
+.icon-radio-unchecked {
+    @extend .fa;
+    @extend .fa-circle-o;
+}
+
+// Radio default
+.icon-radio-checked {
+    @extend .fa;
+    @extend .fa-dot-circle-o;
+}
+
+// Search
+.icon-search:before {
+    content: "\e903";
+}
+
+// Pencil Icon
+.icon-pencil {
+    @extend .fa-pencil;
+}
+
+// Comment
+.icon-comment-outline {
+    @extend .fa-commenting-o;
+}
+
+// Save
+.icon-save {
+    @extend .fa-cloud-upload;
+}
+
+// Cancel
+.icon-cancel {
+    @extend .fa-ban;
+}
+
+// Undo
+.icon-undo {
+    @extend .fa-undo;
+}
+
+// Container
+.icon-container:before {
+    content:"\e95b";
+}
+
+// Upload
+.icon-upload:before {
+    content: "\e96b";
+}
+
+// Upload Cloud
+.icon-upload-cloud:before {
+    content: "\e96c";
+}
+
+// Hide
+.icon-hide {
+    @extend .fa-eye-slash;
+}
+
+// Radio default
+.icon-radio-unchecked {
+    @extend .fa-circle-o;
+}
+
+// Radio default
+.icon-radio-checked {
+    @extend .fa-dot-circle-o;
+}
+
+// Search
+.icon-search {
+    @extend .fa-search;
+}
+
+// Tick or Check Icon
+.icon-check:before {
+    content: "\e902";
+}
+
+// Trash
+.icon-trash:before {
+    content: "\e94c";
+}
+
+// Desktop
+.icon-desktop {
+    @extend .fa-desktop;
+}
+
+// Configuration
+.icon-configuration {
+    @extend .fa-sliders;
+}
+
+// Arrow Up
+.icon-arrow-up:before {
+    content: "\e908";
+}
+
+// Arrow Down
+.icon-arrow-down:before {
+    content: "\e907";
+}
+
+// Right
+
+.icon-right:before {
+    content: "\e906";
+}
+
+// Caret Down
+
+.icon-down:before {
+    content: "\e946";
+}
+
+// Play Down
+.icon-move {
+    @extend .fa-arrows;
+}
+
+// Link
+.icon-link {
+    @extend .fa-link;
+}
+
+// Plus
+.icon-plus:before {
+    content: "\e901";
+}
+
+// Arrow Expand
+.icon-arrow-expand:before {
+    content: "\e946";
+}
+
+// Arrow Collapse
+.icon-arrow-collapse:before {
+    content: "\e94a";
+}
+
+// Arrow Left
+.icon-arrow-previous:before {
+    content: "\e90a";
+}
+
+// Arrow Next
+.icon-arrow-next:before {
+    content: "\e909";
+}
+
+// Arrow Angled Left
+.icon-arrow-angle-previous:before {
+    content: "\e905";
+}
+
+// Arrow Angled Next
+.icon-arrow-angle-next:before {
+    content: "\e906";
+}
+
+// Arrow Angled Up
+.icon-arrow-angle-up:before {
+    content: "\e94a";
+}
+
+// Arrow Angled Down
+.icon-arrow-angle-down:before {
+    content: "\e946";
+}
+
+// Minus
+.icon-minus-circle {
+    @extend .fa-minus-circle;
+}
+
+// Bulb
+.icon-hint {
+    @extend .fa-lightbulb-o;
+}
+
+// Resore
+.icon-restore {
+    @extend .fa-rotate-left;
+}
+
+// Settings
+.icon-settings:before {
+    content: "\e90f";
+}
+
+// Settings
+.icon-manage:before {
+    content: "\e90f";
+}
+
+// Expand thin
+.icon-arrow-expand-thin {
+    @extend .fa-angle-down;
+}
+
+// Site Map
+.icon-sitemap:before {
+    content: "\e95f";
+}
+
+// Add User
+.icon-user-plus {
+    @extend .fa-user-plus;
+}
+
+// Folder
+.icon-folder-o {
+    @extend .fa-folder-o;
+}
+
+// New Folder
+.icon-folder-new:before {
+    content: "\e92c";
+}
+
+// List
+.icon-list:before {
+    content: "\e962";
+}
+
+// Grid Large
+.icon-grid:before {
+    content: "\e961";
+}
+
+// Phone
+.icon-phone:before {
+    content: "\e96a";
+}
+
+// Email
+.icon-email:before {
+    content: "\e926";
+}
+
+// Location
+.icon-location:before {
+    content: "\e968";
+}
+
+// Check Circle
+.icon-check-circle-o {
+    @extend .fa-check-circle-o;
+}
+
+// Cross Circle
+.icon-cross-circle-o {
+    @extend .fa-times-circle-o;
+}
+
+// Cross Circle
+.icon-details {
+    @extend .fa-file-text-o;
+}
+
+// User Admin
+.icon-user-admin {
+    @extend .fa-user-secret;
+}
+
+// Role
+.icon-role:before {
+    content: "\e96d";
+}
+
+// Resource
+.icon-resource:before {
+    content: "\e96e";
+}
+
+// Cross Circle
+.icon-send {
+    @extend .fa-paper-plane;
+}
+
+// Claim
+.icon-claim:before {
+    content: "\e90d";
+}
+
+// Day
+.icon-date:before {
+    content: "\e91f";
+}
+
+// Time
+.icon-time {
+    @extend .fa-clock-o;
+}
+
+// Menu
+.icon-menu:before {
+    content: "\e910";
+}
+
+// Filter
+.icon-filter:before {
+    content: "\e95a";
+}
+
+// Clear Filter
+.icon-clear-filter:before {
+    content: "\e967";
+}
+
+// Globe
+.icon-globe:before {
+    content: "\e944";
+}
+
+// Shortcut
+.icon-shortcut:before {
+    content: "\e936";
+}
+
+// Provision Request Definition
+.icon-prd:before {
+    content: "\e971";
+}
+
+// Drag Selected List Item
+
+.icon-drag:before {
+    content: "\e910";
+}
+

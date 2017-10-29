@@ -1,0 +1,41 @@
+ <!-- <div class="modal modal-confirm modal-confirm-global fade in" *ngIf="showmessageDiaglog.activateUnauthorizeMessage"> 
+<div class="modal modal-confirm modal-confirm-global fade in">
+<div class="modal-dialog" id="activateUnauthorizeMessage">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="modal-content-row">
+					<div class="modal-col-icon">
+						<i class="icon icon-warning"></i>
+					</div>
+					<div class="modal-col-content">
+						<h4 class="modal-content-title ng-binding">Unauthorized access to page </h4>
+						<p class="modal-content-description" ><span >Close will redirect to Dashboard</span></p>
+						<div class="modal-footer">
+              <button class="btn btn-default" (click)="redirectHandle()" data-dismiss="modal" translate=""><span >Close</span></button> 
+              <button aria-label="Close" class="btn btn-default" data-dismiss="modal" type="button"><span >Close</span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+</div>   -->
+
+
+<div  class="modal in "   data-backdrop="static" data-keyboard="false" id="activateUnauthorizeMessage">
+  <div  class="modal-dialog">
+    <div  class="modal-content">
+      <div  class="modal-header">
+        <!-- <button  aria-label="Close" class="close" data-dismiss="modal" type="button"></button> -->
+        <h4  class="modal-title" id="myModalLabel" ><span  class="ng-scope">Unauthorized access to {{authorizeAccessToPage?.hitPage}} page</span></h4>
+      </div>
+      <div  class="modal-body">
+      
+				<p class="modal-content-description" ><span >Close will redirect to <span class="text-capitalize">{{authorizeAccessToPage?.redirect}} page</span></span></p>
+      </div>
+      <div  class="modal-footer">
+         <button aria-label="Close" class="btn btn-default" (click)="redirect()" data-dismiss="modal" type="button"><span >Close</span></button>
+      </div>
+    </div>
+  </div>
+</div>

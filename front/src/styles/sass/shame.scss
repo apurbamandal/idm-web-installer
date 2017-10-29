@@ -1,0 +1,975 @@
+// To be cleaned
+
+// ----------------------------------------
+// UI Grid
+// ----------------------------------------
+// UI Grid Auto Height
+.ui-grid-viewport,
+.ui-grid-canvas,
+.alerts-grid,
+.ui-grid-contents-wrapper,
+.trigger-events-grid {
+    height: auto !important;
+}
+
+.ui-grid {
+    border: 0;
+}
+
+
+.ui-grid-selection-row-header-buttons {
+    background-color: transparent;
+    border-color: transparent;
+    margin: 0;
+    padding: 0;
+}
+
+.ui-grid .ui-grid-render-container-body .ui-grid-viewport {
+    overflow-x: auto !important;
+}
+
+.ui-grid-contents-wrapper {
+
+    // UI Grid Header
+    .ui-grid-header {
+        border-bottom: 2px solid $color-grey;
+        border-left-width: 0;
+        border-right-width: 0;
+
+        .ui-grid-top-panel {
+            background: none;
+            background-image: none;
+            background-color: $table-row-striped;
+            font-size: $theme-font-size-xs;
+            font-weight: $theme-font-weight-semibold;
+            color: lighten($color-slate-grey, 20%);
+
+            .ui-grid-header-cell {
+                border: 0;
+            }
+        }
+
+        // Column Header Sorting
+        .sortable .ui-grid-header-cell-primary-focus > .ui-grid-invisible {
+            visibility: visible;
+        }
+
+        .sortable .ui-grid-header-cell-primary-focus .ui-grid-invisible .ui-grid-icon-blank {
+            @extend .icon-sortable;
+
+            &:before {
+                @extend .icon;
+            }
+        }
+
+        .sortable .ui-grid-icon-up-dir {
+            @extend .icon-arrow-up;
+
+            &:before {
+                @extend .icon;
+            }
+        }
+
+        .sortable .ui-grid-icon-down-dir {
+            @extend .icon-arrow-down;
+
+            &:before {
+                @extend .icon;
+            }
+        }
+    }
+
+    
+
+    // Header cell - Sorted
+    .ui-grid-cell-contents.ui-grid-header-cell-primary-focus {
+        color: $color-medium-grey;
+        font-weight: $theme-font-weight-semibold;
+        padding: $spacing-sm;
+    }
+
+    // Header Cell - Unsorted
+    [aria-sort="none"] .ui-grid-header-cell-primary-focus {
+        color: $color-slate-grey;
+        font-weight: $theme-font-weight-semibold;
+
+        i {
+            color: desaturate(lighten($color-slate-grey, 20%), 20%);
+        }
+    }
+
+    // Header Cell - Sort order
+    .ui-grid-header-cell .ui-grid-sort-priority-number {
+        margin-left: -6px;
+        bottom: initial;
+    }
+
+    .ui-grid-render-container-body .ui-grid-viewport {
+        overflow: auto !important;
+    }
+
+    // Grid Content Row
+    .ui-grid-row {
+        &:nth-child(even) .ui-grid-cell,
+        &:nth-child(odd) .ui-grid-cell {
+            @include simple-transition();
+            background-color: $color-white;
+            border-bottom: solid 1px $color-light-grey;
+            border-right: 0;
+            color: $color-primary-text;
+            font-size: $theme-font-size-sm;
+            font-weight: $theme-font-weight-normal;
+            height: 36px;
+
+            .ui-grid-cell-contents {
+                padding: $spacing-sm;
+            }
+        }
+
+        &:hover .ui-grid-cell {
+            background-color: $table-row-selected-bg;
+        }
+    }
+
+    // Grid Content Row selected
+    .ui-grid-row-selected {
+        &:nth-child(even) .ui-grid-cell,
+        &:nth-child(odd) .ui-grid-cell {
+            background-color: $table-row-selected-bg;
+            border-bottom: solid 1px $table-row-selected-border-color;
+        }
+    }
+
+
+    // Grid content row error
+    .ui-grid-row-error {
+        &:nth-child(even) .ui-grid-cell,
+        &:nth-child(odd) .ui-grid-cell {
+            background-color: $ui-grid-row-error-bg;
+            color: $color-primary-text !important;
+            border-bottom: solid 1px $ui-grid-row-error-border-color;
+        }
+    }
+
+    // Checkbox column
+    .ui-grid-pinned-container-left .ui-grid-row,
+    .ui-grid-pinned-container-left .ui-grid-header-cell {
+        .ui-grid-cell-contents {
+            padding: 9px 6px;
+        }
+
+        .ui-grid-icon-ok {
+            @include opacity(1);
+            @extend .icon-square-outline;
+            color: $color-grey;
+
+            &:before {
+                @extend .fa;
+                font-size: 16px;
+                margin: 0;
+            }
+
+            &:hover {
+                color: $color-slate-grey;
+            }
+        }
+
+        &-selected .ui-grid-icon-ok,
+        .ui-grid-all-selected.ui-grid-icon-ok {
+            @extend .icon-checkbox-square;
+            color: $color-primary-blue;
+        }
+
+        &-error .ui-grid-icon-ok {
+            color: darken($ui-grid-row-error-border-color, 10%);
+        }
+    }
+
+    .ui-grid-header-cell .ui-grid-icon-ok,
+    .ui-grid-header-cell .ui-grid-all-selected.ui-grid-icon-ok {
+        margin-left: 2px;
+    }
+}
+
+// UI Grid Pagination
+.ui-grid .ui-grid-pager-panel {
+    background-color: lighten($color-light-grey, 5%);
+    border-top: solid 1px $color-light-grey;
+    border-bottom: solid 1px $color-light-grey;
+    border-left: 0;
+    border-right: 0;
+    box-sizing: border-box;
+    font-size: $theme-font-size-xs;
+    font-weight: $theme-font-weight-normal;
+    padding: 4px 16px;
+    position: relative;
+
+
+
+    &:after {
+        content:"";
+        display: table;
+        clear: both;
+    }
+
+    .ui-grid-pager-count {
+        display: inline-block;
+        float: none;
+        margin-right: $spacing-md;
+    }
+
+    .ui-grid-pager-label {
+        vertical-align: middle;
+    }
+
+    $pager-control-height: 22px;
+
+    .grid-pager-group {
+        display: inline-block;
+        margin-right: $spacing-md;
+        vertical-align: middle;
+        line-height: normal;
+    }
+
+    .grid-pager-label {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .grid-pager-navigation {
+        display: inline-block;
+        margin-right: $spacing-md;
+        vertical-align: middle;
+
+        .btn-pager {
+            @include border-radius(2px);
+            background-color: $color-slate-grey;
+            border: solid 1px $color-slate-grey;
+            box-sizing: border-box;
+            color: $color-white;
+            height: $pager-control-height;
+            margin-right: $spacing-xs;
+            min-width: 20px;
+            padding: 0 6px;
+
+            .icon {
+                font-size: $theme-font-size-xs;
+            }
+
+            &[disabled] {
+                @include opacity(.3);
+            }
+        }
+    }
+
+    .grid-pager-goto input,
+    .grid-pager-row-count select {
+        height: $pager-control-height;
+        margin: 0 $spacing-sm;
+        padding: 0 0 0 4px;
+        vertical-align: middle;
+    }
+}
+
+
+// UI Select Container
+.ui-select-container {
+    .ui-select-choices {
+        .ui-select-choices-row.active > span {
+            background-color: $color-blue;
+        }
+    }
+}
+
+// UI Select Multiple
+.ui-select-multiple {
+
+    .ui-select-match-item {
+        position: relative;
+        display: inline-block;
+        background-color: $color-light-grey;
+        padding: $spacing-xs/2 8px $spacing-xs/2 $spacing-sm;
+        color: $color-primary-text;
+        @include border-radius(3px);
+        font-size: $theme-font-size-xs;
+        margin-bottom: $spacing-xs;
+        height: auto;
+
+
+        // To be removed after fixing the close icon in the html template - start
+        line-height: 1;
+
+        .close {
+            margin-left: 4px;
+        }
+        // End 
+
+        // Need to be applied after fixing the close icon in the html template
+        /* .close {
+            @extend .icon;
+            @extend .icon-cross;
+            @include opacity(.7);
+            position: absolute;
+            top: 6px;
+            right: 4px;
+            background-color: transparent;
+            border: 0;
+            float: none;
+            font-size: 1em !important;
+            color: $color-black;
+            margin-right: 0;
+            margin-left: $spacing-sm;
+            padding: 0;
+            vertical-align: middle;
+        }
+        
+        &:hover {
+            .close {
+                @include opacity(1);
+            }
+        } */
+
+    }
+
+    .ui-select-choices {
+        .ui-select-choices-row.active > span {
+            background-color: $color-blue;
+        }
+    }
+}
+
+// Form Control Bootstrap Override
+
+.form-control {
+    border: solid 1px $color-grey;
+}
+// Data Tag Container
+.tag-selector-hybird {
+    // border: solid 1px $color-grey;
+    border: none;
+    outline: solid 1px $color-grey;
+    // padding: $spacing-xs $spacing-sm;
+    padding: 0;
+    .selected-tags, .selected-tags > .selected-tag-item {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .selected-tags {
+        margin-bottom: $spacing-sm;
+        
+        .selected-tag-item, .selected-tag-item {
+           display: inline-block;
+           &.drag {
+               .selected-tag-content {
+                   @include draggable-item();
+               }
+           }
+           .selected-tag-content {
+                position: relative;
+                display: inline-block;
+                width: auto;
+                height: auto;
+                border: solid 1px transparent;
+                background-color: $color-light-grey;
+                margin: 4px 4px 0 0;
+                padding: $spacing-xs/2 $spacing-sm;
+                font-size: $theme-font-size-xs;
+                color: $color-primary-text;     
+                z-index: 100;
+
+                &:hover {
+                    background-color: $color-very-light-grey;
+                    border: solid 1px $color-blue;
+                    cursor: pointer;
+                }
+
+                .remove {
+                    @extend .icon;
+                    @extend .icon-cross;
+                    @include opacity(.7);
+                    background-color: transparent;
+                    border: 0;
+                    color: $color-primary-text;
+                    margin-right: 0;
+                    margin-left: $spacing-sm;
+                    padding: 0;
+                    vertical-align: middle;
+
+                    &:hover {
+                        @include opacity(1);
+                        color: $color-blue;
+                    }
+                }
+
+                &:hover {
+                    .remove {
+                        @include opacity(1);
+                    }
+                }
+            }
+        }
+
+        &.has-tags {
+            border-bottom: solid 1px $color-light-grey;
+        }
+    }
+
+    .list-view-toggle {
+        position: relative;
+        display: block;
+        padding: $spacing-sm;
+        color: $color-medium-grey;
+
+        &:before {
+            @extend .icon;
+            @extend .icon-arrow-angle-down;
+            position: absolute;
+            top: 6px;
+            right: 0;
+            margin-right: 8px;
+            font-size: $theme-font-size-lg;
+            color: $color-medium-grey;
+        }
+
+        &:hover {
+            cursor: pointer;
+
+            &:before {
+                color: $color-blue;
+            }
+        }
+
+        &.expanded {
+            &:before {
+                 @extend .icon-cross;
+            }
+
+        }
+    }
+
+    .input-group {
+        outline: 1px solid $color-grey;
+        .form-control {
+            border: none;
+            outline: none;
+            &:focus {
+                outline: none;
+            }
+        }
+        &.input-focused {
+            outline: 1px solid $color-blue;
+        }
+        .input-group-btn {
+            .btn {
+                height: 30px;
+                padding: $spacing-xs;
+                background: $color-white;
+                border: none;
+                outline: none;
+                border-left: none;
+                border-radius: 0;
+                &:hover {
+                    border: none;
+                    outline: none;
+                }
+                .icon {
+                    font-size: $theme-font-size-lg;
+                    color: $color-medium-grey;
+                     &:hover {
+                        cursor: pointer;
+
+                        &:before {
+                            color: $color-blue;
+                        }
+                    }
+                }                
+            }
+        }
+    }
+
+    .list-selector {
+        position: relative;
+        margin: 0; padding: 0;
+        width: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+         li {
+            list-style: none;
+            margin: 0 0 $spacing-xs 0;
+
+            a {
+                position: relative;
+                display: block;
+                padding: $spacing-sm $spacing-sm;
+                background-color: $color-light-grey;
+                border: solid 1px transparent;
+                color: $color-dark-grey;
+                text-transform: capitalize;
+                
+                &:hover {
+                    background-color: $color-very-light-grey;
+                    border: solid 1px $color-blue;
+                    text-decoration: none;
+                    cursor: pointer;
+
+                    &:before {
+                        @extend .icon;
+                        @extend .icon-plus;
+                        position: absolute;
+                        top: 4px;
+                        right: 4px;
+                        font-size: $theme-font-size-lg;
+                        color: $color-blue;
+                    }
+                } 
+
+                // Icon
+                .icon {
+                    font-size: 18px;
+                    vertical-align: text-bottom;
+                }
+            }
+            
+            &.item-selected a,
+                &.item-selected a:hover{
+                    border-color: $color-highlight-border;
+                    background-color: $color-highlight-bg;
+                }
+                &.disabled a,
+                &.disabled a:hover{
+                    cursor: not-allowed;
+                    &:before {
+                        display: none;
+                    }
+                }
+         }
+
+    }
+
+    .tree-list-group {
+        list-style: none;
+        &.root {
+            padding-left: 0;
+        }
+        &.loading {
+            padding-left: 75px;
+        }
+
+        li > idm-container-tree > a, li > idm-driver-tree > a {
+            position: relative;
+            display: flex;
+            color: $color-dark-grey;
+            text-transform: capitalize;
+            text-decoration: none;
+            .left {
+                padding: $spacing-sm;
+                border: solid 1px transparent;
+
+                .icon-right {
+                    &:hover {
+                        color: $color-blue;
+                        font-weight: bold;
+                    }
+                }
+                .icon-down {
+                    &:hover {
+                        color: $color-blue;
+                        font-weight: bold;
+                    }
+                }  
+            }
+            .right {
+                padding: $spacing-sm;
+                border: solid 1px transparent;
+                flex: 1;
+                &:hover {
+                    background-color: $color-very-light-grey;
+                    border: solid 1px $color-blue;
+                    text-decoration: none;
+                    cursor: pointer;
+
+                    &:before {
+                        @extend .icon;
+                        @extend .icon-plus;
+                        position: absolute;
+                        top: 4px;
+                        right: 4px;
+                        font-size: $theme-font-size-lg;
+                        color: $color-blue;
+                    }
+                }
+            }
+        }
+
+        li.disabled > idm-container-tree > a, li.disabled > idm-driver-tree > a {
+            .right {
+                cursor: not-allowed;
+                &:hover {
+                    border-color: transparent;
+                    background-color: transparent;
+                    &:before {
+                        display: none;
+                    }
+                }
+            }
+        }
+        
+        li.tree-list-item-selected > idm-container-tree > a, li.tree-list-item-selected > idm-driver-tree > a {
+            .right {
+                border-color: $color-highlight-border;
+                background-color: $color-highlight-bg;
+                &:hover {
+                    border-color: $color-highlight-border;
+                    background-color: $color-highlight-bg;
+                }
+            }
+        }
+    }
+}
+
+// Data Tag Container Hybrid : Sekected Item being dragged
+
+.selected-tag-item.gu-mirror {
+    
+    display: inline-block;
+
+    .selected-tag-content {
+        @include draggable-item-active();
+        position: relative;
+        display: inline-block;
+        width: auto;
+        height: auto;
+        // border: solid 1px transparent;
+        background-color: $color-light-grey;
+        margin: 4px 4px 0 0;
+        padding: $spacing-xs/2 $spacing-sm;
+        font-size: $theme-font-size-xs;
+        color: $color-primary-text;     
+        z-index: 100;
+
+        &:hover {
+            background-color: $color-very-light-grey;
+            // border: solid 1px $color-blue;
+            cursor: pointer;
+        }
+
+        .remove {
+            @extend .icon;
+            @extend .icon-cross;
+            @include opacity(.7);
+            background-color: transparent;
+            border: 0;
+            color: $color-primary-text;
+            margin-right: 0;
+            margin-left: $spacing-sm;
+            padding: 0;
+            vertical-align: middle;
+
+            &:hover {
+                @include opacity(1);
+                color: $color-blue;
+            }
+        }
+
+        &:hover {
+            .remove {
+                @include opacity(1);
+            }
+        }
+    }
+}
+
+// Data Tag Container
+.tag-selector-basic {
+    border: solid 1px $color-grey;
+    padding: 0 $spacing-sm $spacing-xs $spacing-sm;
+    .selected-tags, .selected-tags > .selected-tag-item {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .selected-tags {
+        margin-bottom: 0;
+    }
+
+    .selected-tag-item {
+        display: inline-block;
+
+        &.tag-item-block {
+            display: block;
+        }
+    }
+
+    .selected-tag-content {
+        @include border-radius(3px);
+        position: relative;
+        display: inline-block;
+        width: auto;
+        height: auto;
+        border: solid 1px transparent;
+        background-color: $color-light-grey;
+        margin: 4px 4px 2px 0;
+        padding: $spacing-xs/2 $spacing-sm;
+        font-size: $theme-font-size-xs;
+        color: $color-primary-text;     
+        z-index: 100;
+
+        &:hover {
+            background-color: $color-very-light-grey;
+            border: solid 1px $color-blue;
+        }
+
+        .tag-row {
+            display: table;
+            width: auto;
+
+            .tag-col {
+                display: table-cell;
+            }
+        }
+
+        .tag-title {
+            font-size: $theme-font-size-base;
+            font-weight: $theme-font-weight-semibold;
+        }
+
+        .remove {
+            @extend .icon;
+            @extend .icon-cross;
+            @include opacity(.7);
+            background-color: transparent;
+            border: 0;
+            color: $color-primary-text;
+            margin-right: 0;
+            margin-left: $spacing-sm;
+            padding: 0;
+            vertical-align: middle;
+
+            &:hover {
+                @include opacity(1);
+                color: $color-blue;
+            }
+        }
+
+        &:hover {
+            .remove {
+                @include opacity(1);
+            }
+        }
+    }
+
+    .tag-search-control {
+        position: relative;
+
+        &:before {
+            position: absolute;
+            @extend .icon;
+            @extend .icon-search:before;
+            top: 9px;
+            left: 4px;
+            z-index: 10;
+            color: $color-secondary-text;
+            font-size: $theme-font-size-md;
+        }
+        .form-control {
+            border: 0;
+            padding-left: 24px;
+        }
+    }
+
+    .has-error & {
+        border: solid 2px $color-danger;
+    }
+
+    // List Selector
+    .list-selector {
+        position: relative;
+        margin: 0; padding: 0;
+        width: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+         li {
+            list-style: none;
+            margin: 0 0 $spacing-xs 0;
+
+            a {
+                position: relative;
+                display: block;
+                padding: $spacing-sm $spacing-sm;
+                background-color: $color-light-grey;
+                border: solid 1px transparent;
+                color: $color-dark-grey;
+                text-transform: capitalize;
+                
+                &:hover {
+                    background-color: $color-very-light-grey;
+                    border: solid 1px $color-blue;
+                    text-decoration: none;
+                    cursor: pointer;
+
+                    &:before {
+                        @extend .icon;
+                        @extend .icon-plus;
+                        position: absolute;
+                        top: 4px;
+                        right: 4px;
+                        font-size: $theme-font-size-lg;
+                        color: $color-blue;
+                    }
+                } 
+
+                &:focus,
+                &:active {
+                    text-decoration: none;
+                }
+
+                // List Item Table
+                &.list-item-row {
+                    display: table;
+                    width: 100%;
+
+                    .list-item-col {
+                        display: table-cell;
+                    }
+
+                    .list-item-col-wide {
+                        display: table-cell;
+                        width: 100%;
+                    }
+                }
+            }
+
+            // Disables or already selected
+            &.disabled {
+                @include opacity(.4);
+
+                & a:hover {
+                    border: solid 1px transparent;
+                    background-color: $color-light-grey;
+                    cursor: not-allowed !important;    
+                }              
+            }
+
+         }
+
+    }
+
+
+}
+
+
+// Data Dropdown Selector- Single
+.dropdown-selector-single {
+    position: relative;
+
+    &:before {
+        @extend .icon;
+        @extend .icon-arrow-angle-down;
+        position: absolute;
+        top: 6px;
+        right: 8px;
+        margin-right: 0;
+        font-size: $theme-font-size-lg;
+        color: $color-medium-grey;
+    }
+
+    .selected-item {
+        border: solid 1px $color-grey;
+        padding: $spacing-sm;
+    }
+
+    .list-selector {
+        position: relative;
+        border: solid 1px $color-grey;
+        margin: 0; padding: $spacing-xs;
+        width: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+         li {
+            list-style: none;
+            margin: 0 0 $spacing-xs 0;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            a {
+                position: relative;
+                display: block;
+                padding: $spacing-sm $spacing-sm;
+                background-color: $color-light-grey;
+                border: solid 1px transparent;
+                color: $color-dark-grey;
+                text-transform: capitalize;
+                
+                &:hover {
+                    background-color: $color-very-light-grey;
+                    border: solid 1px $color-blue;
+                    text-decoration: none;
+                    cursor: pointer;
+
+                    &:before {
+                        @extend .icon;
+                        @extend .icon-check;
+                        position: absolute;
+                        top: 6px;
+                        right: 4px;
+                        font-size: $theme-font-size-lg;
+                        color: $color-blue;
+                    }
+                } 
+
+                // Icon
+                .icon {
+                    font-size: 18px;
+                    vertical-align: text-bottom;
+                }
+            }
+         }
+
+         .alert {
+            display: block !important;
+            margin-bottom: 0;
+         }
+
+    }
+}   
+
+.spinner-img {
+    width: 100px;
+    height: 14px;
+    margin: 20px auto;
+    background-image: url(../assets/img/loading.gif);
+    // background-image: urlD:\Source code\ADMIN\src\main\ngapp\src\styles\sass\_patterns\_tables.scss);
+    background-size: contain;
+    display: inherit
+}
+.loader-img {
+    width: 200px;
+    height: 287px;
+    margin: 20px auto;
+    background-image: url(../assets/img/mf-loading.gif);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inherit;
+}
+.loading-overlay {
+    position: fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    width:100%;
+    height:100%;
+    background: #fff;
+    z-index:5000;
+}
+.a-coma:not(:last-of-type)::after {
+   content: ",";
+}

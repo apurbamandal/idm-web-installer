@@ -1,0 +1,57 @@
+@charset "utf-8";
+
+@import "../_globals/variables";
+@import "../_globals/mixins";
+
+// Badges
+.badge {
+    @include border-radius(3px);
+    border: solid 1px $color-grey;
+    margin-left: $spacing-xs;
+    vertical-align: bottom;
+    background-color: $color-grey;
+    color: $color-black;
+    font-weight: $theme-font-weight-normal;
+}
+
+.heading-page-main .badge {
+    vertical-align: middle;
+    margin-left: $spacing-xs;
+    font-size: $theme-font-size-base;
+}
+
+.panel-simple .panel-heading .badge {
+    vertical-align: middle;
+}
+// Badge in a navbar dropdown menu
+.navbar-nav > li > .dropdown-menu {
+    .badge {
+        margin: 0 2px;
+    }
+}
+
+.badge-danger {
+    background-color: $color-red;
+    border: solid 1px $color-red;
+    color: $color-white;
+}
+
+.badge-sm {
+    padding: 0 6px;
+    font-size: $theme-font-size-xs;
+    font-weight: $theme-font-weight-semibold;
+    line-height: 1.2;
+    vertical-align: middle;
+}
+
+
+
+.badge-light {
+    background-color: $color-white;
+    color: $color-primary-text;
+}
+
+/* .badge-lg {
+    font-size: 16px;
+    padding: .2em .7em;
+} */

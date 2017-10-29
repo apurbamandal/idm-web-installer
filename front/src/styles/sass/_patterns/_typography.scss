@@ -1,0 +1,328 @@
+@charset "utf-8";
+
+@import "../_globals/variables";
+@import "../_globals/mixins";
+
+// Text fonts declaration - Roboto
+@include font-face("Roboto", $base-font-regular-url, 400, normal, $file-formats: ttf eot svg woff);
+@include font-face("Roboto", $base-font-italic-url, 400, italic, $file-formats: ttf eot svg woff);
+@include font-face("Roboto", $base-font-semibold-url, 500, normal, $file-formats: ttf eot svg woff);
+@include font-face("Roboto", $base-font-semibold-italic-url, 500, italic, $file-formats: ttf eot svg woff);
+@include font-face("Roboto", $base-font-bold-url, 700, normal, $file-formats: ttf eot svg woff);
+@include font-face("Roboto", $base-font-bold-italic-url, 700, italic, $file-formats: ttf eot svg woff);
+
+body {
+    background: $body-bg-color;
+    color: $color-black;
+    font-family: $base-font-family;
+    font-size: $theme-font-size-base;
+    font-weight: $theme-font-weight-normal;
+}
+
+// Small
+small,
+.small {
+    font-size: $theme-font-size-xs;
+    font-weight: $theme-font-weight-normal;
+    line-height: 1.2;
+}
+
+a {
+    color: $color-blue-alt;
+    cursor: pointer;
+    &:hover {
+        color: $color-dark-primary-blue;
+    }
+}
+
+address {
+    margin: 0;
+}
+
+.text-link {
+    color: $color-blue-alt;
+    text-decoration: underline;
+
+    &.text-link-regular {
+        font-weight: $theme-font-weight-normal;
+    }
+
+    &.no-underline,
+    table &,
+    table &.text-link-regular {
+        &,
+        &:hover {
+            text-decoration: none !important;
+        }
+    }
+
+    .icon {
+        color: $color-medium-grey;
+        vertical-align: middle;
+    }
+}
+
+.color-danger {
+    color: $color-red;
+}
+
+// These text styles will changed in future
+h1 {
+    font-size: 1.5em;
+}
+
+// Heading 
+.heading-page-main {
+    margin-top: 0;
+    margin-bottom: $spacing-md;
+    font-weight: $theme-font-weight-normal;
+}
+
+.heading-page-secondary {
+    margin-top: $spacing-sm;
+    margin-bottom: $spacing-md;
+    font-weight: $theme-font-weight-normal;
+    font-size: $theme-font-size-lg;
+    color: $color-dark-grey;
+}
+
+.heading-secondary-form {
+    font-size: $theme-font-size-md;
+    font-weight: $theme-font-weight-semibold;
+    margin: $spacing-base 0 $spacing-base 0;
+    border-bottom: solid 1px $color-grey;
+    color: $color-medium-grey;
+}
+
+.heading-panel-section {
+    @include border-radius(2px);
+    background-color: $color-grey;
+    color: $color-black;
+    font-size: $theme-font-size-base;
+    font-weight: $theme-font-weight-semibold;
+    margin: $spacing-sm 0 $spacing-sm 0;
+    padding: $spacing-xs $spacing-sm;
+}
+
+.heading-1 {
+    font-size: $theme-font-size-xl;
+    font-weight: $theme-font-weight-normal;
+    margin: $spacing-base 0 $spacing-sm;
+}
+
+.heading-dragndrop-category {
+    font-size: $theme-font-size-base;
+    font-weight: $theme-font-weight-normal;
+    margin: $spacing-base 0 $spacing-sm 0;
+    color: $color-primary-text;
+}
+
+.heading-landing-category {
+    font-size: $theme-font-size-md;
+    font-weight: $theme-font-weight-normal;
+    margin: $spacing-base 0 $spacing-sm 0;
+    color: $color-primary-text;
+}
+
+// Main Content Header
+.main-content-header {
+    margin-bottom: $spacing-sm;
+    .heading-page-main {
+        display: inline-block;
+        vertical-align: top;
+        font-size: $theme-font-size-lgr;
+    }
+
+    .header-actions {
+        display: inline-block;
+        margin-left: $spacing-sm;
+        vertical-align: top;
+
+        .btn-icon {
+            font-size: 28px;
+            width: 30px;
+            height: 30px;
+        }
+
+        .btn-icon + .btn-icon {
+            margin-left: 4px;
+        }
+    }
+}
+
+.page-instructions {
+       font-size: $theme-font-size-base;
+	   color: $color-medium-grey;
+	   max-width: 550px;
+	}
+
+.section-form-secondary-header {
+    border-bottom: solid 1px darken($color-light-grey, 15%);
+    min-height: 28px;
+
+    .secondary-header-title {
+        font-size: $theme-font-size-md;
+        font-weight: $theme-font-weight-semibold;
+        margin: $spacing-sm 0 $spacing-xs 0;
+        color:$color-primary-text;
+        line-height: 1.3;
+	
+		.badge {
+			vertical-align: middle;
+		}
+
+    }
+
+    .secondary-header-actions {
+        text-align: right;
+
+        .btn {
+			vertical-align: middle;
+            padding-left: $spacing-base;
+        }
+	    .btn-link {
+			font-size: 20px;
+			vertical-align: middle;
+            padding: $spacing-xxs $spacing-xxs $spacing-xxs $spacing-base;
+        }
+	}
+}
+
+
+// Sidebar Heading
+.heading-sidebar-main {
+    margin-top: 0;
+    font-size: $theme-font-size-lg;
+    font-weight: $theme-font-weight-semibold;
+    margin-bottom: $spacing-xs;
+}
+
+// Simple Bulleted List
+.simple-ul {
+    padding-left: 20px;
+
+    li {
+        margin-bottom: $spacing-sm;
+    }
+
+}
+
+// Text Secondary
+.text-secondary {
+    color: $color-medium-grey;
+}
+
+.text-watermark {
+    color: $color-secondary-text;
+}
+
+p {
+   @extend .text-secondary; 
+}
+
+
+// Label only
+.label-text {
+    color: $color-primary-text;
+    font-size: $theme-font-size-base;
+    font-weight: $theme-font-weight-semibold;
+    margin-right: 4px;
+}
+
+// Label value pair - Inline
+.label-section-inline {
+    color: $color-medium-grey;
+    display: block;
+    margin-right: $spacing-md;
+    font-size: $theme-font-size-xs;
+
+    .label-section-value,
+    strong {
+        color: $color-primary-text;
+        display: inline;
+        font-size: $theme-font-size-base;
+        font-weight: $theme-font-weight-semibold;
+        margin-right: 4px;
+    }
+
+    &.inverse {
+        .label-section-value,
+        strong {
+
+        }
+    }
+}
+
+// Label value pair - Block
+.label-section-block {
+    color: $color-medium-grey;
+    display: block;
+    margin-right: 0;
+    margin-bottom: $spacing-md;
+    font-size: $theme-font-size-xs;
+
+    .label-section-value {
+        color: $color-primary-text;
+        display: block;
+        font-size: $theme-font-size-base;
+    }
+
+    strong {
+        color: $color-primary-text;
+        display: block;
+        font-size: $theme-font-size-base;
+        font-weight: $theme-font-weight-semibold;
+    }
+
+    &.inverse {
+        font-size: $theme-font-size-base;
+        color: $color-primary-text;
+
+        .label-section-value {
+            font-size: $theme-font-size-xs;
+            color: $color-medium-grey;
+        }
+
+        strong {
+            font-weight: $theme-font-weight-normal;
+            color: $color-medium-grey;
+        }
+    }
+}
+
+// Label value pair - Inline Block
+.label-section-inline-block {
+    color: $color-medium-grey;
+    display: block;
+    margin-bottom: $spacing-sm;
+    font-size: $theme-font-size-sm;
+
+    .label-section-value {
+        display: inline-block;
+        margin-left: $spacing-xs;
+        font-size: $theme-font-size-base;
+        font-weight: $theme-font-weight-normal;
+        color: $color-primary-text;
+    }
+
+    strong {
+        color: $color-primary-text;
+        display: inline-block;
+        font-size: $theme-font-size-base;
+        font-weight: $theme-font-weight-semibold;
+        margin-left: $spacing-sm;
+    }
+}
+
+.label-section-inline,
+.label-section-block,
+.label-section-inline-block {
+    .label-section-value-muted {
+        color: $color-medium-grey;
+        display: block;
+        font-size: $theme-font-size-base;
+        font-weight: $theme-font-weight-normal;
+        margin-right: 4px;
+    }    
+}
+

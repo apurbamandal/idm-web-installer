@@ -1,0 +1,596 @@
+@charset "utf-8";
+
+@import "../_globals/variables";
+@import "../_globals/mixins";
+
+// Buttons
+.btn,
+.btn-md {
+    font-size: $theme-font-size-base;
+    font-weight: $theme-font-weight-semibold;
+    padding: 6px 16px;
+    height: 34px;
+}
+
+.btn-lg {
+    @include border-radius(3px);
+    font-size: $theme-font-size-md;
+    padding: $spacing-sm 32px;
+    height: 42px;
+}
+
+.btn {
+    @include border-radius(3px);
+
+    .icon {
+        margin-right: 6px;
+    }
+
+    &:focus,
+    &:active {
+        outline: none;
+    }
+
+    &.btn-no-trans {
+        transition: none;
+
+        .icon {
+            transition: none;
+        }
+    }
+
+}
+
+// Icon button group
+.btn-group-icon-only {
+    .btn-icon {
+        &.active {
+            @include shadow-none();
+            color: $color-medium-grey;
+        }
+    }
+}
+
+// Button Link
+.btn-link {
+    display: inline-block;
+    vertical-align: middle;
+    border: 0;
+    padding: 10px 6px;
+    line-height: 1;
+    font-weight: $theme-font-weight-normal;
+    text-decoration: underline;
+
+    &.text-only {
+        padding: 0 $spacing-xs;
+        vertical-align: text-top;
+    }
+
+    .icon {
+        float: left;
+    }
+}
+
+.btn-link-red {
+    .icon {
+        color: $color-red;
+    }
+}
+
+.btn-image-select {
+	position: absolute;
+	top: 65px;
+	left: 65px;
+	padding: 0;
+	}
+	
+.btn-rounded {
+    @include border-radius(50%);
+    text-align: center;
+
+    width: 42px;
+    height: 42px;
+    margin-right: $spacing-xs;
+    padding: 8px 0;
+
+    .icon {
+        margin: 0;
+        font-size: $theme-font-size-lgr;
+    }
+}
+
+.btn-rounded-blue {
+    background-color: $color-blue;
+    color: $color-white;
+
+    &:hover,
+    &:focus {
+        background-color: $color-dark-primary-blue;
+        color: $color-white;
+        outline: none;
+    }
+
+    &.active,
+    &:active {
+        &,
+        &:hover {
+            background-color: darken($color-dark-primary-blue, 10%);
+        }
+    }
+}
+
+// Button Sizing
+.btn-sm {
+    font-size: $theme-font-size-xs;
+    font-weight: $theme-font-weight-normal;
+    padding: 3px 12px;
+    @include border-radius(2px);
+    height: 28px;
+}
+
+// Default Button
+.btn-default {
+    background-color: $color-very-light-grey;
+    border-color: $color-grey;
+    color: $color-primary-text;
+    font-weight: $theme-font-weight-normal;
+
+    &:hover,
+    &:focus {
+        background-color: $color-very-light-grey;
+        border-color: $color-blue-alt;
+        color: $color-blue-alt;
+    }
+
+    // Button active state declaration
+    @mixin button-active-state() {
+        @include shadow-none();
+        border-color: lighten($color-slate-grey, 30%);
+        background-color: lighten($color-grey, 12%);
+        color: $color-primary-text;
+    }
+
+    &.active,
+    &:active {
+        &,
+        &:hover {
+            @include button-active-state();
+        }
+    }
+
+    &.dropdown-toggle {
+        // Caret
+        .caret {
+            @extend .icon;
+            @extend .icon-arrow-expand-thin;
+            border: 0;
+            width: auto;
+            height: auto;
+            margin-right: -$spacing-sm !important;
+            margin-left: $spacing-base;
+            color: lighten($color-slate-grey, 10%);
+        }
+
+        &:hover {
+            .caret {
+                color: $color-dark-primary-blue;
+            }
+        }
+        
+    }
+
+    .open > &.dropdown-toggle {
+        @include button-active-state();
+
+        &:hover {
+            @include button-active-state();
+        }
+
+        // Caret
+        .caret {
+            color: $color-white;
+        }
+
+    }
+
+    &[disabled] {
+        &,
+        &:hover {
+            @include opacity(.6);
+            background-color: $color-very-light-grey;
+            color: lighten($color-primary-text, 20%);
+        }
+        
+        .icon {
+            color: lighten($color-slate-grey, 30%);
+        }
+
+    }
+}
+
+// Button Primary
+.btn-primary {
+    background-color: $button-primary-color;
+    border-color: $button-primary-color;
+
+    &,
+    .icon {
+        color: $color-white;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: darken($button-primary-color, 12%);
+        border-color: darken($button-primary-color, 12%);
+    }
+
+    &:active {
+        &,
+        &:hover {
+            background-color: darken($button-primary-color, 12%);
+        }
+    }
+
+    &[disabled] {
+        @include opacity(.45);
+
+        &:hover {
+            background-color: $button-primary-color;
+        }
+    }
+
+}
+
+// Button Success
+.btn-success {
+    background-color: $button-success-color;
+    border-color: $button-success-color;
+
+    &,
+    .icon {
+        color: $color-white;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: darken($button-success-color, 5%);
+        border-color: darken($button-success-color, 10%);
+    }
+
+    &:active {
+        &,
+        &:hover {
+            background-color: darken($button-success-color, 10%);
+        }
+    }
+
+    &[disabled] {
+        @include opacity(.45);
+
+        &:hover {
+            background-color: $button-success-color;
+        }
+    }
+
+}
+
+// Button Success alternate
+.btn-success-alt {
+    background-color: $color-white;
+    border-color: $button-success-color;
+    color: $button-success-color;
+
+    &,
+    .icon {
+        color: darken(saturate($button-success-color, 5%),5%);
+    }
+
+    &:hover,
+    &:focus {
+        background-color: lighten($button-success-color, 45%);
+        color: darken(saturate($button-success-color, 5%),5%);
+    }
+
+    &[disabled] {
+        @include opacity(.45);
+
+        &:hover {
+            background-color: $button-success-color;
+        }
+    }
+
+}
+
+// Button Danger
+.btn-danger {
+    background-color: $button-danger-color;
+    border-color: $button-danger-color;
+
+    &,
+    .icon {
+        color: $color-white;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: darken($button-danger-color, 5%);
+        border-color: darken($button-danger-color, 10%);
+    }
+
+    &:active {
+        &,
+        &:hover {
+            background-color: darken($button-danger-color, 10%);
+        }
+    }
+
+    &[disabled] {
+        @include opacity(.45);
+
+        &:hover {
+            background-color: $button-danger-color;
+        }
+    }
+
+}
+
+// Button Danger alternate
+.btn-danger-alt {
+    background-color: $color-white;
+    border-color: $button-danger-color;
+    color: $button-danger-color;
+
+    &,
+    .icon {
+        color: $button-danger-color;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: lighten($button-danger-color, 50%);
+        color: $button-danger-color;
+    }
+
+    &[disabled] {
+        @include opacity(.45);
+
+        &:hover {
+            background-color: $button-danger-color;
+        }
+    }
+
+}
+
+// Button Default - Alternate
+.btn-default-alt {
+    background-color: $button-default-alt-color;
+    border-color: $button-default-alt-color;
+
+    &,
+    .icon {
+        font-weight: $theme-font-weight-normal;
+        color: $color-white;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: lighten($button-default-alt-color, 12%);
+        border-color: lighten($button-default-alt-color, 12%);
+        color: $color-white;
+    }
+
+    &:active {
+        &,
+        &:hover {
+            background-color: lighten($button-default-alt-color, 12%);
+            color: $color-white;
+        }
+    }
+
+    &[disabled] {
+        @include opacity(.45);
+
+        &:hover {
+            background-color: $button-default-alt-color;
+        }
+    }
+
+}
+
+// Button Grey
+.btn-grey {
+    background-color: $color-white;
+    border-color: lighten($color-slate-grey, 30%);
+    color: $color-primary-text;
+
+    .icon {
+        color: $color-slate-grey;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: lighten($color-dark-primary-blue, 58%);
+        border-color: lighten($color-dark-primary-blue, 20%);
+        color: $color-dark-primary-blue;
+
+        .icon {
+            color: $color-dark-primary-blue;
+        }
+    }
+
+    // Button active state declaration
+    @mixin button-active-state() {
+        background-color: $color-slate-grey;
+        border-color: darken($color-slate-grey, 10%);
+        color: $color-white;
+
+        .icon {
+            color: $color-white;
+        }
+    }
+
+    &.active,
+    &:active {
+        &,
+        &:hover {
+            @include button-active-state();
+        }
+    }
+
+    &.dropdown-toggle {
+        // Caret
+        .caret {
+            @extend .icon;
+            @extend .icon-arrow-expand-thin;
+            border: 0;
+            width: auto;
+            height: auto;
+            margin-right: -$spacing-sm !important;
+            margin-left: $spacing-base;
+            color: lighten($color-slate-grey, 10%);
+        }
+
+        &:hover {
+            .caret {
+                color: $color-dark-primary-blue;
+            }
+        }
+        
+    }
+
+    .open > &.dropdown-toggle {
+        @include button-active-state();
+
+        &:hover {
+            @include button-active-state();
+        }
+
+        // Caret
+        .caret {
+            color: $color-white;
+        }
+
+    }
+
+    &[disabled] {
+        @include opacity(1);
+        color: lighten($color-slate-grey, 30%);
+
+        &:hover {
+            border-color: lighten($color-slate-grey, 30%);
+            color: lighten($color-slate-grey, 30%);
+        }
+
+        .icon {
+            color: lighten($color-slate-grey, 30%);
+        }
+
+    }
+}
+
+// Pagination - Previous and Next Buttons
+.btn-pager-previous,
+.btn-pager-next {
+    @include border-radius(2px);
+    height: 20px;
+    width: 24px;
+    padding: 3px 6px;
+    height: 24px;
+    font-size: $theme-font-size-sm;
+    background-color: $color-white;
+    border: solid 1px transparent;
+
+    &:before {
+        @extend .icon;
+    }
+
+    &:hover,
+    &:focus {
+        border-color: lighten($color-slate-grey, 30%);
+        background-color: lighten($color-grey, 12%);
+        color: $color-blue-alt;
+    }
+
+    &:active {
+        background-color: $color-slate-grey;
+        color: $color-white;
+    }
+}
+
+.btn-pager {
+    &-previous {
+        &:before {
+            @extend .fa;
+            @extend .icon-arrow-angle-previous;
+        }
+    }
+
+    &-next {
+        &:before {
+            @extend .fa;
+            @extend .icon-arrow-angle-next;
+        }
+    }
+}
+
+
+// Large Icon
+.btn-icon {
+    @include no-transition();
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    border: solid 1px transparent;
+    color: $color-medium-grey;
+    font-size: 25px;
+    width: 28px;
+    height: 28px;
+    line-height: 1;
+    margin-left: $spacing-sm;
+
+    &:hover,
+    &:focus,
+    &:active {
+        @include no-transition();
+        @include shadow-none();
+        @include border-radius(2px);
+        border-color: $color-grey;
+        background-color: $color-very-light-grey;
+        color: $color-blue-alt;
+        outline: none;
+    }
+
+    &.btn-sm {
+        font-size: $theme-font-size-base;
+        padding: 4px 0 0 0!important;
+        height: 26px;
+        width: 26px;
+    }
+
+    .icon {
+        margin-right: 0;
+        vertical-align: initial;
+    }
+
+    .btn-group & + & {
+        margin-left: 0;
+    }
+
+    &[disabled] {
+        @include opacity(1);
+        color: lighten($color-slate-grey, 30%);
+
+        &:hover {
+            border-color: lighten($color-slate-grey, 30%);
+            color: lighten($color-slate-grey, 30%);
+        }
+
+        .icon {
+            color: lighten($color-slate-grey, 30%);
+        }
+
+    }
+
+
+
+}
