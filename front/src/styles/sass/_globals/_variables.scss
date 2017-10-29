@@ -1,0 +1,233 @@
+// Typography
+//
+// These variables will have all the text specific items
+
+$base-image: "../assets/img/";
+
+// Text font path for font styles light, light italic, regular, italic, bold and bold italic
+$base-font-regular-url: "../assets/fonts/text/Roboto-Regular";
+$base-font-italic-url: "../assets/fonts/text/Roboto-Italic";
+$base-font-semibold-url: "../assets/fonts/text/Roboto-Medium";
+$base-font-semibold-italic-url: "../assets/fonts/text/Roboto-MediumItalic";
+$base-font-bold-url: "../assets/fonts/text/Roboto-Bold";
+$base-font-bold-italic-url: "../assets/fonts/text/Roboto-BoldItalic";
+
+// Icon font path
+
+// Base font family
+$base-font-family: "Helvetica Neue Thin", "Roboto", Helvetica, Arial, sans-serif;
+
+// Icon font
+$icon-font-url: "../assets/fonts/icons/mf-icons";
+$icon-font-name: "mf-icons";
+
+// Font size variants
+$theme-font-size-base: 14px !default;
+$theme-font-size-md: ceil(($theme-font-size-base * 1.12)) !default;
+$theme-font-size-lg: 22px !default;
+$theme-font-size-lgr: 24px !default;
+$theme-font-size-xl: ceil(($theme-font-size-base * 2)) !default;
+$theme-font-size-xxl: ceil(($theme-font-size-base * 2.3)) !default;
+$theme-font-size-sm: ceil(($theme-font-size-base * .9)) !default;
+$theme-font-size-xs: ceil(($theme-font-size-base * .8)) !default;
+
+// Text font line height
+$theme-line-height-base: 1.428571429 !default;
+
+// Font weights
+//$theme-font-weight-normal:              300 !default;
+//$theme-font-weight-semibold:            400 !default;
+//$theme-font-weight-bold:                700 !default;
+
+$theme-font-weight-normal: 400 !default;
+$theme-font-weight-semibold: 500 !default;
+$theme-font-weight-bold: 700 !default;
+
+// Theme Colors
+
+// Primary Colors
+$color-primary-blue: #0078EF;
+$color-dark-blue: #271782;
+$color-blue: #01A9E7;
+$color-blue-alt: #007CD0;
+$color-dark-primary-blue: #007fbf;
+$color-light-blue: #29CEFF;
+$color-turquoise: #3DDCCA;
+$color-aqua: #1FFBBA;
+
+// Secondary Colors
+$color-violet: #56176C;
+$color-purple: #8457B6;
+$color-pink: #DF287C;
+$color-bright-green: #15DB66;
+$color-green-yellow: #90F170;
+$color-orange: #F17E12;
+$color-red: #DC233F;
+
+// Neutrals Old
+$color-full-black: #000000;
+$color-grey8: #2C3D45;
+$color-grey7: #3D515C;
+$color-grey6: #6A7C87;
+$color-grey5: #9DABAC;
+$color-grey4: #D4D6DA;
+$color-grey3: #E8EAE9;
+$color-grey2: #F5F5F5;
+$color-grey1: #FAFAFA;
+$color-white: #FFFFFF;
+
+// Neutrals
+$color-black: #1f1f1f;
+$color-dark-grey: #434c50;
+$color-dark-grey-compliment: #59656a; //menu option hover background color (compliment to #434c50)
+$color-dark-grey-alt: #555555;
+$color-medium-grey: #808080;
+$color-grey: #dae1e1;
+$color-grey-alt: #9DABAC;
+$color-light-grey: #eef2f2;
+$color-light-grey-alt: #b8b8b8;
+$color-very-light-grey: #f6f9f8;
+
+$color-slate-grey: $color-grey6;
+
+$color-primary-text: $color-dark-grey;
+$color-secondary-text: $color-medium-grey;
+
+// Highlight
+$color-highlight-bg: #fff6ce;
+$color-highlight-border: #FFD92D;
+
+// Spacers
+$spacing-xxs: 2px;
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-base: 16px;
+$spacing-md: 24px;
+$spacing-lg: 32px;
+$spacing-xl: 48px;
+$spacing-xxl: 64px;
+
+$spacer-size-list: (
+  xs: $spacing-xs,
+  sm: $spacing-sm,
+  base: $spacing-base,
+  md: $spacing-md,
+  lg: $spacing-lg,
+  none: 0
+);
+
+$spacer-sides: top right bottom left;
+$box-boundary-list: (
+  in: padding,
+  out: margin
+);
+
+// Button Colors
+$button-success-color: #39b549;
+$button-danger-color: #BF0A00;
+$button-default-alt-color: $color-dark-grey;
+$button-primary-color: $color-primary-blue;
+$button-primary-alt-color: $color-dark-blue;
+
+// System Status Colors
+$color-danger: #e91e1e;
+$color-warning: #ec8b00;
+$color-info: $color-blue;
+$color-success: #60ac2d;
+
+// Notification
+$color-nf-warning: #ec8b00;
+$color-nf-warning-bg: #fffdef;
+$color-nf-warning-fg: $color-nf-warning;
+
+$color-nf-info: $color-blue;
+$color-nf-info-bg: #e9f7fe;
+$color-nf-info-fg: $color-dark-primary-blue;
+
+$color-nf-success: #60ac2d;
+$color-nf-success-bg: #f4fcef;
+$color-nf-success-fg: $color-nf-success;
+
+$color-nf-danger: #e91e1e;
+$color-nf-danger-bg: #faefef;
+$color-nf-danger-fg: $color-nf-danger;
+
+$color-nf-global-error: #df4848;
+$color-nf-global-error-bg: $color-nf-global-error;
+$color-nf-global-error-fg: $color-white;
+
+$ui-grid-row-selection-bg: lighten($color-light-blue, 40%);
+$ui-grid-row-selection-border-color: $color-primary-blue;
+$ui-grid-row-error-bg: $color-nf-danger-bg;
+$ui-grid-row-error-border-color: darken($ui-grid-row-error-bg, 20%);
+
+$table-row-striped: $color-grey2;
+$table-row-selected-bg: lighten($color-light-blue, 40%);
+$table-row-selected-border-color: $color-light-blue;
+
+$selection-highlight-bg-color: lighten($color-light-blue, 40%);
+$selection-highlight-border-color: $color-light-blue;
+
+$modal-padding: 20px;
+
+// Priority Colors
+$priority-0-19: #a1a6ae;
+$priority-20-49: #007fbf;
+$priority-50-79: #80c03c;
+$priority-80-99: #f39c12;
+$priority-100: #d71c1c;
+$priority-fg-color: $color-white;
+
+$priority-class-name: priority;
+
+// Incident Priority Colors
+$incident-priority-0: #a1a6ae;
+$incident-priority-1: #007fbf;
+$incident-priority-2: #80c03c;
+$incident-priority-3: #f39c12;
+$incident-priority-4: #ff5627;
+$incident-priority-5: #d71c1c;
+$incident-priority-6: #900c3f;
+$incident-priority-fg-color: $color-white;
+
+$incident-priority-class-name: incident-priority;
+
+// Box Shadow Colors
+$box-shadow-20: rgba(0, 0, 0, .2);
+$box-shadow-45: rgba(0, 0, 0, .45);
+$box-shadow-60: rgba(0, 0, 0, .6);
+
+// Layout Colors
+$body-bg-color: $color-white;
+$body-fg-color: $color-primary-text;
+
+// Grid Gutter Size
+$grid-gutter-size: 15px;
+
+// Navbar Global
+$navbar-global-bg-color-start: $color-blue;
+$navbar-global-bg-color-end: $color-blue-alt;
+$global-nav-dropdown-color: darken($navbar-global-bg-color-start, 10%);
+$navbar-global-height: 50px;
+
+// Navbar Primary
+$navbar-primary-height: 35px;
+
+// Main Content Spacer
+$main-content-spacer: 25px;
+
+// Cards
+$card-width: 340px;
+$card-height: 234px;
+$card-photo-size: 64px;
+$card-gutter: $spacing-sm;
+
+// Brand Logo
+$logo-app-brand: $base-image +"logo-app-main.png";
+$img-user-thumb-default: $base-image + "default_user_img.png";
+
+// Responsive breakpoints
+$breakpoint-xs: 640px;
+$breakpoint-sm: 767px;
+$breakpoint-md: 992px;
+$breakpoint-lg: 1200px;

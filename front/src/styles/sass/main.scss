@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+// Stop bourborn from emitting deprecation warning messages
+$output-bourbon-deprecation-warnings: false !default;
+
+// Bootstrap resetting font path
+$icon-font-path: "../../node_modules/bootstrap-sass/assets/fonts/bootstrap/" !default;
+//$icon-font-path: "../assets/fonts/icons/" !default;
+
+// Font Awesome resetting font path
+$fa-font-path: "../../node_modules/font-awesome/fonts" !default;
+//$fa-font-path: "../assets/fonts/icons/" !default;
+
+// Vendor Dependencies
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap";
+@import "../../../node_modules/bourbon/app/assets/stylesheets/bourbon";
+@import "~font-awesome/scss/font-awesome";
+
+// Authored Dependencies
+@import "_globals/variables";
+@import "_globals/mixins";
+@import "_globals/utility";
+
+// Patterns
+@import "_patterns/layout";
+@import "_patterns/modals";
+@import "_patterns/navigation";
+@import "_patterns/icons";
+@import "_patterns/notifications";
+/*@import "_patterns/sidebar";*/
+@import "_patterns/tables";
+@import "_patterns/badges";
+@import "_patterns/forms";
+@import "_patterns/buttons";
+@import "_patterns/panels";
+@import "_patterns/lists";
+@import "_patterns/tabs";
+@import "_patterns/cards";
+@import "_patterns/accordions";
+@import "_patterns/typography";
+@import "_patterns/branding";
+@import "_patterns/thumbnail";
+
+// Shame
+@import "shame";
+
+// Components

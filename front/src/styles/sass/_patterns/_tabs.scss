@@ -1,0 +1,104 @@
+@charset "utf-8";
+
+@import "../_globals/variables";
+@import "../_globals/mixins";
+
+// Simple Tabs
+.tabs-simple {
+    $simple-tabs-border-color: $color-grey;
+    $simple-tabs-bg-normal-color: $color-white;
+    $simple-tabs-bg-hover-color: $color-light-grey;
+    .nav-tabs {
+        border-bottom: 1px solid $color-medium-grey;
+
+        > li {
+            > a {
+                @include border-radius(3px);
+                @include border-bottom-radius(0);
+                background-color: lighten($color-slate-grey, 50%);
+                border: 1px solid lighten($color-grey, 20%);
+                border-bottom-color: $color-medium-grey;
+                color: $color-dark-grey;
+                font-size: $theme-font-size-base;
+                font-weight: $theme-font-weight-normal;
+                padding: 6px 16px;
+				margin-left: 5px;
+
+                &:hover {
+                    border-color: $color-blue-alt $color-blue-alt $color-medium-grey $color-blue-alt;
+                    color: $color-blue-alt;
+                }
+            }
+
+            // Active state, and its :hover to override normal :hover
+            &.active > a {
+                &,
+                &:hover,
+                &:focus {
+                    background-color: $color-white;
+                    border: 1px solid $color-medium-grey;
+                    border-bottom-color: $color-white;
+                    color: $color-dark-grey;
+                    cursor: default;
+                    font-weight: $theme-font-weight-semibold;
+                }
+            }
+
+            &:first-child a {
+                margin-left: 0;
+            }
+
+        }
+    }
+
+    // Tab COntent
+    .tab-content {
+        padding: $spacing-base 0;
+    }
+}
+
+// Simple Tabs - Dark
+.tabs-simple-dark {
+    $tab-nav-bg-color: transparent;
+    $tab-nav-border-color: transparent;
+    $tab-nav-active-bg-color: $color-light-grey;
+    $tab-nav-active-border-color: $color-medium-grey;
+
+    // Tab items
+    .nav-tabs {
+
+        > li {
+            > a {
+                background-color: $tab-nav-bg-color;
+                border: 1px solid $tab-nav-border-color;
+                border-bottom-color: $tab-nav-border-color;
+
+                &:hover {
+                    border-color: $tab-nav-bg-color;
+                    border-bottom-color: $tab-nav-border-color;
+                    color: $color-primary-text;
+                }
+            }
+
+            // Active state, and its :hover to override normal :hover
+            &.active > a {
+                &,
+                &:hover,
+                &:focus {
+                    background-color: $tab-nav-active-bg-color;
+                    border: 1px solid $tab-nav-active-border-color;
+                    border-bottom-color: $tab-nav-active-bg-color;
+                    color: $color-primary-text;
+                }
+            }
+
+        }
+    }
+
+    // Tab Content
+    .tab-content {
+        background-color: $tab-nav-active-bg-color;
+    }
+}
+
+

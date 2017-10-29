@@ -1,0 +1,65 @@
+<div class="alert spacer-out-top-md ng-scope" [ngClass]="messageType?'alert-success':'alert-danger'">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+	<ng-template [ngIf]="treeNotification">
+		<div *ngIf="displayMessage.hasOwnProperty('succeeded')">
+				<div  id="sucessAccordion">
+					<h4 class="panel-title">
+						<div class="alert-heading spacer-out-bottom-sm">
+							<a data-toggle="collapse" data-parent="#sucessAccordion" class="accordion-toggle collapsed " href="#sucess">
+								
+								 Sucess({{displayMessage.succeeded.length}})
+							</a>
+						</div>	
+					</h4>
+					<div id="sucess" class="panel-collapse collapse">
+						<div  class="panel-body">
+							<ng-container *ngFor="let succeeded of displayMessage?.succeeded let i=index">
+								<div id="childsucess">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#childsucess"  class="accordion-toggle" href="#collapse{{i}}">{{succeeded.name||succeeded.id}}</a>
+									</h4>
+									<div id="collapse{{i}}" class="panel-collapse collapse">
+										<div class="panel-body">
+											{{succeeded.id}}
+										</div>
+									</div>
+								</div>
+							</ng-container>
+						</div>	
+					</div>
+
+				</div>
+		</div>
+		<div *ngIf="displayMessage.hasOwnProperty('failed')">
+			<div  id="failedAccordion">
+					<h4 class="panel-title">
+						<div class="alert-heading spacer-out-bottom-sm">
+							<a data-toggle="collapse" data-parent="#failedAccordion" class="accordion-toggle collapsed" href="#failed">
+								<i class="fa fa-plus-square feedback-expand"></i> failed({{displayMessage.succeeded.length}})
+							</a>
+						</div>	
+					</h4>
+					<div id="failed" class="panel-collapse collapse">
+						<div  class="panel-body">
+							<ng-container *ngFor="let failed of displayMessage?.failed let i=index">
+								<div id="childfailed">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#childfailed"   class="accordion-toggle  " href="#collapse{{i}}">{{failed.name||failed.id}}</a>
+									</h4>
+									<div id="collapse{{i}}" class="panel-collapse collapse">
+										<div class="panel-body">
+											{{failed.id}}
+										</div>
+									</div>
+								</div>
+							</ng-container>
+						</div>	
+					</div>
+
+				</div>
+		</div>
+	</ng-template>
+	<ng-template [ngIf]="!treeNotification">
+		{{displayMessage}}
+	</ng-template>
+</div>

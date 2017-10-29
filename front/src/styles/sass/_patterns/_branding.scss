@@ -1,0 +1,30 @@
+@charset "utf-8";
+
+@import "../_globals/variables";
+@import "../_globals/mixins";
+
+// Brand
+.brand-header {
+    position: relative;
+    height: 80px;
+    min-width: 300px;
+    max-height: 80px;
+    margin: 5px 5px 10px 0;
+
+    .brand-logo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-width: 78px;
+        height: 80px;
+        border-right: 0.5px solid $color-white;
+    }
+
+    .brand-title {
+        position: absolute;
+        top: 25px;
+        left: 90px;
+        font-size: 22px;
+        color: $color-white;
+    }
+}

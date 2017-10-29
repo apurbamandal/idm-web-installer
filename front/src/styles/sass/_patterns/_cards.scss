@@ -1,0 +1,588 @@
+@charset "utf-8";
+
+@import "../_globals/variables";
+@import "../_globals/mixins";
+
+
+// Droppable region
+.droppable-container {
+    @include droppable-region();
+    padding: $spacing-sm;
+    background-color: $color-white;
+
+    &.droppable-container-invisible {
+        border: 0;
+        background-color: transparent;   
+    }
+
+    &.drag-enter {
+        border: dashed 2px $color-dark-primary-blue;
+    }
+}
+
+// Card
+.card-user {
+    position: relative;
+    width: $card-width;
+    min-height: $card-height;
+    margin-bottom: $card-gutter;
+    margin-right: $card-gutter;
+    float: left;
+}
+
+
+.card-user .card-user-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    background-color: $color-light-grey;
+    border: solid 1px $color-light-grey;
+    padding: 10px 10px 0 10px;
+    @include border-radius(3px);
+    overflow-x: hidden;
+
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+        border-color: $color-blue;
+        background-color: lighten($color-light-grey, 3%);
+        cursor: pointer;
+    }
+
+    .card-header {
+        display: table;
+        width: 100%;
+        padding-bottom: $spacing-sm;
+        color: $color-primary-text;
+        overflow: auto;
+        clear: both;
+
+        .card-photo-wrapper {
+            display: table-cell;
+            vertical-align: top;
+            width: $card-photo-size;
+        }
+
+        .card-header-info {
+            display: table-cell;
+            vertical-align: top;
+            height: 100px;
+        }
+
+        .card-title {
+            font-size: $theme-font-size-md;
+            margin: 0;
+            color: $color-black;
+        }
+
+        .card-photo {
+            @include border-radius(3px);
+            width: $card-photo-size;
+            height: $card-photo-size;
+            float: left;
+            margin-right: 10px;
+        }
+
+        .card-header-info .card-title,
+        .card-header-info .card-value {
+            width: 232px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;           
+        }
+
+    }
+
+    .card-actions {
+        padding-bottom: $spacing-sm;
+        text-align: center;
+    }
+
+    .card-body {
+        border-top: solid 1px $color-grey;
+        padding: $spacing-sm 0;
+    }
+
+    .card-label-block {
+        margin-bottom: $spacing-xs;
+        font-size: $theme-font-size-sm;
+        display: block;
+        height: 20px;
+
+        .card-label {
+            display: inline-block;
+            margin-right: $spacing-sm;
+            min-width: 74px;
+            color: $color-medium-grey;
+            font-size: $theme-font-size-xs;
+            vertical-align: middle;
+        }
+
+        .card-value {
+            display: inline-block;
+            color: $color-primary-text;
+            width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+    }
+
+    .card-value {
+        font-size: $theme-font-size-sm;
+    }
+
+    .card-value-nowrap {
+        width: calc(100% - #{$spacing-sm*2});
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+ 
+}
+
+// Disabled Card
+.card-user.disabled {
+    @include opacity(.5);
+    .card-user-wrapper {
+        background-color: $color-very-light-grey;
+        &,
+        &:hover,
+        &:focus {
+            cursor: default;
+        }
+    }
+}
+
+// Users List
+.cards-user {
+    margin: $spacing-sm 0;
+    padding: 0;
+    list-style: none;
+    overflow: visible;
+    clear: both;  
+
+    // Tablet View
+    @include breakpoint(md) {
+        .card-user {
+            width: calc(50% - #{$spacing-sm});
+        }
+    }
+
+    @include breakpoint(xs) {
+        .card-user {
+            width: calc(100%);
+            margin-right: 0;
+        }
+    }
+
+}
+
+// User Card Visibility Editor
+.card-user-editable .card-user-wrapper {
+    position: relative;
+    display: block;
+    width: calc(100% - $spacing-lg);
+    background-color: $color-light-grey;
+    border: solid 1px $color-light-grey;
+    padding: 10px;
+    @include border-radius(3px);
+
+    .card-header {
+        display: table;
+        width: 100%;
+        padding-bottom: $spacing-sm;
+        color: $color-primary-text;
+        overflow: auto;
+        clear: both;
+
+        .card-photo-wrapper {
+            position: relative;
+            display: table-cell;
+            vertical-align: top;
+            width: $card-photo-size + 20px;
+            padding-right: $spacing-base;
+            text-align: center;
+        }
+
+        .card-photo {
+            @include border-radius(3px);
+            border: solid 1px darken($color-light-grey, 10%);
+            width: $card-photo-size + 20px;
+            height: $card-photo-size + 20px;
+            margin-bottom: $spacing-sm;
+            background: transparent url($img-user-thumb-default) left top no-repeat;
+            background-size: cover;
+        }
+
+        .card-header-info {
+            display: table-cell;
+            vertical-align: top;
+        }
+
+    }
+
+    .card-actions {
+        padding: $spacing-xs 0 $spacing-base 0;
+        text-align: center;
+    }
+
+    .card-body {
+        border-top: solid 1px $color-grey;
+        padding: $spacing-sm 0;
+    }
+
+    .droppable-container {
+        min-height: 24px;
+    }
+
+    .card-body .droppable-container {
+        min-height: 42px;
+    }
+
+}
+
+// Card Editable - Editable Items
+.card-user-element {
+    @include border-radius(3px);
+    position: relative;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    border: solid 1px transparent;
+    background-color: $color-light-grey;
+    margin: 4px 4px 0 0;
+    padding: $spacing-xs/2 $spacing-sm;
+    font-size: $theme-font-size-xs;
+    color: $color-primary-text;     
+    z-index: 100;
+
+    &:hover {
+        background-color: $color-very-light-grey;
+        border: solid 1px $color-blue;
+        cursor: pointer;
+    }
+
+    .remove {
+        @extend .icon;
+        @extend .icon-cross;
+        @include opacity(.7);
+        background-color: transparent;
+        border: 0;
+        color: $color-primary-text;
+        margin-right: 0;
+        margin-left: $spacing-sm;
+        padding: 0;
+        vertical-align: middle;
+    }
+
+    &:hover {
+        .remove {
+            @include opacity(1);
+        }
+    }
+}
+
+
+// Landing Page Cards
+$card-landing-size:             160px;
+$card-landing-icon-size:        60px;
+$card-landing-edit-size:        120px;
+$card-landing-icon-edit-size:   42px;
+.cards-landing {
+    
+
+    &,
+    & > .card-item {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        
+    }
+
+    &:after {
+       content: " ";
+       display: block; 
+       height: 0; 
+       clear: both;
+    }
+    
+    .card-item {
+        display: block;
+        float: left;
+    }
+
+    // Card drop zone
+    .card-item.drag-enter {
+        position: relative;
+        padding-left: $card-landing-edit-size + 4px;
+        border: 0;
+
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: dashed 2px $color-dark-primary-blue;
+            width: $card-landing-edit-size;
+            height: $card-landing-edit-size;
+        }
+        
+    }
+
+    .card {
+        @include border-radius(3px);
+        position: relative;
+        display: block;
+        width: $card-landing-size;
+        height: $card-landing-size;
+        text-decoration: none;
+        margin-right: $spacing-xs;
+        margin-bottom: $spacing-xs;
+        padding: $spacing-sm;
+        background-color: $color-light-grey;
+        border: solid 1px transparent;
+        overflow: hidden;
+        text-align: center;
+
+        .card-icon {
+            width: auto;
+            height: $card-landing-icon-size;
+        }
+        .card-title {
+            font-size: $theme-font-size-md;
+            color: $color-black;
+            font-weight: $theme-font-weight-semibold;
+            line-height: 1.15;
+            margin-top: 5px;
+            margin-bottom: 2px;
+            max-height: 40px;
+            overflow: hidden;
+        }
+        .card-description {
+            font-size: $theme-font-size-xs;
+            color: $color-medium-grey;
+            line-height: 1.2;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+        }
+
+        &:hover {
+            background-color: $color-very-light-grey;
+            border: solid 1px $color-blue;
+            cursor: pointer;
+            * {
+                text-decoration: none;    
+            }
+            
+        }
+    }
+
+    // Edit Mode
+    &.cards-landing-edit {
+        .card {
+            position: relative;
+            width: $card-landing-edit-size;
+            height: $card-landing-edit-size;
+            margin-top: 0;
+            margin-left: 0;
+            overflow: visible;
+
+            .card-icon {
+                width: auto;
+                height: $card-landing-icon-edit-size;
+            }
+
+            .card-title {
+                margin-top: $spacing-xs;
+                color: $color-primary-text;
+                font-weight: $theme-font-weight-normal;
+                font-size: $theme-font-size-sm;
+                line-height: 1;
+                display: block;
+                max-height: 54px;
+                overflow: hidden;
+            }
+
+            .card-actions {
+                $card-action-button-size: 32px;
+
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba($color-white, .7);
+
+                .card-action-left,
+                .card-action-right {
+                    @include border-radius(50%);
+                    display: block;
+                    width: $card-action-button-size;
+                    height: $card-action-button-size;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    background-color: $color-dark-primary-blue;
+                    border: 0;
+                    color: $color-white;
+                    margin-top: -($card-action-button-size / 2);
+
+                    .icon {
+                        font-size: $theme-font-size-md;
+                    }
+                }
+                .card-action-left {
+                    margin-left: -($card-action-button-size + 6px);
+                }
+
+                .card-action-right {
+                    margin-right: 6px;
+                }
+            }
+        }
+
+        .card-add-new {
+            position: relative;
+			color: $color-medium-grey;
+            border: dashed 1px $color-medium-grey;
+			background-color: transparent;
+
+            .icon {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-left: -($card-landing-icon-edit-size / 2);
+                margin-top: -($card-landing-icon-edit-size / 2);
+                font-size: $card-landing-icon-edit-size;
+            }
+
+            &:hover {
+                border-color: $color-blue;
+
+                .icon {
+                    color: $color-blue;
+                }
+            }
+        }
+
+        // Edit mode - White cards
+        &.cards-white {
+            .card {
+                background-color: $color-white;
+                border-color: $color-grey;
+            }
+
+            .card-add-new {
+                background-color: transparent;
+                border-color: $color-medium-grey;
+            	&:hover {
+                	border-color: $color-blue;
+
+                	.icon {
+                    	color: $color-blue;
+                	}
+				}
+            }
+        }
+    }
+}
+
+
+// Dashboard Tile
+.dashboard-tiles {
+    @include clearfix();
+}
+.dashboard-tile {
+    @include border-radius(3px);
+    width: 400px;
+    height: 240px;
+    margin: 0 5px 5px 0;
+    padding: 25px;
+    float: left;
+    
+    background-color: $color-light-grey;
+
+    a {
+        color: $color-blue-alt;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .dashboard-tile-heading {
+        text-transform: uppercase;
+        color: $color-medium-grey;
+        margin-top: 0;
+        margin-bottom: 30px;
+        font-size: $theme-font-size-md;
+        font-weight: $theme-font-weight-normal;
+    }
+
+    .dashboard-tile-insight {
+        .tile-insight-label {
+            font-size: $theme-font-size-base;
+            color: $color-black;
+        }
+
+        .tile-insight-value,
+        .tile-insight-value > a {
+            font-size: 42px;
+            line-height: 1.2;
+            color: $color-blue-alt;
+            text-decoration: none;
+        }
+
+        .tile-insight-value .icon {
+            color: $color-medium-grey !important;
+            vertical-align: text-bottom;
+            line-height: 1.2;
+            margin-right: -4px;
+        }
+
+        .tile-insight-value > a {
+            &:hover {
+                color: $color-dark-primary-blue;
+                background-color: $color-very-light-grey;
+            }
+        }
+
+    }
+
+    .dashboard-tile-insight-ib {
+        display: inline-block;
+        margin-right: $spacing-lg;
+    }
+    
+    // Expiring value
+    .tile-insight-value,
+    .label-section-value {
+        &.value-warning,
+        &.value-warning > a,
+        &.value-warning > a:hover {
+            color: $color-warning;    
+        }
+    }
+    .tile-insight-value.value-warning,
+    .tile-insight-value.value-warning > a,
+    .tile-insight-value.value-warning > a:hover {
+        color: $color-warning;
+    }
+    
+    // Denied value
+    .tile-insight-value,
+    .label-section-value {
+        &.value-danger,
+        &.value-danger > a,
+        &.value-danger > a:hover {
+            color: $color-danger;    
+        }
+    }
+}
