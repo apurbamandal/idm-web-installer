@@ -16,16 +16,24 @@ export class WebService {
   }
 
   public install() {
-    return this.authService.postResource({}, '/api/install' );
+    return this.authService.postResource({}, '/api/install');
   }
   public download() {
-    return this.authService.postResource({}, '/api/download' );
+    return this.authService.postResource({}, '/api/download');
   }
   public copyIso() {
-    return this.authService.postResource({}, '/api/copyIso' );
+    return this.authService.postResource({}, '/api/copyIso');
+  }
+
+  public s_install() {
+    return this.authService.postResource({}, '/api/s_install');
+  }
+
+  public s_configure() {
+    return this.authService.postResource({}, '/api/s_configure');
   }
   public save(body: object) {
-    return this.authService.postResource({}, '/api/save' );
+    return this.authService.postResource(body, '/api/save');
   }
 
   public isAuthenticated() {

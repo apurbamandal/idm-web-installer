@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class VariableService {
 
-  constructor() { }
+  constructor() {
+  }
 
   isUndefined(x) {
     return x == undefined;

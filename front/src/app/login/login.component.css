@@ -79,3 +79,11 @@
   color: #3899c7;
   margin-left: 27px;
 }
+
+.input-group {
+  width: 300px;
+}
+
+.col-md-4 {
+  width: 50%;
+}

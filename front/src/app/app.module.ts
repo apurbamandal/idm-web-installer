@@ -35,7 +35,7 @@ import { NoContentComponent } from './no-content';
 
 import '../styles/style.css';
 import { InstallComponent } from './install/install.component';
-import { VariableService } from './utils/services/variable.service';
+import {VariableService} from './utils/services/variable.service';
 // import '../styles/headings.css';
 
 // Application wide providers
