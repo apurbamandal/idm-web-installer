@@ -232,16 +232,8 @@ module.exports = function (options) {
         ignored: /node_modules/
       },
       proxy: {
-        '/IDMProv': {
-          target: 'http://164.99.91.32:8180',
-          secure: false
-        },
-        '/context': {
-          target: 'http://164.99.91.32:8180/idmadmin',
-          secure: false
-        },
-        '/idmtools/api': {
-          target: 'http://localhost:9000/',
+        '/idmtools': {
+          target: 'http://localhost:8080/',
           secure: false
         }
       }
