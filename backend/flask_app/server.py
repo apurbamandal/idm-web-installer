@@ -473,7 +473,7 @@ def s_install():
 
 
 @app.route('/api/s_configure', methods=['POST'])
-def s_install():
+def s_configure():
     logger.info('s_install api called')
     hostname = '164.99.162.153'
     port = 22
@@ -493,3 +493,21 @@ def s_install():
     ret = "Identity Manager successfully installed in " + hostname
     print(ret)
     return jsonify(ret), 200
+
+@app.route('/api/loginCheck', methods=['GET'])
+@jwt_required
+def LoginCheck():
+    """Get dummy data returned from the server."""
+    jwt_data = get_jwt()
+    if jwt_data['roles'] != 'admin':
+        return jsonify(msg="Permission denied"), Status.HTTP_BAD_FORBIDDEN
+
+    identity = get_jwt_identity()
+    if not identity:
+        return jsonify({"msg": "Token invalid"}), Status.HTTP_BAD_UNAUTHORIZED
+
+    data = {"msg": "Loggeed In"}
+    json_response = json.dumps(data)
+    return Response(json_response,
+                    status=Status.HTTP_OK_BASIC,
+                    mimetype='application/json')
