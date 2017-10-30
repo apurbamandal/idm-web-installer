@@ -44,7 +44,8 @@ export class InstallComponent implements OnInit {
       postgresusername: this.installForm.postgresusername,
       postgresuserpass: this.installForm.postgresuserpass,
       postgresadminpass: this.installForm.postgresadminpass,
-      sentinelip: this.installForm.sentinelip
+      sentinelip: this.installForm.sentinelip,
+      vaulttreename: this.installForm.vaulttreename
     });
   }
 
@@ -52,6 +53,7 @@ export class InstallComponent implements OnInit {
     let body = {
       vaultip: this.installForm.vaultip.value,
       boxpass: this.installForm.boxpass.value,
+      vaulttreename: this.installForm.vaulttreename.value,
       vaultadminname: this.installForm.vaultadminname.value,
       vaultadminpass: this.installForm.vaultadminpass.value,
       ssopass: this.installForm.ssopass.value,
@@ -60,7 +62,6 @@ export class InstallComponent implements OnInit {
       appsadminpass: this.installForm.appsadminpass.value,
       postgresusername: this.installForm.postgresusername.value,
       postgresuserpass: this.installForm.postgresuserpass.value,
-      postgresadminpass: this.installForm.postgresadminpass.value,
       sentinelip: this.installForm.sentinelip.value
     };
     console.log(this.installForm.vaultadminname.value)
