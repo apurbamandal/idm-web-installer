@@ -1,0 +1,164 @@
+/*
+------------------------------------
+GLOBAL NAVIGATION
+------------------------------------
+*/
+/* Brand - Text */
+.navbar-global .navbar-brand {
+  color: #FFFFFF;
+}
+
+/* Navigation Bar */
+.navbar-global {
+  background-color: #01A9E7;
+  background: -webkit-linear-gradient( left , #01A9E7, #007CD0) top repeat;
+  background: linear-gradient(to right, #01A9E7, #007CD0) top repeat;
+}
+
+/*
+------------------------------------
+TABLE HIGHLIGHTS
+------------------------------------
+*/
+/* Selected table row */
+.table-row-selected td {
+  background-color: #f5fdff;
+  border-bottom: solid 1px #29CEFF;
+}
+
+/* Table row hover color */
+.table-hover tbody tr:hover td {
+  background-color: #f5fdff;
+}
+
+/*
+------------------------------------
+FORM CONTROL ACCENT COLORS
+------------------------------------
+
+This is the general accent for selected/focused state for various form controls.
+
+*/
+/* Text Box, Select Box, Textarea - Focus or Active state color */
+.form-control:focus {
+  border-color: #01A9E7;
+}
+
+/* Checkbox */
+.checkbox input[type="checkbox"] + .checkbox-label:hover:before, .checkbox input[type="checkbox"] + .checkbox-label:focus:before,
+.checkbox-inline input[type="checkbox"] + .checkbox-label:hover:before,
+.checkbox-inline input[type="checkbox"] + .checkbox-label:focus:before {
+  color: #01A9E7;
+}
+.checkbox input[type="checkbox"]:checked + .checkbox-label:before,
+.checkbox-inline input[type="checkbox"]:checked + .checkbox-label:before {
+  color: #01A9E7;
+}
+
+/* Radio Button */
+.radio input[type="radio"] + .rb-label:hover:before, .radio input[type="radio"] + .rb-label:focus:before,
+.radio-inline input[type="radio"] + .rb-label:hover:before,
+.radio-inline input[type="radio"] + .rb-label:focus:before {
+  color: #01A9E7;
+}
+.radio input[type="radio"]:checked + .rb-label:before,
+.radio-inline input[type="radio"]:checked + .rb-label:before {
+  color: #01A9E7;
+}
+
+/* IOS Style Checkbox - Active State Color */
+.checkbox-ios :checked + i {
+  background: #01A9E7;
+}
+
+/*
+------------------------------------
+APPLICATION TILE
+------------------------------------
+
+These are the styles for tiles in the applications page.
+
+*/
+/* Applications Page - View mode */
+.cards-landing .card {
+  background-color: #eef2f2;
+}
+.cards-landing .card .card-title {
+  color: #1f1f1f;
+}
+.cards-landing .card .card-description {
+  color: #808080;
+}
+.cards-landing .card:hover {
+  background-color: #f6f9f8;
+  border: solid 1px #01A9E7;
+}
+
+/* Applications Page - Edit mode */
+.cards-landing.cards-landing-edit {
+  /* Add New Card */
+  /* White card */
+}
+.cards-landing.cards-landing-edit .card .card-title {
+  color: #434c50;
+}
+.cards-landing.cards-landing-edit .card .card-actions .card-action-left,
+.cards-landing.cards-landing-edit .card .card-actions .card-action-right {
+  background-color: #007fbf;
+  color: #FFFFFF;
+}
+.cards-landing.cards-landing-edit .card-add-new {
+  color: #808080;
+  border: dashed 1px #808080;
+}
+.cards-landing.cards-landing-edit .card-add-new:hover {
+  border-color: #01A9E7;
+}
+.cards-landing.cards-landing-edit .card-add-new:hover .icon {
+  color: #01A9E7;
+}
+.cards-landing.cards-landing-edit.cards-white .card {
+  background-color: #FFFFFF;
+  border-color: #dae1e1;
+}
+.cards-landing.cards-landing-edit.cards-white .card-add-new {
+  border-color: #808080;
+}
+.cards-landing.cards-landing-edit.cards-white .card-add-new:hover {
+  border-color: #01A9E7;
+}
+.cards-landing.cards-landing-edit.cards-white .card-add-new:hover .icon {
+  color: #01A9E7;
+}
+
+/*
+------------------------------------
+USER CARD BUTTON COLOR
+------------------------------------
+
+These are the styles for card that has been shown in the user's card view page.
+
+*/
+.card-user .card-user-wrapper {
+  background-color: #eef2f2;
+  border: solid 1px #eef2f2;
+}
+.card-user .card-user-wrapper:hover, .card-user .card-user-wrapper:focus, .card-user .card-user-wrapper:active {
+  border-color: #01A9E7;
+  background-color: #f7f9f9;
+}
+
+/*
+------------------------------------
+ABOUT - SPLASH SCREEN
+------------------------------------
+
+*/
+/* */
+.splash-product-info .splash-product-info-wrapper {
+  background-color: #434c50;
+  color: #FFFFFF;
+}
+.splash-product-info .close {
+  color: #FFFFFF;
+}

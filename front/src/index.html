@@ -1,47 +1,44 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>
-    <%= htmlWebpackPlugin.options.title %>
-  </title>
+  <title translate>Identity Manager Admin</title>
 
   <meta name="description" content="<%= htmlWebpackPlugin.options.title %>">
 
+  <link href="assets/css/indigo-pink.css" rel="stylesheet">
+
   <% if (webpackConfig.htmlElements.headTags) { %>
-    <!-- Configured Head Tags  -->
-    <%= webpackConfig.htmlElements.headTags %>
-      <% } %>
+  <!-- Configured Head Tags  -->
+  <%= webpackConfig.htmlElements.headTags %>
+  <% } %>
 
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <!-- base url -->
+  <% if (htmlWebpackPlugin.options.metadata.isDevServer) { %>
+  <!-- set base url -->
+  <base href="<%= htmlWebpackPlugin.options.metadata.baseUrlDev %>">
+  <% } else { %>
+  <base href="<%= htmlWebpackPlugin.options.metadata.baseUrlProd %>">
+  <% } %>
 
-        <!-- base url -->
-        <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
 
+  <%= htmlWebpackPlugin.files.webpackManifest %>
 
 </head>
 
 <body>
 
-  <app>
-    Loading...
-  </app>
-
-
+  <idm-root>
+  
+  </idm-root>
 
   <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
-    <!-- Webpack Dev Server reload -->
-    <script src="/webpack-dev-server.js"></script>
-    <% } %>
-
+  <!-- Webpack Dev Server reload -->
+  <script src="/webpack-dev-server.js"></script>
+  <% } %>
 
 </body>
-
 </html>

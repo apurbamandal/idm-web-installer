@@ -1,0 +1,72 @@
+<div *ngIf="!showComplexData">
+  <ng-template [ngIf]="!isClickable">
+    <div class="managed-text">{{displayData}}</div>
+  </ng-template>
+  <ng-template [ngIf]="isClickable">
+    <a class="cursor-pointer ng-binding" (click)="simpleClickHandler()">{{displayData}} </a>
+  </ng-template>
+</div>
+
+<div *ngIf="showComplexData">
+  <ng-template [ngIf]="!isClickable">
+    <ng-container *ngFor="let element of uiData; let rowNum =index">
+      <div class="a-coma">{{this.displayComplexData[rowNum]}} </div>
+    </ng-container>
+  </ng-template>
+  <ng-template [ngIf]="isClickable">
+    <ng-template [ngIf]="uiData.length<=3">
+      <ng-container *ngFor="let element of uiData; let rowNum =index">
+        <a class="cursor-pointer a-coma " (click)="complexClickHandler(element)">
+           <ng-template [ngIf]="element.type=='user'" >
+              <i class="icon icon-size-xs icon-user"></i>
+            </ng-template>
+            <ng-template [ngIf]="element.type=='group'" >
+              <i class="icon icon-size-xs icon-group"></i>
+            </ng-template>
+          {{this.displayComplexData[rowNum]}}
+        </a>&nbsp;
+      </ng-container>
+    </ng-template>
+    <ng-template [ngIf]="uiData.length>3">
+      <ng-container *ngFor="let element of uiData; let rowNum =index">
+        <ng-template [ngIf]="rowNum <2 ">
+          <a class="cursor-pointer a-coma" (click)="complexClickHandler(element)">
+            <ng-template [ngIf]="element?.type=='user'" >
+              <i class="icon icon-size-xs icon-user"></i>
+            </ng-template>
+            <ng-template [ngIf]="element?.type=='group'" >
+              <i class="icon icon-size-xs icon-group"></i>
+            </ng-template>
+            {{this.displayComplexData[rowNum]}}
+            </a>
+        </ng-template>
+      </ng-container>
+      <span class="cursor-pointer " role="button" data-toggle="modal" [attr.data-target]="'#'+'viewData_'+rowNumber" (click)="changeModalData(uiData)"> ...</span>
+    </ng-template>
+  </ng-template>
+</div>
+
+<div class="modal modal-size-md modal-height-lg" id="viewData_{{rowNumber}}" *ngIf="refreshModelData">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+        <h4 class="modal-title" id="myModalLabel" translate=""><span class="ng-scope">{{columnHeader}}</span></h4>
+      </div>
+      <div class="modal-body container" >
+        <ng-container *ngFor="let element of modalData; let rowNum =index">
+          <div class="list" (click)="complexClickHandler(element)">
+            <ng-template [ngIf]="element?.type=='user'" >
+              <i class="icon icon-size-xs icon-user"></i>
+            </ng-template>
+            <ng-template [ngIf]="element?.type=='group'" >
+              <i class="icon icon-size-xs icon-group"></i>
+            </ng-template>
+          <a class="cursor-pointer ng-binding a-coma text-nowrap" >{{this.displayComplexData[rowNum]}}</a>&nbsp;
+          </div>
+        </ng-container>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -53,7 +53,7 @@ def add_claims_to_access_token(identity):
     }
 
 
-@app.route("/api/logout", methods=['POST'])
+@app.route("/idmtools/api/logout", methods=['POST'])
 @jwt_required
 def logout():
     """Logout the currently logged in user."""
@@ -66,7 +66,7 @@ def logout():
     return 'logged out successfully', Status.HTTP_OK_BASIC
 
 
-@app.route('/api/login', methods=['POST'])
+@app.route('/idmtools/api/login', methods=['POST'])
 def login():
     """View function for login view."""
     logger.info('Logged in user')
@@ -90,7 +90,7 @@ def login():
     return jsonify(ret), 200
 
 
-@app.route('/api/protected', methods=['GET'])
+@app.route('/idmtools/api/protected', methods=['GET'])
 @jwt_required
 def get_data():
     """Get dummy data returned from the server."""
@@ -127,7 +127,7 @@ def main():
         # Do something here
         pass
 
-@app.route('/api/download',methods=['POST'])
+@app.route('/idmtools/api/download',methods=['POST'])
 @jwt_required
 # def download():
 #     jwt_data = get_jwt()
@@ -260,7 +260,7 @@ def download():
                     status=sendStat,
                     mimetype='application/json')
 
-@app.route('/api/copyIso',methods=['POST'])
+@app.route('/idmtools/api/copyIso',methods=['POST'])
 @jwt_required
 def copyIso():
     jwt_data = get_jwt()
@@ -382,7 +382,7 @@ def copyIso():
                     mimetype='application/json')
 
 
-@app.route('/api/save', methods=['POST'])
+@app.route('/idmtools/api/save', methods=['POST'])
 def save():
 
     logger.info('api called')
@@ -478,7 +478,7 @@ def save():
     return jsonify(ret), 200
 
 
-@app.route('/api/s_install', methods=['POST'])
+@app.route('/idmtools/api/s_install', methods=['POST'])
 def s_install():
     logger.info('s_install api called')
     hostname = '164.99.162.153'
@@ -501,7 +501,7 @@ def s_install():
     return jsonify(ret), 200
 
 
-@app.route('/api/s_configure', methods=['POST'])
+@app.route('/idmtools/api/s_configure', methods=['POST'])
 def s_configure():
     logger.info('s_install api called')
     hostname = '164.99.162.153'
@@ -522,3 +522,21 @@ def s_configure():
     ret = "Identity Manager successfully configured in " + hostname
     print(ret)
     return jsonify(ret), 200
+
+@app.route('/idmtools/api/loginCheck', methods=['GET'])
+@jwt_required
+def LoginCheck():
+    """Get dummy data returned from the server."""
+    jwt_data = get_jwt()
+    if jwt_data['roles'] != 'admin':
+        return jsonify(msg="Permission denied"), Status.HTTP_BAD_FORBIDDEN
+
+    identity = get_jwt_identity()
+    if not identity:
+        return jsonify({"msg": "Token invalid"}), Status.HTTP_BAD_UNAUTHORIZED
+
+    data = {"msg": "Loggeed In"}
+    json_response = json.dumps(data)
+    return Response(json_response,
+                    status=Status.HTTP_OK_BASIC,
+                    mimetype='application/json')

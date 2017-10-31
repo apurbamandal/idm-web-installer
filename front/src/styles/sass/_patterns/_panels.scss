@@ -1,0 +1,212 @@
+@charset "utf-8";
+
+@import "../_globals/variables";
+@import "../_globals/mixins";
+
+// Panels
+
+.panel-simple {
+    @include shadow-none();
+    
+    .panel-heading {
+        @include border-radius(2px);
+        position: relative;
+        background-color: $color-light-grey;
+        padding: $spacing-xs $spacing-sm;
+        margin: $spacing-sm 0 $spacing-sm 0;
+        min-height: 30px;
+
+        h1, h2, h3, h4, h5, h6 {
+            color: $color-black;
+            font-size: $theme-font-size-base;
+            font-weight: $theme-font-weight-semibold;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        > .btn-collapse {
+            @extend .icon;
+            @extend .icon-arrow-collapse;
+            @include opacity(.7);
+            background-color: transparent;
+            background-image: none;
+            border: 0;
+            position: absolute;
+            right: 0;
+            top: 6px;
+            color: $color-black;
+
+            &:hover,
+            &:active {
+                @include opacity(.7);
+            }
+            
+
+            &.collapsed {
+                @extend .icon-arrow-expand;                
+            }
+        }
+    }
+
+    .panel-body {
+        padding: $spacing-xs $spacing-sm;
+    }
+
+    .panel-heading + .panel-body {
+        padding-top: 0;
+    }
+}
+
+// Grey Panel
+.panel-default {
+    @include shadow-none();
+
+    .panel-body {
+        padding: $spacing-xs $spacing-sm;
+    }
+
+    .panel-heading + .panel-body {
+        padding-top: 0;
+    }
+}
+
+// Media Panel
+.panel-media {
+    @include shadow-none();
+    position: relative;
+    border: solid 1px $color-grey;
+    padding: $spacing-base;
+    margin-bottom: $spacing-sm;
+
+    .panel-media-element {
+        position: absolute;
+        top: 16px;
+        right: 12px;
+        font-size: $theme-font-size-xl;
+        color: $color-dark-blue;
+    }
+
+    .panel-heading {
+        padding: 0 $spacing-lg 0 0;
+        h1, h2, h3, h4, h5, h6 {
+            color: $color-dark-blue;
+            font-size: $theme-font-size-lg;
+            font-weight: $theme-font-weight-normal;
+            margin: 0;
+            line-height: 1.4;
+        }
+    }
+
+    .panel-body {
+        padding: $spacing-xs $spacing-lg 0 0;
+    }
+
+    .panel-footer {
+        background-color: transparent;
+        border: 0;
+        padding: 0;
+    }
+
+    // Alertnate
+    &.panel-media-primary {
+        border-color: rgba($color-dark-blue, .4);
+        background-color: rgba($color-dark-blue, .02);
+    }
+}
+
+
+// About Splash Screen
+.splash-product-info {
+    $modal-width: 620px;
+    $modal-height: 260px;
+
+    @include border-radius(3px);
+    @include shadow-none();
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: $modal-width;
+    height: $modal-height;
+    margin-top: -$modal-height/1.8;
+    margin-left: -$modal-width/2;
+    z-index: 999;
+
+    & &-wrapper {
+        @include border-radius(3px);
+        @include shadow-none();
+        position: relative;
+        width: $modal-width;
+        height: $modal-height;
+        background-color: $color-dark-grey;
+        color: $color-white;
+    }
+
+    & &-content {
+        padding: 28px 34px;
+    }
+
+    .close {
+        @include opacity(.7);
+        @extend .icon;
+        @extend .icon-cross;
+        position: absolute;
+        top: 14px;
+        right: 18px;
+        margin: 0;
+        color: $color-white;
+
+        &:hover {
+            @include opacity(1);
+        }
+    }
+
+    .product-meta {
+        $logo-size: 72px;
+
+        @include clearfix();
+        display: block;
+        margin-top: $spacing-base;
+
+        .product-brand-image {
+            width: $logo-size + $spacing-base;
+            min-height: $logo-size;
+            display: block;
+            padding-top: 12px;
+            float: left;
+
+            img {
+                width: $logo-size;
+                height: auto;
+            }
+        }
+
+        .product-details {
+            width: calc(100% - #{$logo-size + $spacing-base});
+            padding-right: 24px;
+            display: block;
+            float: left;
+
+            .product-name {
+                font-weight: $theme-font-weight-normal;
+                color: $color-white;
+                font-size: 28px;
+            }
+
+            .product-description {
+                margin-top: $spacing-base;
+                font-size: $theme-font-size-base;
+                color: $color-white;
+                word-break: break-word;
+            }
+        }
+    }
+
+    .product-copyright {
+        @include opacity(.5);
+        position: absolute;
+        bottom: 24px;
+        margin: 0;
+        font-size: $theme-font-size-sm;
+        color: $color-white;
+    }
+}

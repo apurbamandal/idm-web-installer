@@ -1,4 +1,23 @@
-<div class="container-fluid">
+<div class="row">
+  <div class="col-sm-6">
+    <div class="main-content-header">
+      <h2 class="heading-page-main spacer-out-bottom-sm" translate>
+        <span translate> Welcome to one click IDM install</span>
+
+      </h2>
+      <div class="header-actions"  >
+        <button type="button" (click)="download()" class="btn btn-primary">Download</button>
+        <button type="button" (click)="copyIso()" class="btn btn-primary">Mount</button>
+        <button type="button" (click)="s_install()" class="btn btn-primary">Install</button>
+        <button type="button" (click)="s_confiugre()" class="btn btn-primary">Configure</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <!-- help section -->
+  </div>
+</div>
+<div >
 
   <form class="well form-horizontal" novalidate [formGroup]="installFormGroup" (ngSubmit)="save()" id="contact_form">
     <fieldset>

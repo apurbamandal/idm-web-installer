@@ -1,36 +1,28 @@
 import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
-import { WebService } from '../webservices/webservices.services';
-import { AuthenticationService } from '../authentication/authentication.service';
-import {getInputValues} from "@angularclass/hmr";
-import {BrowserModule} from '@angular/platform-browser';
-import {FormArray, FormControl, FormGroup, FormsModule, Validators} from '@angular/forms';
-import {InstallSchema} from '../utils/headers/schema/install';
-import {VariableService} from "../utils/services/variable.service";
+import {FormGroup} from '@angular/forms';
+import {InstallSchema} from "../shared/schemas/install";
+import {VariableService} from "../shared/services/utilities/util_variable/variable.service";
+import {InstallService} from "../shared/services/install/install.service";
 
 @Component({
-  selector: 'app-install',
+  selector: 'idm-install',
   templateUrl: './install.component.html',
   styleUrls: ['./install.component.css' ],
   encapsulation: ViewEncapsulation.None,
-  providers: [WebService, AuthenticationService]
+  providers: [InstallService]
 })
 export class InstallComponent implements OnInit {
-
-
   private installFormGroup: FormGroup;
   private installForm: InstallSchema = new InstallSchema();
-
-  constructor(private http: Http, private router: Router, private webservice: WebService, private variableService: VariableService) {
+  constructor(private http: Http, private router: Router, private webservice: InstallService, private variableService: VariableService) {
     this.createForm();
   }
 
   public ngOnInit() {
-
-    this.webservice.isAuthenticated();
+    this.webservice.loginCheck().subscribe(res => console.log(res));
   }
-
   public createForm() {
     this.installFormGroup = new FormGroup({
       vaultip: this.installForm.vaultip,
@@ -48,7 +40,6 @@ export class InstallComponent implements OnInit {
       vaulttreename: this.installForm.vaulttreename
     });
   }
-
   public  save() {
     let body = {
       vaultip: this.installForm.vaultip.value,
@@ -72,11 +63,60 @@ export class InstallComponent implements OnInit {
         (err) => this.logError(err),
         () => console.log('got data'));
   }
+  public isFormValid() {
+    let isValid: boolean = this.installFormGroup.valid && !(this.variableService.isEmptyArray(this.installForm.vaultadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.appsadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.vaultip.value)) && !(this.variableService.isEmptyArray(this.installForm.boxusername.value));
+    return isValid;
+  }
+  public getData() {
+    this.webservice.getDataFromBackend()
+      .subscribe(
+        (data) => console.log(data),
+        (err) => this.logError(err),
+        () => console.log('got data')
+      );
+  }
+  public s_install() {
+    this.webservice.s_install()
+      .subscribe(
+        (data) => {
+          console.log('installation started');
+        },
+        (err) => this.logError(err),
+        () => console.log('got data')
+      );
 
-  public save2() {
-    // console.log(val.value);
-    console.log(this.installForm);
-    console.log(this.installForm.appsadminname)
+  }
+  public s_confiugre() {
+    this.webservice.s_configure()
+      .subscribe(
+        (data) => {
+          console.log('configuration started');
+        },
+        (err) => this.logError(err),
+        () => console.log('got data')
+      );
+
+  }
+  public  download() {
+    this.webservice.download()
+      .subscribe(
+        (data) => {
+          console.log('got data');
+          this.copyIso();
+        },
+        (err) => this.logError(err),
+        () => console.log('got data')
+      );
+  }
+  public  copyIso() {
+    this.webservice.copyIso()
+      .subscribe(
+        (data) => {
+          console.log('got data');
+        },
+        (err) => this.logError(err),
+        () => console.log('got data')
+      );
   }
   private logError(err: Response) {
     console.log('There was an error: ' + err.status);
@@ -86,11 +126,6 @@ export class InstallComponent implements OnInit {
     if (err.status === 401) {
       this.router.navigate(['/sessionexpired']);
     }
-  }
-
-  public isFormValid() {
-    let isValid: boolean = this.installFormGroup.valid && !(this.variableService.isEmptyArray(this.installForm.vaultadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.appsadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.vaultip.value)) && !(this.variableService.isEmptyArray(this.installForm.boxusername.value));
-    return isValid;
   }
 
 }

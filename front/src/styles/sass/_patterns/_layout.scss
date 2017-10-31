@@ -1,0 +1,662 @@
+@charset "utf-8";
+
+@import "../_globals/variables";
+@import "../_globals/mixins";
+
+// Main Body Wrapper
+.main-body-wrapper {
+    height: calc(100% - #{$navbar-global-height + $navbar-primary-height });
+    top: $navbar-global-height + $navbar-primary-height;
+    position: relative;
+}
+
+// Main Content
+.main-content {
+    padding-top: $main-content-spacer;
+    padding-left: 25px;
+    padding-right: 25px;
+
+    // Tablet view
+    @include breakpoint(sm) {
+        padding-top: 25px;
+    }
+}
+
+.layout-main-body {
+    @include flexbox;
+    @include flex-direction(column);
+    @include justify-content(flex-start); 
+    position: relative;
+    height: 100%;
+
+    .main-body-content-container {
+        @include flex(1);
+        @include align-items(stretch);
+        @include align-content(stretch);
+        padding: 0;
+        position: relative;
+        overflow: auto;
+    }
+
+    .main-body-footer-container {
+        position: relative;
+        padding: 0;
+    }
+}
+
+
+// Footer
+.main-footer {
+    width: 100%;
+    border-top: solid 1px $color-light-grey;
+    padding: $spacing-sm $spacing-base;
+    background-color: $color-white;
+    font-size: $theme-font-size-xs;
+    color: $color-medium-grey;
+
+    a {
+        color: $color-blue-alt;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    // Version
+    & &-version {
+        float: right;
+    }
+
+    // Preview Mode
+    &#{&}-preview {
+        position: relative;
+        margin: $spacing-base 0;
+        border: solid 1px $color-light-grey;
+    }
+}
+
+// Row with no gutter
+.row-no-gutter{
+  margin-right: 0;
+  margin-left: 0;
+  
+  [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+// Row with min gutter
+.row-min-gutter{
+  margin-right: -4px;
+  margin-left: -4px;
+  
+  [class*="col-"] {
+    padding-right: 4px;
+    padding-left: 4px;
+  }
+}
+
+.layout-split-7-3 {
+    display: table;
+    width: 100%;
+    height: calc(100% - 20px);
+    padding-top:($navbar-global-height + $navbar-primary-height) - 20px;
+    padding-left: 0;
+    padding-right: 0;
+
+    .col {
+        &-content {
+            display: table-cell;
+            width: 70%;
+            background-color: $color-light-grey;
+            padding: 15px 20px 15px 15px;
+        }
+
+        &-sidebar {
+            display: table-cell;
+            width: 30%;
+            background-color: $color-white;
+            padding: 15px 15px 15px 20px;
+        }
+    }
+
+    // Tablet view
+    @include breakpoint(sm) {
+        padding-top: $navbar-global-height - 20px;
+        
+        .col-content {
+            width: 60%;
+        }
+        .col-sidebar {
+            width: 40%;
+        }
+    }
+
+    // Phone view
+    @include breakpoint(xs) {
+        padding-top: $navbar-global-height - 20px;
+
+        display: block;
+        .col-content {
+            display: block;
+            width: 100%;
+        }
+        .col-sidebar {
+            display: block;
+            width: 100%;
+        }
+    }
+}
+
+.main-content,
+.layout-split-8-4 {
+
+    @include breakpoint(sm) {
+        padding-top: 25px;
+    }
+}
+
+
+// Modal Split layout
+.modal-layout-split-6-4 {
+    display: table;
+    width: 100%;
+
+    .col {
+        &-content {
+            display: table-cell;
+            width: 60%;
+            background-color: $color-white;
+            padding: 15px 20px 15px 15px;
+        }
+
+        &-sidebar {
+            display: table-cell;
+            width: 40%;
+            background-color: $color-light-grey;
+            padding: 15px 20px;
+        }
+    }
+}
+
+// Split Layout with header row
+.layout-split-2-8-has-header {
+    $cell-padding-base: 15px;
+    $cell-padding-md: 25px;
+    $left-col-width: 225px;
+
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+
+    .layout-container {
+        display: table;
+        width: 100%;
+        height: 100%;
+    }
+
+    .row {
+        &-header,
+        &-body {
+            display: table-row;
+        }
+
+        &-header .col {
+            display: table-cell;
+            border-bottom: solid 1px $color-light-grey;
+            background-color: $color-white;
+            padding: 0 $cell-padding-md $cell-padding-base $cell-padding-md;
+        }
+
+        &-body {
+            &-wrapper {
+                display: table-cell;
+                height: 100%;
+                position: relative;
+            }
+
+            .col-container {
+                display: table;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    .col {
+        &-content {
+            position: relative;
+            display: table-cell;
+            background-color: $color-white;
+            width: calc(100% - #{$left-col-width});
+            height: 100%;
+            vertical-align: top;
+
+            &-body-container {
+                position: relative;
+                height: 100%;
+            }
+
+            &-body {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                overflow: auto;
+            }
+
+            &-footer {
+                padding: $spacing-sm;
+                border-top: solid 2px $color-light-grey;
+                background-color: $color-white;
+            }
+        }
+
+        &-sidebar {
+            display: table-cell;
+            border-right: solid 1px $color-light-grey;
+            background-color: $color-white;
+            width: 225px;
+            height: 100%;
+            padding: $cell-padding-base $cell-padding-md;
+            vertical-align: top;
+        }
+    }
+}
+
+// Layout Explorer has header
+.layout-explorer-has-header {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+
+    .layout-explorer-container {
+        display: table;
+        width: 100%;
+        height: calc(100% - 12px);
+    }
+
+    .row-header {
+        display: table-row;
+        .row-header-content {
+            display: table-cell;
+            padding: 15px 25px;
+        }
+    }
+
+    .row-body {
+        display: table-row;
+        .row-body-content {
+            display: table-cell;
+            height: 100%;
+            position: relative;
+            padding: 0px 25px;
+
+            .row-body-content-wrapper {
+                position: relative;
+                display: block;
+                height: calc(100% - 12px);
+            }
+        }
+    }
+}
+
+// Layout Split Rows
+.layout-split-rows {
+    @include flexbox;
+    @include flex-direction(column);
+    @include justify-content(flex-start); 
+    position: relative;
+    height: 100%;
+   
+
+    .split-row {
+        position: relative;
+        padding: 0;
+    }
+
+    .split-row-grow {
+        @include flex(1);
+        @include align-items(stretch);
+        @include align-content(stretch);
+        padding: 0;
+        position: relative;
+        overflow: auto;
+    }
+}
+
+// Layout Split Cols
+.layout-split-cols {
+    @include flexbox;
+    @include flex-direction(row);
+    @include justify-content(flex-start); 
+    position: relative;
+    width: 100%;
+   
+
+    .split-col {
+        position: relative;
+        padding: 0;
+    }
+
+    .split-col-grow {
+        @include flex(1);
+        @include align-items(stretch);
+        @include align-content(stretch);
+        padding: 0;
+        position: relative;
+        overflow: auto;
+    }
+}
+
+// Thumb
+$thumb-sm: 32px;
+$thumb-md: 64px;
+$thumb-lg: 96px;
+$thumb-xl: 160px;
+
+.thumb-rounded {
+    @include border-radius(50%);
+    width: 48px;
+    height: 48px;
+}
+
+.thumb-normal {
+    @include border-radius(2px);
+    width: 48px;
+    height: 48px;
+}
+
+.thumb-sm {
+    width: $thumb-sm;
+    height: $thumb-sm;
+    border-width: 1px;
+}
+
+.thumb-md {
+    @include border-radius(3px);
+    width: $thumb-md;
+    height: $thumb-md;
+}
+
+.thumb-lg {
+    @include border-radius(4px);
+    width: $thumb-lg;
+    height: $thumb-lg;
+    border-width: 0;
+}
+
+.thumb-xl {
+    @include border-radius(4px);
+    width: $thumb-xl;
+    height: $thumb-xl;
+    border-width: 0;
+}
+
+.thumb-wrapper {
+    &-xl {
+        @include border-radius(50%);
+        width: $thumb-xl + 8px;
+        height: $thumb-xl + 8px;
+        max-width: 100%;
+        height: auto;
+        border: solid 4px $color-primary-blue;
+
+        img {
+            border-color: $color-white;
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    &-blue {
+        border-color: $color-primary-blue;
+    }
+
+    &-light-blue {
+        border-color: lighten($color-dark-primary-blue, 35%);
+    }
+}
+
+.photo-name-card {
+    display: table;
+    &.width-full {
+        width: 100%;
+    }
+    .photo {
+        display: table-cell;
+        padding-right: $spacing-sm;
+        vertical-align: top;
+    }
+    .photoLg {
+        display: table-cell;
+        padding-right: $spacing-base;
+        vertical-align: top;
+    }
+    .name-card {
+        display: table-cell;
+        vertical-align: top;
+        color: $color-dark-grey-alt;
+
+        .name {
+            margin: 0;
+            font-size: $theme-font-size-md;
+            color: $color-primary-text;
+        }
+
+        a.name {
+            font-weight: $theme-font-weight-semibold;
+            color: $color-dark-primary-blue;
+        }
+        .history-recipient {
+            font-size: $theme-font-size-sm;
+            margin-top: 5px;
+            margin-left: 24px;
+            font-weight: $theme-font-weight-normal;
+            color: $color-medium-grey;
+        }
+    }
+    .history-date { // used to display request history date in left menu item in request history page's list view layout
+        display: table-cell;
+        vertical-align: bottom;
+        text-align: right;
+        font-size: $theme-font-size-xs;
+        font-weight: $theme-font-weight-normal;
+        color: $color-medium-grey;
+    }
+}
+
+
+
+// 
+.disp-ib-row {
+    .ib-col {
+        display: inline-block;  
+        vertical-align: top;  
+    }
+}
+
+@include scrollbars(.5em, darken($color-grey, 20%));
+
+// Explorer
+.explorer {
+    $explorer-border-color: $color-grey;
+    $explorer-pane-pagination-height: 32px;
+
+    display: table;
+    width: 100%;
+    height: 100%;
+    margin: $spacing-sm 0;
+    background-color: $color-white;
+
+    // Explorer Pane
+    & #{&}-pane {
+        position: relative;
+        display: table-cell;
+        border: solid 1px $color-light-grey;
+        width: 30%;
+        height: 100%;
+        vertical-align: top;
+        
+    }
+
+    & #{&}-pane-wrapper {
+        display: table;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    & #{&}-pane-pagination {
+        position: relative;
+        padding: 0;
+        display: table-row;
+    }
+
+    & #{&}-pane-pagination-content {
+        display: table-cell;
+        padding: $spacing-xs $spacing-sm;
+        border-bottom: solid 1px $color-light-grey;
+        font-size: $theme-font-size-xs;
+        color: $color-medium-grey;
+    }
+
+    & #{&}-list-wrapper {
+        display: table-cell;
+        height: 100%;
+        padding: 0;
+        position: relative;
+        overflow: auto;
+    }
+
+    & #{&}-list-container {
+        position: absolute;
+        width: 100%;
+        overflow: auto;
+    }
+
+    @-moz-document url-prefix() {
+        & #{&}-list-container {
+            height: 100%;
+        }
+    }
+
+    // Explorer List
+/*     & #{&}-list-wrapper {
+    position: absolute;
+    margin: 0; padding: 0;
+    width: 100%;
+    height: calc(100% - 24px);
+    $list-top: $explorer-pane-pagination-height + 2px;
+    top: $list-top;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+} */
+
+    & #{&}-list {
+        @include clearfix();
+        margin: 0; padding: 0;
+        width: 100%;
+
+         li {
+            list-style: none;
+            display: block;
+            width: 100%;
+            margin: 0 0 $spacing-xs 0;
+            padding: $spacing-sm $spacing-sm;
+            background-color: $color-light-grey;
+            border: solid 1px transparent;
+
+            &.list-item-selected,
+            &.list-item-selected:hover {
+                border-color: $color-highlight-border;
+                background-color: $color-highlight-bg;
+            }
+
+            &:hover {
+                background-color: $color-very-light-grey;
+                border: solid 1px $color-blue;
+                cursor: pointer;
+            }
+
+            // Disabled
+            &.disabled {
+                @include opacity(.5);
+                background-color: $color-very-light-grey;
+            }
+         }
+    }
+
+    // Explorer Detail
+    & #{&}-detail {
+        position: relative;
+        display: table-cell;
+        width: 70%;
+        height: 100%;
+        padding: 0 0 $spacing-base $spacing-base;
+        overflow: auto;
+        overflow-x: hidden;
+        vertical-align: top;
+
+        .header {
+            padding-bottom: $spacing-sm;
+            border-bottom: solid 1px $color-grey;
+
+            .header-title {
+                font-size: $theme-font-size-lgr;
+                margin: 0;
+                color: $color-black;
+
+                .header-actions {
+                    display: inline-block;
+                    margin-left: $spacing-base;
+                    letter-spacing: -0.3em;
+                    vertical-align: text-top;
+                }
+            }
+        }
+
+        .body {
+            padding-top: $spacing-sm;
+        }
+
+        .footer {
+            padding-top: $spacing-sm;
+            border-top: solid 1px $color-grey;
+            background-color: $color-white;
+        }
+    }
+
+    & #{&}-detail-wrapper {
+        position: absolute;
+        left: $spacing-base;
+        top: 0;
+        right: $spacing-base;
+        bottom: 0;
+        height: 100%;
+    }
+
+    & #{&}-pane-pagination {
+        /* position: absolute;
+        top: 0;
+        left: 0;
+        right: 0; 
+        height: 32px;*/
+        
+    }
+}
