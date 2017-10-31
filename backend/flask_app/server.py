@@ -391,6 +391,7 @@ def save():
     vaultip = params.get('vaultip', None)
     boxpass = params.get('boxpass', None)
     boxusername = params.get('boxusername', None)
+    vaulttreename = params.get('vaulttreename', None)
     vaultadminname = params.get('vaultadminname', None)
     vaultadminpass = params.get('vaultadminpass', None)
     ssopass = params.get('ssopass', None)
@@ -404,15 +405,19 @@ def save():
     logger.info(vaultip)
 
     if not vaultip:
-        return jsonify({"msg": "Missing vaultip parameter"}), Status.HTTP_BAD_REQUEST
+        return jsonify(
+            {"msg": "Please provide a proper ip where you want to create Identity Vault."}), Status.HTTP_BAD_REQUEST
+    if not vaulttreename:
+        return jsonify({"msg": "Plese provide a valid and unique Tree name."})
     if not boxusername:
-        return jsonify({"msg": "Missing vaultip parameter"}), Status.HTTP_BAD_REQUEST
+        return jsonify({"msg": "Please provide your machine login credentials."}), Status.HTTP_BAD_REQUEST
     if not boxpass:
-        return jsonify({"msg": "Missing boxpass parameter"}), Status.HTTP_BAD_REQUEST
+        return jsonify({"msg": "Please provide your machine login credentials."}), Status.HTTP_BAD_REQUEST
     if not vaultadminname:
-        return jsonify({"msg": "Missing vaultadminname parameter"}), Status.HTTP_BAD_REQUEST
+        return jsonify({"msg": "Please provide your vault admin username in LDAP format"}), Status.HTTP_BAD_REQUEST
     if not appsadminname:
-        return jsonify({"msg": "Missing appsadminname parameter"}), Status.HTTP_BAD_REQUEST
+        return jsonify(
+            {"msg": "Please provide you Identity apps admin username in LDAP format."}), Status.HTTP_BAD_REQUEST
     if vaultadminpass == None:
         vaultadminpass = "novell"
     if ssopass == None:
@@ -432,7 +437,7 @@ def save():
     port = 22
     username = boxusername
     password = boxpass
-    command1 = 'sed -i -e "/ID_VAULT_ADMIN_LDAP=/ s/=.*/=' + vaultadminname + '/" -e "/ID_VAULT_ADMIN=/ s/=.*/=' + vaultadminname + '/" -e "/ID_VAULT_PASSWORD=/ s/=.*/=' + vaultadminpass + '/" -e "/ID_VAULT_HOST=/ s/=.*/=' + vaultip + '/" -e "/TOMCAT_SERVLET_HOSTNAME=/ s/=.*/=' + vaultip + '/" -e "/SSO_SERVER_HOST=/ s/=.*/=' + vaultip + '/" -e "/SSO_SERVER_HOST=/ s/=.*/=' + vaultip + '/" -e "/CONFIGURATION_PWD=/ s/=.*/=' + ssopass + '/" -e "/SSO_SERVICE_PWD=/ s/=.*/=' + ssopass + '/" -e "/UA_ADMIN=/ s/=.*/=' + appsadminname + '/" -e "/UA_ADMIN_PWD=/ s/=.*/=' + appsadminpass + '/" -e "/UA_DATABASE_USER=/ s/=.*/=' + postgresusername + '/" -e "/UA_DATABASE_PWD=/ s/=.*/=' + postgresusername + '/" -e "/UA_DATABASE_ADMIN_PWD=/ s/=.*/=' + postgresadminpass + '/" -e "/SENTINEL_AUDIT_SERVER=/ s/=.*/=' + sentinelip + '/" /home/a/silent.properties'
+    command1 = 'sed -i -e "/ID_VAULT_ADMIN_LDAP=/ s/=.*/=' + vaultadminname + '/" -e "/ID_VAULT_ADMIN=/ s/=.*/=' + vaultadminname + '/" -e "/ID_VAULT_TREENAME=/ s/=.*/=' + vaulttreename + '/" -e "/ID_VAULT_PASSWORD=/ s/=.*/=' + vaultadminpass + '/" -e "/ID_VAULT_HOST=/ s/=.*/=' + vaultip + '/" -e "/TOMCAT_SERVLET_HOSTNAME=/ s/=.*/=' + vaultip + '/" -e "/SSO_SERVER_HOST=/ s/=.*/=' + vaultip + '/" -e "/SSO_SERVER_HOST=/ s/=.*/=' + vaultip + '/" -e "/CONFIGURATION_PWD=/ s/=.*/=' + ssopass + '/" -e "/SSO_SERVICE_PWD=/ s/=.*/=' + ssopass + '/" -e "/UA_ADMIN=/ s/=.*/=' + appsadminname + '/" -e "/UA_ADMIN_PWD=/ s/=.*/=' + appsadminpass + '/" -e "/UA_DATABASE_USER=/ s/=.*/=' + postgresusername + '/" -e "/UA_DATABASE_PWD=/ s/=.*/=' + postgresusername + '/" -e "/UA_DATABASE_ADMIN_PWD=/ s/=.*/=' + postgresadminpass + '/" -e "/SENTINEL_AUDIT_SERVER=/ s/=.*/=' + sentinelip + '/" /home/a/silent.properties'
     print(command1)
     command2='sed -i -e "/MIN_CPU=/ s/=.*/=0/" -e "/MIN_MEM=/ s/=.*/=0/" -e "/MIN_DISK_OPT=/ s/=.*/=0/" -e "/MIN_DISK_VAR=/ s/=.*/=0/" -e "/MIN_DISK_ETC=/ s/=.*/=0/" -e "/MIN_DISK_TMP=/ s/=.*/=0/" -e "/MIN_DISK_ROOT=/ s/=.*/=0/" /home/idm/IDM/sys_req.sh'
     command3='sed -i -e "/MIN_CPU=/ s/=.*/=0/" -e "/MIN_MEM=/ s/=.*/=0/" -e "/MIN_DISK_OPT=/ s/=.*/=0/" -e "/MIN_DISK_VAR=/ s/=.*/=0/" -e "/MIN_DISK_ETC=/ s/=.*/=0/" -e "/MIN_DISK_TMP=/ s/=.*/=0/" -e "/MIN_DISK_ROOT=/ s/=.*/=0/" /home/idm/user_application/sys_req.sh'
@@ -443,7 +448,31 @@ def save():
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=hostname, username=username,password=password, port=port)
     channel = client.get_transport().open_session()
-    channel.exec_command(command1 +"\n" + command2 +"\n" + command3 +"\n" + command4)
+    channel.settimeout(108000)
+    try:
+        channel.exec_command(command1 + "\n" + command2 + "\n" + command3 + "\n" + command4)
+        contents = StringIO()
+        error = StringIO()
+        while not channel.exit_status_ready():
+            if channel.recv_ready():
+                data = channel.recv(1024)
+                print (data)
+                while data:
+                    contents.write(data)
+                    data = channel.recv(1024)
+            if channel.recv_stderr_ready():
+                error_buff = channel.recv_stderr(1024)
+                while error_buff:
+                    error.write("error")
+                    error_buff = channel.recv_stderr(1024)
+        exit_status = channel.recv_exit_status()
+
+    except socket.timeout:
+        raise socket.timeout
+    client.close()
+
+
+
     ret = "Identity Manager successfully installed in " + vaultip
     print(ret)
     return jsonify(ret), 200
@@ -490,7 +519,7 @@ def s_configure():
     client.connect(hostname=hostname, username=username, password=password, port=port)
     channel = client.get_transport().open_session()
     channel.exec_command(command1 + "\n" + command2)
-    ret = "Identity Manager successfully installed in " + hostname
+    ret = "Identity Manager successfully configured in " + hostname
     print(ret)
     return jsonify(ret), 200
 

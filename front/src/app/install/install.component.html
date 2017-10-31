@@ -72,6 +72,20 @@
       </div>
 
       <div class="form-group">
+        <label class="col-md-4 control-label">Enter Identity Vault Tree name.</label>
+        <div class="col-md-4 inputGroupContainer">
+          <span *ngIf="!vaulttreename"
+                [ngClass]="{'has-error' : installForm.vaulttreename?.errors && (installForm.vaulttreename?.dirty || installForm.vaulttreename?.touched), 'has-success':!installForm.vaulttreename?.errors && (installForm.vaulttreename?.dirty || installForm.vaulttreename?.touched)}">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                  <input name="vaulttreename" placeholder="TreeName" class="form-control" type="text"
+                         formControlName="vaulttreename" required/>
+            </div>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
         <label class="col-md-4 control-label">Enter Identity Vault Administrator name.</label>
         <div class="col-md-4 inputGroupContainer">
           <span *ngIf="!vaultadminname"
@@ -203,7 +217,7 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <!--<div class="form-group">
         <label class="col-md-4 control-label" >Enter Postgres Administrator password.</label>
         <div class="col-md-4 inputGroupContainer">
           <span *ngIf="!postgresadminpass"
@@ -215,7 +229,7 @@
           </div>
           </span>
         </div>
-      </div>
+      </div>-->
 
       <!-- Select Basic -->
 
