@@ -1,8 +1,10 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { CanActivateViaAuthGuardService } from "../shared/services/guards/can-activate-via-auth-guard.service";
-import { EmitterService } from "../shared/services/emitter/emitter.service";
-import { Router } from "@angular/router";
+import {Component, OnInit, Input, AfterViewInit} from '@angular/core';
+import {CanActivateViaAuthGuardService} from "../shared/services/guards/can-activate-via-auth-guard.service";
+import {EmitterService} from "../shared/services/emitter/emitter.service";
+import {Router} from "@angular/router";
+
 declare var jQuery: any;
+
 @Component({
   selector: 'idm-unauthorize',
   templateUrl: './unauthorize.component.html',

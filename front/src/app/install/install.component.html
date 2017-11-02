@@ -5,7 +5,7 @@
         <span translate> Welcome to one click IDM install</span>
 
       </h2>
-      <div class="header-actions"  >
+      <div class="header-actions">
         <button type="button" (click)="download()" class="btn btn-primary">Download</button>
         <button type="button" (click)="copyIso()" class="btn btn-primary">Mount</button>
         <button type="button" (click)="s_install()" class="btn btn-primary">Install</button>
@@ -17,7 +17,7 @@
     <!-- help section -->
   </div>
 </div>
-<div >
+<div>
 
   <form class="well form-horizontal" novalidate [formGroup]="installFormGroup" (ngSubmit)="save()" id="contact_form">
     <fieldset>
@@ -66,6 +66,20 @@
               <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
               <input name="boxpass" placeholder="password" class="form-control" formControlName="boxpass"
                      type="password" required>
+            </div>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label">Enter Build ID.(ignore to install last successful build)</label>
+        <div class="col-md-4 inputGroupContainer">
+          <span *ngIf="!buildid"
+                [ngClass]="{'has-error' : installForm.buildid?.errors && (installForm.buildid?.dirty || installForm.buildid?.touched), 'has-success':!installForm.buildid?.errors && (installForm.buildid?.dirty || installForm.buildid?.touched)}">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+              <input name="buildid" placeholder="build id" class="form-control" formControlName="buildid"
+                     type="text">
             </div>
           </span>
         </div>
@@ -173,7 +187,7 @@
       </div>
 
 
-      <div class="form-group">
+      <!--<div class="form-group">
         <label class="col-md-4 control-label">Do you want to enable clustering?</label>
         <div class="col-md-4">
           <div class="radio">
@@ -187,7 +201,7 @@
             </label>
           </div>
         </div>
-      </div>
+      </div>-->
 
       <div class="form-group">
         <label class="col-md-4 control-label">Enter Identity Applications database username.</label>

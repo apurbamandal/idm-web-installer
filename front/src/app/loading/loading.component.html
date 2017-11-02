@@ -1,10 +1,9 @@
+<!--<div  class="overlay" >-->
+<div *ngIf="isApplicationLoading()" class="overlay">
+  <span class="loader-img"></span>
+</div>
 
-  <!--<div  class="overlay" >-->
-  <div *ngIf="isApplicationLoading()" class="overlay" >
-    <span class="loader-img" ></span>
-  </div>
-
-  <div *ngIf="tableLoading">
-    <span class="spinner-img" ></span>
-  </div>
+<div *ngIf="tableLoading">
+  <span class="spinner-img"></span>
+</div>
 

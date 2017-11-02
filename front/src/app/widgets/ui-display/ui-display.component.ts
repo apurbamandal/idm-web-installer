@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Inject, forwardRef } from '@angular/core';
-import { Table } from "../../widgets/table/table";
+import {Component, OnInit, Input, Inject, forwardRef} from '@angular/core';
+import {Table} from "../../widgets/table/table";
 
 @Component({
   selector: 'idm-ui-display',
@@ -17,9 +17,10 @@ export class UiDisplayComponent implements OnInit {
   showComplexData = false;
   refreshModelData: boolean;
   modalData = [];
-  constructor( @Inject(forwardRef(() => Table)) private _parent: Table) {
+
+  constructor(@Inject(forwardRef(() => Table)) private _parent: Table) {
     this.displayComplexData = [];
-   // this.refreshModelData = false;
+    // this.refreshModelData = false;
   }
 
   ngOnInit() {
@@ -66,9 +67,11 @@ export class UiDisplayComponent implements OnInit {
   simpleClickHandler() {
     this._parent.elementClickHandler(this.rowData, this.columnHeader);
   }
+
   complexClickHandler(element) {
     this._parent.elementClickHandler(element, this.columnHeader);
   }
+
   changeModalData(data) {
     this.refreshModelData = true;
     //this.refreshModelData = true;
@@ -81,7 +84,6 @@ export class UiDisplayComponent implements OnInit {
     this.modalData = data;
     console.log(this.modalData);
   }
-
 
 
 }

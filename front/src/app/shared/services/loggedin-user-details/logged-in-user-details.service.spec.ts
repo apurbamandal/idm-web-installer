@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { LoggedInUserDetailsService } from './logged-in-user-details.service';
+import {LoggedInUserDetailsService} from './logged-in-user-details.service';
 
 describe('LoggedInUserDetailsService', () => {
   beforeEach(() => {

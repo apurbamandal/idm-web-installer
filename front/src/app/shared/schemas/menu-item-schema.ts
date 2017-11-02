@@ -5,5 +5,5 @@ export class MenuItem {
   mapName: string;
   context: string;
   subMenuList: MenuItem[];
-  
+
 }

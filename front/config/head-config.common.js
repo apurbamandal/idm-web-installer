@@ -39,12 +39,12 @@ module.exports = {
     // { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/assets/icon/favicon-32x32.png', '=href': true },
     // { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/assets/icon/favicon-96x96.png', '=href': true },
     // { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/assets/icon/favicon-16x16.png', '=href': true },
-    { rel: 'icon', type: 'image/png', sizes: '16x16', href: 'assets/icon/favicon.png', '=href': true },
+    {rel: 'icon', type: 'image/png', sizes: '16x16', href: 'assets/icon/favicon.png', '=href': true},
 
     /**
      * <link> tags for a Web App Manifest
      */
-    { rel: 'manifest', href: 'assets/manifest.json' }
+    {rel: 'manifest', href: 'assets/manifest.json'}
   ],
   meta: [
     // { name: 'msapplication-TileColor', content: '#00bcd4', '=content': true },

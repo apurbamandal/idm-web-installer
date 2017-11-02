@@ -14,6 +14,7 @@ export class HeaderConstants {
   static set applicationJson(value: string) {
     this._applicationJson = value;
   }
+
   static get authorization(): string {
     return this._authorization;
   }

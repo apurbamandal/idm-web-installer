@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { FeedBackService } from './feed-back.service';
+import {FeedBackService} from './feed-back.service';
 
 describe('FeedBackService', () => {
   beforeEach(() => {

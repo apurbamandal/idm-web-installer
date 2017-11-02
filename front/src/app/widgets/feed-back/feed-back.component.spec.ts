@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FeedBackComponent } from './feed-back.component';
+import {FeedBackComponent} from './feed-back.component';
 
 describe('FeedBackComponent', () => {
   let component: FeedBackComponent;
@@ -8,9 +8,9 @@ describe('FeedBackComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FeedBackComponent ]
+      declarations: [FeedBackComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

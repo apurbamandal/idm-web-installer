@@ -19,6 +19,7 @@ export function main(): Promise<any> {
     .then(decorateModuleRef)
     .catch((err) => console.error(err));
 }
+
 /**
  * Needed for hmr
  * in prod this is replace for document ready

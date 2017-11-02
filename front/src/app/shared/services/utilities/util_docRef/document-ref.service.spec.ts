@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { DocumentRefService } from './document-ref.service';
+import {DocumentRefService} from './document-ref.service';
 
 describe('DocumentRefService', () => {
   beforeEach(() => {

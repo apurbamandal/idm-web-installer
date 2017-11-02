@@ -1,27 +1,28 @@
-<div class="modal modal-confirm modal-size-sm fade in"  data-backdrop="static" data-keyboard="false" id="confirmation" role="dialog" >
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="modal-content-row">
-                    <div class="modal-col-icon">
-                        <i class="icon icon-warning" aria-hidden="true"></i>
-                    </div>
-                    <div class="modal-col-content">
-                        <h4 class="modal-content-title"><span class="ng-scope">{{mainHeading}}</span></h4>
-                        <p class="modal-content-description">
-                            <span class="ng-scope">{{subHeading}}</span>
-                        </p>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" (click)="confirm()" data-dismiss="modal">
-                              <span class="ng-scope" >Confirm</span>
-                            </button>
-                            <button type="button" class="btn btn-default" (click)="cancel()" data-dismiss="modal">
-                                <span class="ng-scope" >Cancel</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+<div class="modal modal-confirm modal-size-sm fade in" data-backdrop="static" data-keyboard="false" id="confirmation"
+     role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-content-row">
+          <div class="modal-col-icon">
+            <i class="icon icon-warning" aria-hidden="true"></i>
+          </div>
+          <div class="modal-col-content">
+            <h4 class="modal-content-title"><span class="ng-scope">{{mainHeading}}</span></h4>
+            <p class="modal-content-description">
+              <span class="ng-scope">{{subHeading}}</span>
+            </p>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" (click)="confirm()" data-dismiss="modal">
+                <span class="ng-scope">Confirm</span>
+              </button>
+              <button type="button" class="btn btn-default" (click)="cancel()" data-dismiss="modal">
+                <span class="ng-scope">Cancel</span>
+              </button>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

@@ -1,8 +1,8 @@
 export class Locale {
-    locale: string;
-    localeDisplayName: string;
+  locale: string;
+  localeDisplayName: string;
 }
 
 export class Locales {
-    supportedLocales: Locale[];
+  supportedLocales: Locale[];
 }

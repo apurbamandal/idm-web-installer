@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ConfirmationWidgetComponent } from './confirmation-widget.component';
+import {ConfirmationWidgetComponent} from './confirmation-widget.component';
 
 describe('ConfirmationWidgetComponent', () => {
   let component: ConfirmationWidgetComponent;
@@ -8,9 +8,9 @@ describe('ConfirmationWidgetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmationWidgetComponent ]
+      declarations: [ConfirmationWidgetComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,5 +1,5 @@
 export class UIConstants {
- 
+
   static get pageSizes(): any {
     return this._pageSizes;
   }
@@ -15,5 +15,5 @@ export class UIConstants {
   private static _pageSizes: any = [10, 20, 50, 100, 500];
   private static _rolesPageSizeAttribute: String = 'rolesPageSize';
   private static _resourcesPageSizeAttribute: String = 'resourcesPageSize';
-  
+
 }
