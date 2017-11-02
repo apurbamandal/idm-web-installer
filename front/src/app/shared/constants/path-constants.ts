@@ -3,9 +3,11 @@ export class PathConstats {
   static get navigationRightsApi(): string {
     return this._navigationRightsApi;
   }
+
   static get settingsApi(): string {
     return this._settingsApi;
   }
+
   static get userRightsApi(): string {
     return this._userRightsApi;
   }
@@ -33,9 +35,11 @@ export class PathConstats {
   static get taskColumnCustomizationApi(): string {
     return this._taskColumnCustomizationApi;
   }
+
   static get columnCustomizationApi(): string {
     return this._columnCustomizationApi;
   }
+
   static get columnCustomizationresourcesApi(): string {
     return this._columnCustomizationresourcesApi;
   }
@@ -51,9 +55,11 @@ export class PathConstats {
   static get rolesListApi(): string {
     return this._rolesListApi;
   }
+
   static get rolesList(): string {
     return this._rolesList;
   }
+
   static get resourcesList(): string {
     return this._resourcesList;
   }
@@ -93,15 +99,19 @@ export class PathConstats {
   static get resourcesDetailsApi(): string {
     return this._resourcesDetailsApi;
   }
+
   static get sysNrfRoles(): string {
     return this._sysNrfRoles;
   }
+
   static get sysNrfResources(): string {
     return this._sysNrfResources;
   }
+
   static get deleteRoles(): string {
     return this._deleteRoles;
   }
+
   static get deleteResources(): string {
     return this._deleteResources;
   }
@@ -109,6 +119,7 @@ export class PathConstats {
   static get roleCreateApi(): string {
     return this._roleCreateAPI;
   }
+
   static get getResourceEntitlementList(): string {
     return this._getResourceEntitlementList;
   }

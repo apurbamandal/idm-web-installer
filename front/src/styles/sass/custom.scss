@@ -2,7 +2,6 @@
 
 // Vendor Dependencies
 @import "../../../../../grunt/node_modules/bourbon/app/assets/stylesheets/bourbon";
-
 // Authored Dependencies
 @import "_globals/variables";
 
@@ -14,13 +13,13 @@ GLOBAL NAVIGATION
 
 /* Brand - Text */
 .navbar-global .navbar-brand {
-    color: $color-white;
+  color: $color-white;
 }
 
 /* Navigation Bar */
 .navbar-global {
-    background-color: $navbar-global-bg-color-start;
-    @include background(linear-gradient(to right, $color-blue, $color-blue-alt) top repeat);
+  background-color: $navbar-global-bg-color-start;
+  @include background(linear-gradient(to right, $color-blue, $color-blue-alt) top repeat);
 }
 
 /*
@@ -31,15 +30,15 @@ TABLE HIGHLIGHTS
 
 /* Selected table row */
 .table-row-selected td {
-    background-color: $table-row-selected-bg;
-    border-bottom: solid 1px $table-row-selected-border-color;
+  background-color: $table-row-selected-bg;
+  border-bottom: solid 1px $table-row-selected-border-color;
 }
 
 /* Table row hover color */
 .table-hover tbody tr {
-    &:hover td {
-        background-color: $table-row-selected-bg;
-    }
+  &:hover td {
+    background-color: $table-row-selected-bg;
+  }
 }
 
 /*
@@ -53,54 +52,54 @@ This is the general accent for selected/focused state for various form controls.
 
 /* Text Box, Select Box, Textarea - Focus or Active state color */
 .form-control:focus {
-    border-color: $color-blue;
+  border-color: $color-blue;
 }
 
 /* Checkbox */
 .checkbox,
 .checkbox-inline {
-    input[type="checkbox"] {
-        & + .checkbox-label {
-            &:hover, 
-            &:focus {
-                &:before {
-                    color: $color-blue;
-                }
-            } 
+  input[type="checkbox"] {
+    & + .checkbox-label {
+      &:hover,
+      &:focus {
+        &:before {
+          color: $color-blue;
         }
-
-        &:checked + .checkbox-label {
-            &:before {
-                color: $color-blue;
-            }
-        }
+      }
     }
+
+    &:checked + .checkbox-label {
+      &:before {
+        color: $color-blue;
+      }
+    }
+  }
 }
 
 /* Radio Button */
 .radio,
 .radio-inline {
-    input[type="radio"] {
-        & + .rb-label {
-            &:hover, 
-            &:focus {
-                &:before {
-                    color: $color-blue;
-                }
-            } 
+  input[type="radio"] {
+    & + .rb-label {
+      &:hover,
+      &:focus {
+        &:before {
+          color: $color-blue;
         }
-
-        &:checked + .rb-label {
-            &:before {
-                color: $color-blue;
-            }
-        }
+      }
     }
+
+    &:checked + .rb-label {
+      &:before {
+        color: $color-blue;
+      }
+    }
+  }
 }
 
 /* IOS Style Checkbox - Active State Color */
 .checkbox-ios :checked + i {
-    background: $color-blue;
+  background: $color-blue;
 }
 
 /*
@@ -114,71 +113,71 @@ These are the styles for tiles in the applications page.
 
 /* Applications Page - View mode */
 .cards-landing {
-    .card {
-        background-color: $color-light-grey;
+  .card {
+    background-color: $color-light-grey;
 
-        .card-title {
-            color: $color-black;
-        }
-
-        .card-description {
-            color: $color-medium-grey;
-        }
-
-        &:hover {
-            background-color: $color-very-light-grey;
-            border: solid 1px $color-blue;
-        }
+    .card-title {
+      color: $color-black;
     }
+
+    .card-description {
+      color: $color-medium-grey;
+    }
+
+    &:hover {
+      background-color: $color-very-light-grey;
+      border: solid 1px $color-blue;
+    }
+  }
 }
 
 /* Applications Page - Edit mode */
 .cards-landing.cards-landing-edit {
+  .card {
+    .card-title {
+      color: $color-primary-text;
+    }
+
+    .card-actions {
+      .card-action-left,
+      .card-action-right {
+        background-color: $color-dark-primary-blue;
+        color: $color-white;
+      }
+    }
+  }
+  /* Add New Card */
+  .card-add-new {
+    color: $color-medium-grey;
+    border: dashed 1px $color-medium-grey;
+
+    &:hover {
+      border-color: $color-blue;
+
+      .icon {
+        color: $color-blue;
+      }
+    }
+  }
+
+  /* White card */
+  &.cards-white {
     .card {
-        .card-title {
-            color: $color-primary-text;
-        }
-
-        .card-actions {
-            .card-action-left,
-            .card-action-right {
-                background-color: $color-dark-primary-blue;
-                color: $color-white;
-            }
-        }
+      background-color: $color-white;
+      border-color: $color-grey;
     }
-    /* Add New Card */
+
     .card-add-new {
-        color: $color-medium-grey;
-        border: dashed 1px $color-medium-grey;
+      border-color: $color-medium-grey;
+      &:hover {
+        border-color: $color-blue;
 
-        &:hover {
-            border-color: $color-blue;
-
-            .icon {
-                color: $color-blue;
-            }
+        .icon {
+          color: $color-blue;
         }
+      }
     }
-
-    /* White card */
-    &.cards-white {
-        .card {
-            background-color: $color-white;
-            border-color: $color-grey;
-        }
-
-        .card-add-new {
-            border-color: $color-medium-grey;
-            &:hover {
-                border-color: $color-blue;
-
-                .icon {
-                    color: $color-blue;
-                }
-            }
-        }
-    }
+  }
 }
 
 /*
@@ -190,17 +189,16 @@ These are the styles for card that has been shown in the user's card view page.
 
 */
 .card-user .card-user-wrapper {
-    background-color: $color-light-grey;
-    border: solid 1px $color-light-grey;
+  background-color: $color-light-grey;
+  border: solid 1px $color-light-grey;
 
-    &:hover,
-    &:focus,
-    &:active {
-        border-color: $color-blue;
-        background-color: lighten($color-light-grey, 3%);
-    }
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: $color-blue;
+    background-color: lighten($color-light-grey, 3%);
+  }
 }
-
 
 /*
 ------------------------------------
@@ -211,12 +209,12 @@ ABOUT - SPLASH SCREEN
 
 /* */
 .splash-product-info {
-    & &-wrapper {
-        background-color: $color-dark-grey;
-        color: $color-white;
-    }
+  & &-wrapper {
+    background-color: $color-dark-grey;
+    color: $color-white;
+  }
 
-    .close {
-        color: $color-white;
-    }
+  .close {
+    color: $color-white;
+  }
 }

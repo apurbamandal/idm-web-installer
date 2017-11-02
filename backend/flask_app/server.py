@@ -150,12 +150,15 @@ def download():
         logger.info("Params Missing ")
         # return jsonify(msg="Params Missing"), Status.HTTP_BAD_CONFLICT
 
-    hostname = '164.99.162.153'
+    hostname = vaultip
     port = 22
-    username = 'root'
-    password = 'novell'
+    username = boxusername
+    password = boxpass
     buildISO='http://164.99.91.109:8080/job/IDMLinuxInstaller_idm4.7.0/80/artifact/Identity_Manager_4.7_Linux.iso'
-    command = 'wget -P /home/ http://blr-iam-jenkins.labs.blr.novell.com:8080/view/IDM_4.7.0/view/Install/job/IDMLinuxInstaller_idm4.7.0/lastSuccessfulBuild/artifact/Identity_Manager_4.7_Linux.iso'
+    #command = 'wget -P /home/ http://blr-iam-jenkins.labs.blr.novell.com:8080/view/IDM_4.7.0/view/Install/job/IDMLinuxInstaller_idm4.7.0/lastSuccessfulBuild/artifact/Identity_Manager_4.7_Linux.iso'
+    command = './a.sh &> output.log &'
+    command2 = 'cd /home/'
+    command3 = 'chmod 777 /home/a.sh'
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh.connect(hostname, username=username,password=password)
@@ -168,7 +171,7 @@ def download():
     try:
         # Execute the given command
         # chan.exec_command("wget -P /home/ http://164.99.91.109:8080/job/IDMLinuxInstaller_idm4.7.0/80/artifact/Identity_Manager_4.7_Linux_Framework.iso")
-        chan.exec_command(command)
+        chan.exec_command(command2+'\n'+command3+'\n'+command)
         contents = StringIO()
         error = StringIO()
         while not chan.exit_status_ready():
@@ -438,9 +441,8 @@ def save():
     #asd
     #asd
     # var1=copyIso()
-    copysilent()
-    save3()
-    s_install()
+    #copysilent()
+    #download()
 
     return jsonify("saved"), 200
 
@@ -462,7 +464,12 @@ def copysilent():
     sftp = client.open_sftp()
     sftp.put('../front/src/assets/files/silent.properties', '/home/a/silent.properties')
     sftp.close()
+    sftp = client.open_sftp()
+    sftp.put('../front/src/assets/files/a.sh', '/home/a.sh')
+    sftp.close()
+
     client.close()
+    return jsonify("return"), 200
 
     # channel.close()
 

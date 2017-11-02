@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { CookiesService } from './cookies.service';
+import {CookiesService} from './cookies.service';
 
 describe('CookiesService', () => {
   beforeEach(() => {

@@ -1,13 +1,20 @@
-<idm-loading [tableLoading]="isRowsLoading()" ></idm-loading>
-<div *ngIf="_tableConfigObject != undefined && _tableConfigObject.tableData != undefined && !isRowsLoading()" class="pagination-grid">
-    <span class="pagination-grid-position">Showing {{_tableConfigObject.tableData.showingStart}} - {{_tableConfigObject.tableData.showingEnd}}  of  <b>{{_tableConfigObject.tableData.totalSize}}</b></span>
-    <button class="btn btn-pager-previous" *ngIf="!disablePrevious()"  (click)="previousPage()" role="button"><span class="sr-only" >Previous page</span></button>
-    <button class="btn btn-pager-next"  *ngIf="!disableNext()"  (click)="nextPage()" role="button"><span class="sr-only"  >Next Page</span></button>
-    <span class="pagination-grid-goto"> Go to page  <input type="number" aria-label="Go to Page" [(ngModel)]="pageNumber" min="1" (keyup)="($event.keyCode == 38 || $event.keyCode == 40 ) && goToPage()" class="form-control input-sm"></span>
-    <span><button class="btn btn-goto" (click)="goToPage()" role="button" >GO</button></span>
-    <span class="pagination-grid-page-size">
+<idm-loading [tableLoading]="isRowsLoading()"></idm-loading>
+<div *ngIf="_tableConfigObject != undefined && _tableConfigObject.tableData != undefined && !isRowsLoading()"
+     class="pagination-grid">
+  <span class="pagination-grid-position">Showing {{_tableConfigObject.tableData.showingStart}} - {{_tableConfigObject.tableData.showingEnd}}  of  <b>{{_tableConfigObject.tableData.totalSize}}</b></span>
+  <button class="btn btn-pager-previous" *ngIf="!disablePrevious()" (click)="previousPage()" role="button"><span
+    class="sr-only">Previous page</span></button>
+  <button class="btn btn-pager-next" *ngIf="!disableNext()" (click)="nextPage()" role="button"><span class="sr-only">Next Page</span>
+  </button>
+  <span class="pagination-grid-goto"> Go to page  <input type="number" aria-label="Go to Page" [(ngModel)]="pageNumber"
+                                                         min="1"
+                                                         (keyup)="($event.keyCode == 38 || $event.keyCode == 40 ) && goToPage()"
+                                                         class="form-control input-sm"></span>
+  <span><button class="btn btn-goto" (click)="goToPage()" role="button">GO</button></span>
+  <span class="pagination-grid-page-size">
         Showing
-       <select class="form-control" aria-label="ShowingPerPage" [(ngModel)]="_tableConfigObject.tableData.pageSize" (ngModelChange)="changedPageSize()">
+       <select class="form-control" aria-label="ShowingPerPage" [(ngModel)]="_tableConfigObject.tableData.pageSize"
+               (ngModelChange)="changedPageSize()">
             <option *ngFor="let page of pageSizes">{{page}}</option>
        </select>
         per page

@@ -15,6 +15,7 @@ export class AppState {
   public get state() {
     return this._state = this._clone(this._state);
   }
+
   /**
    * Never allow mutation
    */

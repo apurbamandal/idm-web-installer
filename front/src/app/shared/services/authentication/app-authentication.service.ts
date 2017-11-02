@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Request, RequestOptionsArgs } from '@angular/http';
-import { AppContextService } from "../context/app-context.service";
-import { PathConstats } from "../../constants/path-constants";
-import { WindowRefService } from "../utilities/util_winRef/window-ref.service";
-import { DocumentRefService } from "../utilities/util_docRef/document-ref.service";
-import { CookiesService } from "../utilities/util_cookies/cookies.service";
+import {Injectable} from '@angular/core';
+import {Request, RequestOptionsArgs} from '@angular/http';
+import {AppContextService} from "../context/app-context.service";
+import {PathConstats} from "../../constants/path-constants";
+import {WindowRefService} from "../utilities/util_winRef/window-ref.service";
+import {DocumentRefService} from "../utilities/util_docRef/document-ref.service";
+import {CookiesService} from "../utilities/util_cookies/cookies.service";
 import {Router} from "@angular/router";
 
 type finishedLoginCallbackType = (Request, RequestOptionsArgs) => any;
@@ -24,13 +24,11 @@ export class AppAuthenticationService {
   failedRequestFinishedLoginCallbacksParameter1: (string | Request)[] = [];
   failedRequestFinishedLoginCallbacksParameter2: RequestOptionsArgs[] = [];
 
-  constructor(
-    private appContext: AppContextService,
-    private windowRefService: WindowRefService,
-    private documentRefService: DocumentRefService,
-    private cookies: CookiesService,
-    private route:Router
-  ) {
+  constructor(private appContext: AppContextService,
+              private windowRefService: WindowRefService,
+              private documentRefService: DocumentRefService,
+              private cookies: CookiesService,
+              private route: Router) {
   }
 
   getContext() {
@@ -99,7 +97,7 @@ export class AppAuthenticationService {
     // this.failedRequestFinishedLoginCallbacksParameter2.push(replayRequestOptionsArgs);
   }
 
-  login(){
+  login() {
     this.route.navigate(['login']);
   }
 

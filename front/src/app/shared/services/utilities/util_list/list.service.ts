@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
-import { VariableService } from "../util_variable/variable.service";
+import {Injectable} from '@angular/core';
+import {VariableService} from "../util_variable/variable.service";
 
 @Injectable()
 export class ListService {
 
-  constructor(private vutils: VariableService) { }
+  constructor(private vutils: VariableService) {
+  }
 
   isListEmpty(list) {
-    if(this.vutils.isUndefinedOrNull(list)) {
+    if (this.vutils.isUndefinedOrNull(list)) {
       return true;
     } else {
       return list.length == 0;
@@ -15,7 +16,7 @@ export class ListService {
   }
 
   exceedsLength(list, length) {
-    if(this.isListEmpty(list)) {
+    if (this.isListEmpty(list)) {
       return false;
     } else {
       return list.length > length;

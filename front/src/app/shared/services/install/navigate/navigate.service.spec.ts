@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { NavigateService } from './navigate.service';
+import {NavigateService} from './navigate.service';
 
 describe('NavigateService', () => {
   beforeEach(() => {

@@ -5,60 +5,60 @@
 
 // Accordion Default
 .accordion-default {
-    margin: $spacing-md 0;
+  margin: $spacing-md 0;
 
-    .accordion {
-        &-title a {
-            position: relative;
-            display: block;
-            color: $color-primary-text;
-            text-decoration: none;
-            font-size: $theme-font-size-base;
-            padding-bottom: 0;
-            @include simple-transition(); 
+  .accordion {
+    &-title a {
+      position: relative;
+      display: block;
+      color: $color-primary-text;
+      text-decoration: none;
+      font-size: $theme-font-size-base;
+      padding-bottom: 0;
+      @include simple-transition();
 
-            &.collapsed {
-                border-bottom: solid 1px $color-grey;
-                padding-bottom: $spacing-sm;
-            }
+      &.collapsed {
+        border-bottom: solid 1px $color-grey;
+        padding-bottom: $spacing-sm;
+      }
 
-            // Expanded State
-            &:before {
-                @extend .icon;
-                @extend .icon-arrow-collapse;
-                position: absolute;
-                right: 0;
-                color: $color-medium-grey;
-                
-            }
+      // Expanded State
+      &:before {
+        @extend .icon;
+        @extend .icon-arrow-collapse;
+        position: absolute;
+        right: 0;
+        color: $color-medium-grey;
 
-            // Collapsed State
-            &.collapsed:before {
-                @extend .icon-arrow-expand;
-            }
+      }
 
-            small {
-                display: block;
-                margin-top: $spacing-xs;
-                color: $color-dark-grey-alt;
-            }
+      // Collapsed State
+      &.collapsed:before {
+        @extend .icon-arrow-expand;
+      }
 
-            // Hover State
-            &:hover {
-                text-decoration: none;
-                color: $color-primary-text;
-                &:before {
-                    color: $color-medium-grey;
-                }
-            }
-            
+      small {
+        display: block;
+        margin-top: $spacing-xs;
+        color: $color-dark-grey-alt;
+      }
+
+      // Hover State
+      &:hover {
+        text-decoration: none;
+        color: $color-primary-text;
+        &:before {
+          color: $color-medium-grey;
         }
+      }
 
-        &-body {
-            padding-bottom: $spacing-sm;
+    }
 
-            &.in {
-            }
-        }
-    }       
+    &-body {
+      padding-bottom: $spacing-sm;
+
+      &.in {
+      }
+    }
+  }
 }

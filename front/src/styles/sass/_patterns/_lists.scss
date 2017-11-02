@@ -5,543 +5,530 @@
 
 // Lists
 .list-simple {
-    margin: $spacing-sm 0;
-    padding: 0;
-    list-style: none;
+  margin: $spacing-sm 0;
+  padding: 0;
+  list-style: none;
 
+  li {
+    padding: $spacing-sm 0;
+    border-bottom: solid 1px $color-light-grey;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      border: 0;
+    }
+  }
+
+  &.list-simple-dark-divider {
     li {
-        padding: $spacing-sm 0;
-        border-bottom: solid 1px $color-light-grey;
-
-        &:first-child {
-            padding-top: 0;
-        }
-
-        &:last-child {
-            border: 0;
-        }
+      border-bottom: solid 1px $color-grey;
     }
-
-    &.list-simple-dark-divider{
-        li {
-            border-bottom: solid 1px $color-grey;
-        }
-    }
+  }
 }
-
 
 // Tag List Simple
 .list-tags-simple {
-    margin: 0;
-    padding: 0;
-    margin-bottom: $spacing-sm;
+  margin: 0;
+  padding: 0;
+  margin-bottom: $spacing-sm;
 
-    .list-tag-item {
-        @include border-radius(3px);
-        display: inline-block;
-        background-color: $color-light-grey;
-        margin-right: $spacing-xs;
-        margin-bottom: $spacing-xs;
-        padding: $spacing-xs/2 $spacing-sm;
-        color: $color-primary-text;
-        font-size: $theme-font-size-xs;
+  .list-tag-item {
+    @include border-radius(3px);
+    display: inline-block;
+    background-color: $color-light-grey;
+    margin-right: $spacing-xs;
+    margin-bottom: $spacing-xs;
+    padding: $spacing-xs/2 $spacing-sm;
+    color: $color-primary-text;
+    font-size: $theme-font-size-xs;
 
-        .icon {
-            vertical-align: middle;
-        }
-
-        .remove {
-            @extend .icon;
-            @extend .icon-cross;
-            @include opacity(.7);
-            background-color: transparent;
-            border: 0;
-            color: $color-black;
-            margin-right: 0;
-            margin-left: $spacing-sm;
-            padding: 0;
-            vertical-align: middle;
-        }
-
-        &:hover {
-            .remove {
-                @include opacity(1);
-            }
-        }
+    .icon {
+      vertical-align: middle;
     }
+
+    .remove {
+      @extend .icon;
+      @extend .icon-cross;
+      @include opacity(.7);
+      background-color: transparent;
+      border: 0;
+      color: $color-black;
+      margin-right: 0;
+      margin-left: $spacing-sm;
+      padding: 0;
+      vertical-align: middle;
+    }
+
+    &:hover {
+      .remove {
+        @include opacity(1);
+      }
+    }
+  }
 }
-
-
-
 
 // Org Chart
 .org-chart {
-    $connector-color: darken($color-light-grey, 25%);
-    $photo-size: 64px;
-    $border-color: darken($color-light-grey, 18%);
-    $border-hover-color: $color-primary-blue;
+  $connector-color: darken($color-light-grey, 25%);
+  $photo-size: 64px;
+  $border-color: darken($color-light-grey, 18%);
+  $border-hover-color: $color-primary-blue;
 
-    @mixin chart-item-section() {
-        @include border-radius(3px);
-        @include shadow-thin();
-        @include transform(translateX(-50%));
-        position: relative;
-        display: block;
-        border: solid 1px $color-grey;
-        background-color: $color-white;
-        padding: 5px 10px;
-        text-decoration: none;
-        color: black;
-        width: 320px;
-        left: 50%;
-        margin-top: 24px;
-        
-        &:before {
-            position: absolute;
-            content:"";
-            background-color: $connector-color;
-            width: 2px;
-            left:50%;
-            top: -24px;
-            height: 24px;
-            margin-left: -1px;
-        }
-
-        &:hover,
-        a:hover,
-        &:focus,
-        a:focus {
-            text-decoration: none;
-            border-color: $border-hover-color;
-
-            .photo {
-                @include simple-transition();
-                border-color: $border-hover-color;
-            }
-        }
-
-        .badge-chart-item {
-            position: absolute;
-            top: 6px;
-            right: 8px;
-        }
-
-        .chart-item-header {
-            padding-bottom: $spacing-sm;
-            clear: both;
-            text-align: left;
-            overflow: auto;
-            overflow-y: visible;
-
-            .photo {
-                $photo-border-color: $border-color;
-                width: $photo-size;
-                height: $photo-size;
-                float: left;
-                margin-right: $spacing-sm;
-
-                img {
-                    width: $photo-size;
-                    height: $photo-size;
-                    border: 0;
-                }    
-            }
-
-            .item-header-title {
-                font-size: $theme-font-size-base;
-                margin: 0;
-                color: $color-black;
-            }
-        }
-
-        .chart-item-footer {
-            border-top: solid 1px $color-grey;
-            overflow: auto;
-            clear: both;
-            margin-left: -10px;                
-            margin-right: -10px;                
-            margin-bottom: -5px; 
-
-            .btn-footer {
-                display: block;
-                float: left;
-                width: 100%;
-                padding: $spacing-sm;
-                font-size: $theme-font-size-sm;
-                font-weight: $theme-font-weight-normal;
-                color: $color-primary-text;
-
-                .icon {
-                    color: $color-primary-blue;
-                }
-
-                &:hover {
-                    background-color: lighten($color-dark-primary-blue, 58%);
-                    color: $color-dark-primary-blue;
-                    text-decoration: none;
-                }
-            }
-        }
-    }
-
+  @mixin chart-item-section() {
+    @include border-radius(3px);
+    @include shadow-thin();
+    @include transform(translateX(-50%));
     position: relative;
-    margin: 0 auto $spacing-sm auto;
-    padding: 0;
-    text-align: center;
+    display: block;
+    border: solid 1px $color-grey;
+    background-color: $color-white;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: black;
+    width: 320px;
     left: 50%;
-    transform: translateX(-50%);
-    overflow: auto;
-    display: inline-block;
-    width: 100%;
+    margin-top: 24px;
 
-
-    .chart-item {
-        @include chart-item-section();
-
-        &:first-child {
-            &:before {
-                display: none;
-            }
-        }
+    &:before {
+      position: absolute;
+      content: "";
+      background-color: $connector-color;
+      width: 2px;
+      left: 50%;
+      top: -24px;
+      height: 24px;
+      margin-left: -1px;
     }
 
-    // Chart Level Top
-    .chart-level-top, 
-    .chart-level-top > li {
-        &:before {
-            display: none;
-        }
+    &:hover,
+    a:hover,
+    &:focus,
+    a:focus {
+      text-decoration: none;
+      border-color: $border-hover-color;
+
+      .photo {
+        @include simple-transition();
+        border-color: $border-hover-color;
+      }
     }
 
-    .chart-level-normal {
-        > li .chart-item {
+    .badge-chart-item {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+    }
 
+    .chart-item-header {
+      padding-bottom: $spacing-sm;
+      clear: both;
+      text-align: left;
+      overflow: auto;
+      overflow-y: visible;
+
+      .photo {
+        $photo-border-color: $border-color;
+        width: $photo-size;
+        height: $photo-size;
+        float: left;
+        margin-right: $spacing-sm;
+
+        img {
+          width: $photo-size;
+          height: $photo-size;
+          border: 0;
         }
+      }
+
+      .item-header-title {
+        font-size: $theme-font-size-base;
+        margin: 0;
+        color: $color-black;
+      }
+    }
+
+    .chart-item-footer {
+      border-top: solid 1px $color-grey;
+      overflow: auto;
+      clear: both;
+      margin-left: -10px;
+      margin-right: -10px;
+      margin-bottom: -5px;
+
+      .btn-footer {
+        display: block;
+        float: left;
+        width: 100%;
+        padding: $spacing-sm;
+        font-size: $theme-font-size-sm;
+        font-weight: $theme-font-weight-normal;
+        color: $color-primary-text;
+
+        .icon {
+          color: $color-primary-blue;
+        }
+
+        &:hover {
+          background-color: lighten($color-dark-primary-blue, 58%);
+          color: $color-dark-primary-blue;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  position: relative;
+  margin: 0 auto $spacing-sm auto;
+  padding: 0;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: auto;
+  display: inline-block;
+  width: 100%;
+
+  .chart-item {
+    @include chart-item-section();
+
+    &:first-child {
+      &:before {
+        display: none;
+      }
+    }
+  }
+
+  // Chart Level Top
+  .chart-level-top,
+  .chart-level-top > li {
+    &:before {
+      display: none;
+    }
+  }
+
+  .chart-level-normal {
+    > li .chart-item {
 
     }
 
-    // Chart Level Current
-    .chart-level-current {
-        $current-border-color: $color-primary-text;
-        $current-photo-size: 96px;
+  }
 
-        @include chart-item-section();
-        @include shadow-default();
-        width: calc(60% - 20px);
-        max-width: 600px;
-        border-width: 2px;
-        border-color: $current-border-color;
+  // Chart Level Current
+  .chart-level-current {
+    $current-border-color: $color-primary-text;
+    $current-photo-size: 96px;
 
-        &:hover,
-        &:hover .chart-item-header .photo {
-            border-color: $current-border-color;
-        }
+    @include chart-item-section();
+    @include shadow-default();
+    width: calc(60% - 20px);
+    max-width: 600px;
+    border-width: 2px;
+    border-color: $current-border-color;
 
-        .chart-item-header {
-            display: table;
-            width: calc(100% - 24px);
-            margin-top: $spacing-xs;
-            padding-bottom: $spacing-sm;
-
-            .chart-item-photo-wrapper {
-                display: table-cell;
-                vertical-align: top;
-                width: $card-photo-size;
-
-                .chart-item-photo {
-                    @include border-radius(3px);
-                    width: $card-photo-size;
-                    height: $card-photo-size;
-                    float: left;
-                    margin-right: 10px;
-                }
-            }
-
-            .chart-item-header-info {
-                display: table-cell;
-                .chart-item-header-title {
-                    font-size: $theme-font-size-md + 2;
-                    margin: 0;
-                    color: $color-black;
-                } 
-            }
-        }
-
-        .chart-item-actions {
-            padding: $spacing-xs 0 $spacing-base 0;
-            text-align: center;
-        }
-
-        .chart-item-body {
-            border-top: solid 1px $color-grey;
-            padding: $spacing-sm $spacing-xs;
-            text-align: left;
-        }
-
-        .chart-item-label-block {
-            margin-bottom: $spacing-xs;
-            font-size: $theme-font-size-sm;
-            display: block;
-
-            .chart-item-label {
-                display: inline-block;
-                margin-right: $spacing-sm;
-                min-width: 74px;
-                color: $color-medium-grey;
-                font-size: $theme-font-size-xs;
-            }
-
-            .chart-item-value {
-                display: inline-block;
-                color: $color-primary-text;
-            }
-        }
-
-        .chart-item-value {
-            font-size: $theme-font-size-sm;
-        }
-
-        .chart-item-value-nowrap {
-            width: calc(100% - #{$spacing-sm*2});
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        @include breakpoint(sm) {
-            width: 100%;
-            min-width: 100%;
-        }
+    &:hover,
+    &:hover .chart-item-header .photo {
+      border-color: $current-border-color;
     }
 
-    // Chart level bottom
-    .chart-level-bottom {
-        position: relative;
-        margin-top: 24px;
-        background-color: lighten($color-light-grey, 5%);
-        border: solid 1px $connector-color;
-        padding: $spacing-base $spacing-sm $spacing-sm;
-        list-style: none;
+    .chart-item-header {
+      display: table;
+      width: calc(100% - 24px);
+      margin-top: $spacing-xs;
+      padding-bottom: $spacing-sm;
 
-        &:before {
-            position: absolute;
-            content:"";
-            background-color: $connector-color;
-            width: 2px;
-            left:50%;
-            top: -24px;
-            height: 24px;
-            margin-left: -1px;
+      .chart-item-photo-wrapper {
+        display: table-cell;
+        vertical-align: top;
+        width: $card-photo-size;
+
+        .chart-item-photo {
+          @include border-radius(3px);
+          width: $card-photo-size;
+          height: $card-photo-size;
+          float: left;
+          margin-right: 10px;
         }
+      }
 
-        ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
+      .chart-item-header-info {
+        display: table-cell;
+        .chart-item-header-title {
+          font-size: $theme-font-size-md + 2;
+          margin: 0;
+          color: $color-black;
         }
-
-        .chart-item {
-            @include chart-item-section();
-            @include transform(translateX(0));
-            display: inline-block;
-            width: 220px;
-            margin: 6px 4px;
-            left: 0;
-            border-color: darken($color-light-grey, 18%);
-
-
-            &:after, 
-            &:before {
-                display: none;
-            }
-
-            a:hover {
-                text-decoration: none;
-                .chart-item-header .photo {
-                    border-color: $border-hover-color;
-                }
-            }
-
-            .chart-item-header {
-                margin-top: 0;
-
-                .photo {
-                    margin-right: $spacing-sm;
-                }
-            }
-
-        }
-
-    }
-    
-}
-
-.org-chart {
-    @include breakpoint(lg) {
-        .chart-level-current {
-            width: 50%;   
-        }
+      }
     }
 
-    @include breakpoint(md) {
-        .chart-level-current {
-            width: 70%;   
-        }
+    .chart-item-actions {
+      padding: $spacing-xs 0 $spacing-base 0;
+      text-align: center;
+    }
+
+    .chart-item-body {
+      border-top: solid 1px $color-grey;
+      padding: $spacing-sm $spacing-xs;
+      text-align: left;
+    }
+
+    .chart-item-label-block {
+      margin-bottom: $spacing-xs;
+      font-size: $theme-font-size-sm;
+      display: block;
+
+      .chart-item-label {
+        display: inline-block;
+        margin-right: $spacing-sm;
+        min-width: 74px;
+        color: $color-medium-grey;
+        font-size: $theme-font-size-xs;
+      }
+
+      .chart-item-value {
+        display: inline-block;
+        color: $color-primary-text;
+      }
+    }
+
+    .chart-item-value {
+      font-size: $theme-font-size-sm;
+    }
+
+    .chart-item-value-nowrap {
+      width: calc(100% - #{$spacing-sm*2});
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     @include breakpoint(sm) {
+      width: 100%;
+      min-width: 100%;
+    }
+  }
 
-        .chart-level-current {
-            width: 100%;   
-        }
+  // Chart level bottom
+  .chart-level-bottom {
+    position: relative;
+    margin-top: 24px;
+    background-color: lighten($color-light-grey, 5%);
+    border: solid 1px $connector-color;
+    padding: $spacing-base $spacing-sm $spacing-sm;
+    list-style: none;
+
+    &:before {
+      position: absolute;
+      content: "";
+      background-color: $connector-color;
+      width: 2px;
+      left: 50%;
+      top: -24px;
+      height: 24px;
+      margin-left: -1px;
     }
 
-    @include breakpoint(xs) {
-
-        .chart-level-current {
-            width: 100%;   
-        }
-
-        .chart-level-bottom > li {
-            width: calc(100% - 20px);   
-        }
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
+
+    .chart-item {
+      @include chart-item-section();
+      @include transform(translateX(0));
+      display: inline-block;
+      width: 220px;
+      margin: 6px 4px;
+      left: 0;
+      border-color: darken($color-light-grey, 18%);
+
+      &:after,
+      &:before {
+        display: none;
+      }
+
+      a:hover {
+        text-decoration: none;
+        .chart-item-header .photo {
+          border-color: $border-hover-color;
+        }
+      }
+
+      .chart-item-header {
+        margin-top: 0;
+
+        .photo {
+          margin-right: $spacing-sm;
+        }
+      }
+
+    }
+
+  }
+
 }
 
+.org-chart {
+  @include breakpoint(lg) {
+    .chart-level-current {
+      width: 50%;
+    }
+  }
 
+  @include breakpoint(md) {
+    .chart-level-current {
+      width: 70%;
+    }
+  }
 
+  @include breakpoint(sm) {
+
+    .chart-level-current {
+      width: 100%;
+    }
+  }
+
+  @include breakpoint(xs) {
+
+    .chart-level-current {
+      width: 100%;
+    }
+
+    .chart-level-bottom > li {
+      width: calc(100% - 20px);
+    }
+  }
+}
 
 // Timeline
 .list-timeline {
-    list-style: none;
-    margin: $spacing-sm 0;
-    padding: 0;
+  list-style: none;
+  margin: $spacing-sm 0;
+  padding: 0;
 
-    .timeline-list-item {
-        position: relative;
-        margin-bottom: $spacing-sm;
-        padding-left: 14px;
-        $marker-radius: 8px;
-        $marker-color: darken($color-grey, 10%);
-        &:before {
-            position: absolute;
-            content:"";
-            left: 0;
-            top: 6px;
-            width: $marker-radius;
-            height: $marker-radius;
-            @include border-radius($marker-radius);
-            background-color: $marker-color;
-        }
-
-        &:after {
-            position: absolute;
-            content:"";
-            left: 3px;
-            top: 6px;
-            bottom: -(6px + $spacing-sm);
-            width: 2px;
-            background-color: $marker-color;
-        }
-
-        &:last-child {
-            &:after {
-                width: 0;
-                height: 0;
-            }
-        }
-
-        .time {
-            color: $color-medium-grey;
-            font-size: $theme-font-size-xs;
-        }
-
-        .section-accent {
-            color: $color-primary-text;
-        }
+  .timeline-list-item {
+    position: relative;
+    margin-bottom: $spacing-sm;
+    padding-left: 14px;
+    $marker-radius: 8px;
+    $marker-color: darken($color-grey, 10%);
+    &:before {
+      position: absolute;
+      content: "";
+      left: 0;
+      top: 6px;
+      width: $marker-radius;
+      height: $marker-radius;
+      @include border-radius($marker-radius);
+      background-color: $marker-color;
     }
-}
 
+    &:after {
+      position: absolute;
+      content: "";
+      left: 3px;
+      top: 6px;
+      bottom: -(6px + $spacing-sm);
+      width: 2px;
+      background-color: $marker-color;
+    }
+
+    &:last-child {
+      &:after {
+        width: 0;
+        height: 0;
+      }
+    }
+
+    .time {
+      color: $color-medium-grey;
+      font-size: $theme-font-size-xs;
+    }
+
+    .section-accent {
+      color: $color-primary-text;
+    }
+  }
+}
 
 // Draggable list
 .list-draggable {
-    &,
-    & .list-draggable-item {
-        margin: 0;
-        padding: 0;
-        list-style: none;
+  &,
+  & .list-draggable-item {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .list-draggable-item {
+    @include simple-transition();
+    @include border-radius(3px);
+    position: relative;
+    display: block;
+    text-decoration: none;
+    margin-bottom: $spacing-xs;
+    padding: $spacing-sm;
+    background-color: $color-light-grey;
+    border: solid 1px transparent;
+    overflow: hidden;
+    color: $color-primary-text;
+
+    &:hover {
+      background-color: $color-very-light-grey;
+      border: solid 1px $color-blue;
+      cursor: move;
+      text-decoration: none;
     }
 
-    .list-draggable-item {
-        @include simple-transition();
-        @include border-radius(3px);
-        position: relative;
-        display: block;
-        text-decoration: none;
-        margin-bottom: $spacing-xs;
-        padding: $spacing-sm;
-        background-color: $color-light-grey;
-        border: solid 1px transparent;
-        overflow: hidden;
-        color: $color-primary-text;
-
-        &:hover {
-            background-color: $color-very-light-grey;
-            border: solid 1px $color-blue;
-            cursor: move;
-            text-decoration: none;
-        }
-
-        &.drag-disabled,
-        &.drag-disabled:hover {
-            background-color: $color-very-light-grey;
-            border: solid 1px $color-very-light-grey;
-            cursor: no-drop;
-            text-decoration: none;
-            color: $color-grey-alt;
-        }
+    &.drag-disabled,
+    &.drag-disabled:hover {
+      background-color: $color-very-light-grey;
+      border: solid 1px $color-very-light-grey;
+      cursor: no-drop;
+      text-decoration: none;
+      color: $color-grey-alt;
     }
+  }
 }
-
 
 // List - Single Selection
 .list-selection-single {
+  margin: 0;
+  padding: 0;
+  border: solid 1px $color-grey;
+
+  li {
+    display: block;
     margin: 0;
     padding: 0;
-    border: solid 1px $color-grey;
 
-    li {
-        display: block;
-        margin: 0;
-        padding: 0;
+    .list-item {
+      margin: 0;
+      padding: 6px 6px;
+      position: relative;
+      display: block;
+      border-bottom: solid 1px $color-light-grey;
+      text-decoration: none;
 
-        .list-item {
-            margin: 0;
-            padding: 6px 6px;
-            position: relative;
-            display: block;
-            border-bottom: solid 1px $color-light-grey;
-            text-decoration: none;
+      &:hover {
+        background-color: $selection-highlight-bg-color;
+      }
 
-            &:hover {
-                background-color: $selection-highlight-bg-color;
-            }
-
-            &-selected {
-                background-color: $selection-highlight-bg-color;
-                border-bottom: solid 1px $selection-highlight-border-color;   
-            }
-
-        }
-
-        &:last-child {
-            .list-item {
-                border-bottom: 0;
-            }
-        }
-
-
+      &-selected {
+        background-color: $selection-highlight-bg-color;
+        border-bottom: solid 1px $selection-highlight-border-color;
+      }
 
     }
+
+    &:last-child {
+      .list-item {
+        border-bottom: 0;
+      }
+    }
+
+  }
 
 }

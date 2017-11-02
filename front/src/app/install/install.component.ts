@@ -16,6 +16,7 @@ import {InstallService} from "../shared/services/install/install.service";
 export class InstallComponent implements OnInit {
   private installFormGroup: FormGroup;
   private installForm: InstallSchema = new InstallSchema();
+
   constructor(private http: Http, private router: Router, private webservice: InstallService, private variableService: VariableService) {
     this.createForm();
   }
@@ -37,7 +38,8 @@ export class InstallComponent implements OnInit {
       postgresuserpass: this.installForm.postgresuserpass,
       postgresadminpass: this.installForm.postgresadminpass,
       sentinelip: this.installForm.sentinelip,
-      vaulttreename: this.installForm.vaulttreename
+      vaulttreename: this.installForm.vaulttreename,
+      buildid: this.installForm.buildid
     });
   }
   public  save() {
@@ -53,20 +55,33 @@ export class InstallComponent implements OnInit {
       appsadminpass: this.installForm.appsadminpass.value,
       postgresusername: this.installForm.postgresusername.value,
       postgresuserpass: this.installForm.postgresuserpass.value,
-      sentinelip: this.installForm.sentinelip.value
+      sentinelip: this.installForm.sentinelip.value,
+      buildid: this.installForm.buildid.value
     };
-    console.log(this.installForm.vaultadminname.value)
+    console.log(this.installForm.vaultadminname.value);
     this.webservice.save(body)
       .subscribe((data) => {
+          this.copysilent();
           console.log('got data');
         },
+        (err) => this.logError(err));
+  }
+  public copysilent() {
+    this.webservice.copysilent()
+      .subscribe(
+        (data) => {
+          this.download();
+          console.log('files copied');
+        },
         (err) => this.logError(err),
-        () => console.log('got data'));
+        () => console.log('got data')
+      );
   }
   public isFormValid() {
     let isValid: boolean = this.installFormGroup.valid && !(this.variableService.isEmptyArray(this.installForm.vaultadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.appsadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.vaultip.value)) && !(this.variableService.isEmptyArray(this.installForm.boxusername.value));
     return isValid;
   }
+
   public getData() {
     this.webservice.getDataFromBackend()
       .subscribe(
@@ -75,6 +90,7 @@ export class InstallComponent implements OnInit {
         () => console.log('got data')
       );
   }
+
   public s_install() {
     this.webservice.s_install()
       .subscribe(
@@ -86,6 +102,7 @@ export class InstallComponent implements OnInit {
       );
 
   }
+
   public s_confiugre() {
     this.webservice.s_configure()
       .subscribe(
@@ -97,18 +114,20 @@ export class InstallComponent implements OnInit {
       );
 
   }
-  public  download() {
+
+  public download() {
     this.webservice.download()
       .subscribe(
         (data) => {
           console.log('got data');
-          this.copyIso();
+          //this.copyIso();
         },
         (err) => this.logError(err),
         () => console.log('got data')
       );
   }
-  public  copyIso() {
+
+  public copyIso() {
     this.webservice.copyIso()
       .subscribe(
         (data) => {

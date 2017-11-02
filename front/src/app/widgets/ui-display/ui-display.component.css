@@ -1,29 +1,32 @@
-.list{
-    display:inline-block;
-    margin:5px 20px;
-    padding:5px;
-    width: 218px;
-    border:1px solid #CCC;
-}
-.list:hover{
-    background-color:#ecffff;
-    cursor: pointer;
-}
-.list >a{
-        text-decoration: none;
-}
-.ellipsis{
-            /*max-width: calc(100%);*/
-            /*//max-width: 2000px;*/
-            max-height: 98px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            /*white-space: nowrap;*/
+.list {
+  display: inline-block;
+  margin: 5px 20px;
+  padding: 5px;
+  width: 218px;
+  border: 1px solid #CCC;
 }
 
-.managed-text{
-    height: 40px;
-    text-overflow: ellipsis;
-    overflow-x: hidden;
-    overflow-y: hidden;
+.list:hover {
+  background-color: #ecffff;
+  cursor: pointer;
+}
+
+.list > a {
+  text-decoration: none;
+}
+
+.ellipsis {
+  /*max-width: calc(100%);*/
+  /*//max-width: 2000px;*/
+  max-height: 98px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /*white-space: nowrap;*/
+}
+
+.managed-text {
+  height: 40px;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }

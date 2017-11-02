@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
-import { NgModule, ApplicationRef, APP_INITIALIZER, Injector } from '@angular/core';
-import { RouterModule, PreloadAllModules } from '@angular/router';
+import {HttpModule, Http, XHRBackend, RequestOptions} from '@angular/http';
+import {NgModule, ApplicationRef, APP_INITIALIZER, Injector} from '@angular/core';
+import {RouterModule, PreloadAllModules} from '@angular/router';
 
 // Angular 2 Moment : Used for dates and time
 
-import { MomentModule } from 'angular2-moment';
+import {MomentModule} from 'angular2-moment';
 
 // Hot Module Replacement, used for loading files quickly in webpack-dev-serve
 
@@ -18,11 +18,11 @@ import {
 
 // Ng2 Dragula : Used for Drag and Drop
 
-import { DragulaModule, DragulaService } from 'ng2-dragula/ng2-dragula';
+import {DragulaModule, DragulaService} from 'ng2-dragula/ng2-dragula';
 
 // Angular Material used for quorum slider widget
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -37,36 +37,36 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
 import '../styles/styles.scss';
-import { AppContextService } from "./shared/services/context/app-context.service";
-import { AppAuthenticationService } from "./shared/services/authentication/app-authentication.service";
-import { LoggedInUserDetailsService } from "./shared/services/loggedin-user-details/logged-in-user-details.service";
-import { WindowRefService } from "./shared/services/utilities/util_winRef/window-ref.service";
-import { DocumentRefService } from "./shared/services/utilities/util_docRef/document-ref.service";
-import { CookiesService } from "./shared/services/utilities/util_cookies/cookies.service";
-import { ValidationService } from "./shared/services/utilities/util_validation/validation.service";
-import { LocaleService } from "./shared/services/locale/locale.service";
-import { LocationStrategy, HashLocationStrategy } from "@angular/common";
-import { httpFactory } from "./shared/factories/http.factory";
-import { DefaultRequestOptionsService } from "./shared/services/utilities/util_default-request-options/default-request-options.service";
-import { LoadingComponent } from './loading/loading.component';
-import { AppLoadingService } from "./shared/services/loading/app-loading.service";
-import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
-import { LogoutService } from "./shared/services/logout/logout.service";
-import { Table } from "./widgets/table/table";
-import { EmitterService } from "./shared/services/emitter/emitter.service";
-import { PaginationComponent } from './widgets/pagination/pagination.component';
-import { DemoComponent } from './demo/demo.component';
-import { ListService } from "./shared/services/utilities/util_list/list.service";
-import { VariableService } from "./shared/services/utilities/util_variable/variable.service";
-import { UiDisplayComponent } from './widgets/ui-display/ui-display.component';
-import { UnauthorizeComponent } from './unauthorize/unauthorize.component';
-import { FeedBackComponent } from "./widgets/feed-back/feed-back.component";
-import { FeedBackService } from "./shared/services/feed-back/feed-back.service";
-import { ConfirmationWidgetComponent } from './widgets/confirmation-widget/confirmation-widget.component';
+import {AppContextService} from "./shared/services/context/app-context.service";
+import {AppAuthenticationService} from "./shared/services/authentication/app-authentication.service";
+import {LoggedInUserDetailsService} from "./shared/services/loggedin-user-details/logged-in-user-details.service";
+import {WindowRefService} from "./shared/services/utilities/util_winRef/window-ref.service";
+import {DocumentRefService} from "./shared/services/utilities/util_docRef/document-ref.service";
+import {CookiesService} from "./shared/services/utilities/util_cookies/cookies.service";
+import {ValidationService} from "./shared/services/utilities/util_validation/validation.service";
+import {LocaleService} from "./shared/services/locale/locale.service";
+import {LocationStrategy, HashLocationStrategy} from "@angular/common";
+import {httpFactory} from "./shared/factories/http.factory";
+import {DefaultRequestOptionsService} from "./shared/services/utilities/util_default-request-options/default-request-options.service";
+import {LoadingComponent} from './loading/loading.component';
+import {AppLoadingService} from "./shared/services/loading/app-loading.service";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {TranslateModule, TranslateLoader} from "@ngx-translate/core";
+import {LogoutService} from "./shared/services/logout/logout.service";
+import {Table} from "./widgets/table/table";
+import {EmitterService} from "./shared/services/emitter/emitter.service";
+import {PaginationComponent} from './widgets/pagination/pagination.component';
+import {DemoComponent} from './demo/demo.component';
+import {ListService} from "./shared/services/utilities/util_list/list.service";
+import {VariableService} from "./shared/services/utilities/util_variable/variable.service";
+import {UiDisplayComponent} from './widgets/ui-display/ui-display.component';
+import {UnauthorizeComponent} from './unauthorize/unauthorize.component';
+import {FeedBackComponent} from "./widgets/feed-back/feed-back.component";
+import {FeedBackService} from "./shared/services/feed-back/feed-back.service";
+import {ConfirmationWidgetComponent} from './widgets/confirmation-widget/confirmation-widget.component';
 import {HeaderComponent} from "./header/header.component";
 import {FooterComponent} from "./footer/footer.component";
-import { LoginComponent } from './login/login.component';
+import {LoginComponent} from './login/login.component';
 import {InstallComponent} from "./install/install.component";
 
 
@@ -85,6 +85,7 @@ type StoreType = {
 export function loadContext(appContext: AppContextService) {
   return () => appContext.load();
 }
+
 //Localization path
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -121,7 +122,7 @@ export function HttpLoaderFactory(http: Http) {
     HttpModule,
     MomentModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -10,6 +10,7 @@ import {handleError} from "../../factories/handle-error.factory";
 export class LoggedInUserDetailsService {
 
   appContext: Context;
+
   constructor(private http: Http, private appContextService: AppContextService) {
     this.appContext = this.appContextService.getAppContext();
   }
@@ -20,7 +21,7 @@ export class LoggedInUserDetailsService {
   }
 
   getDetails(): Observable<any> {
-    return this.http.get(this.appContext.context+PathConstats.loggedInUserDetailsApi)
+    return this.http.get(this.appContext.context + PathConstats.loggedInUserDetailsApi)
       .map(this.extractData)
       .catch(handleError);
   }

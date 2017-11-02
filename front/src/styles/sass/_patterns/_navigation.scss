@@ -5,239 +5,236 @@
 
 // Navbar Header
 .navbar-header {
-    float: left;
+  float: left;
 }
 
 // Branding
 .navbar-global .navbar-brand {
-    display: block;
+  display: block;
+  color: $color-white;
+  padding: 7px $grid-gutter-size;
+  font-size: $theme-font-size-lg;
+
+  .navbar-brand-image {
+    display: inline-block;
+    vertical-align: top;
+    padding-right: $spacing-xs;
+
+    img {
+      height: 40px;
+      width: auto;
+    }
+  }
+
+  .navbar-brand-label {
+    display: inline-block;
     color: $color-white;
-    padding: 7px $grid-gutter-size;
-    font-size: $theme-font-size-lg;
+    line-height: 1.6;
 
-    .navbar-brand-image {
-        display: inline-block;
-        vertical-align: top;
-        padding-right: $spacing-xs;
-
-        img {
-            height: 40px;
-            width: auto;
-        }
+    .subtitle {
+      @include opacity(.6);
+      display: block;
+      color: $color-white;
+      font-size: $theme-font-size-xs;
     }
-
-    .navbar-brand-label {
-        display: inline-block;
-        color: $color-white;
-        line-height: 1.6;
-
-        .subtitle {
-            @include opacity(.6);
-            display: block;
-            color: $color-white;
-            font-size: $theme-font-size-xs;           
-        }
-    }
+  }
 }
 
 // Global Navigation
 .navbar-global {
-    background-color: $navbar-global-bg-color-start;
-    @include background(linear-gradient(to right, $navbar-global-bg-color-start, $navbar-global-bg-color-end) top repeat);
+  background-color: $navbar-global-bg-color-start;
+  @include background(linear-gradient(to right, $navbar-global-bg-color-start, $navbar-global-bg-color-end) top repeat);
+  border: 0;
+
+  // Caret
+  .caret {
+    @extend .icon;
     border: 0;
+    height: auto;
+    width: auto;
+    margin-right: 0 !important;
+    font-size: 13px !important;
+    font-weight: $theme-font-weight-normal;
 
-    // Caret
-    .caret {
-        @extend .icon;
-        border: 0;
-        height: auto;
-        width: auto;
-        margin-right: 0 !important;
-        font-size: 13px !important;
-        font-weight: $theme-font-weight-normal;
+    &:before {
+      @extend .icon-arrow-angle-down:before;
+    }
+  }
 
-        &:before {
-            @extend .icon-arrow-angle-down:before;    
-        }
+  // Navigation inside global nav bar
+  .navbar-nav.navbar-right {
+    float: right;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    > li {
+      float: left;
     }
 
-    // Navigation inside global nav bar
-    .navbar-nav.navbar-right {
-        float: right;
-        margin-top: 0;
-        margin-bottom: 0;
+    > li > a,
+    > .open > a {
 
-        > li {
-            float: left;
-        }
+      // Navbar Menu item
+      padding-top: 15px;
+      padding-bottom: 15px;
+      background-color: transparent;
+      color: darken($color-white, 10%);
 
-        > li > a,
-        > .open > a {
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: $color-dark-grey;
+        color: $color-white;
+      }
 
-            // Navbar Menu item
-            padding-top: 15px;
-            padding-bottom: 15px;
-            background-color: transparent;
-            color: darken($color-white, 10%);
-
-            &:hover,
-            &:focus,
-            &:active {
-                background-color: $color-dark-grey;
-                color: $color-white;
-            }
-
-            // Navbar Menu item - icon
-            .icon {
-                font-size: $theme-font-size-base * 1.3;
-                vertical-align: middle;
-            }
-
-        }
-
-        // Dropdown Header
-        .dropdown-menu {
-            @include border-top-radius(0);
-            position: absolute;
-            right: 0;
-            left: auto;
-            border: 0;
-            padding: $spacing-sm;
-            min-width: 180px;
-			background-color: $color-dark-grey;
-
-            .divider {
-                background-color: rgba($color-white, .3);
-            }
-
-            .profile-footer {
-                a {
-                    text-align: center;
-                    border-right: solid 1px $color-dark-grey-compliment;
-                }
-
-                .row {
-                    margin: 0;
-                }
-
-                [class*="col-"] {
-                    padding: 0;
-
-                    &:last-child a {
-                        border-right-width: 0;
-                    }
-                }
-
-                
-            }
-        }
-
-        .dropdown-menu li {
-            a {
-                display: block;
-                padding: 8px 16px;
-                color: $color-very-light-grey;
-
-                .icon {
-                    color: lighten($color-medium-grey, 10%);
-                }
-
-                &:focus,
-                &:hover {
-                    border-bottom-color: $color-light-grey;
-                    background-color: rgba(67,76,80,.6);
-					color: $color-very-light-grey;
-                    text-decoration: none;                   
-                }
-            }
-        }
-
-        // Notification navbar
-        .nav-notification {
-            > a {
-                position: relative;
-                .badge {
-                    @extend .badge-danger;
-                    position: absolute;
-                    top: 8px;
-                    right: 3px;
-                    text-align: center;
-                    line-height: .9;
-                    padding: 2px 4px;
-                    background-color: $color-red;
-                    font-size: 11px;
-                    color: $color-white;
-                }
-            }
-            .dropdown-menu {
-                li {
-                    > a {
-                        display: table;
-                        border-top: solid 1px $color-dark-grey-compliment;
-                        font-size: $theme-font-size-xs;
-                        min-width: 240px;
-
-                        .icon {
-                            display: table-cell;
-                            vertical-align: top;
-                            color: $color-very-light-grey;
-                        }
-
-                        .icon-label {
-                            display: table-cell;
-                            vertical-align: top;
-                        }
-                    }
-
-                    &:first-child > a {
-                        border-top-color: transparent;
-                    }
-
-                    &.nav-notification-footer a {
-                        text-align: center;
-                    }
-                }
-            }
-        }
-
-        // Divider
-        .divider {
-            margin: 0;
-        }
-
-
+      // Navbar Menu item - icon
+      .icon {
+        font-size: $theme-font-size-base * 1.3;
+        vertical-align: middle;
+      }
 
     }
 
-    // Collapsible section inside global navigation
-    .navbar-collapse {
-        @include box-shadow(0, 0, 0, 0);
-        border: 0;
-        max-height: calc(100% - 60px);
+    // Dropdown Header
+    .dropdown-menu {
+      @include border-top-radius(0);
+      position: absolute;
+      right: 0;
+      left: auto;
+      border: 0;
+      padding: $spacing-sm;
+      min-width: 180px;
+      background-color: $color-dark-grey;
 
-        &.in .icon-only {
-            margin-right: 6px;
+      .divider {
+        background-color: rgba($color-white, .3);
+      }
+
+      .profile-footer {
+        a {
+          text-align: center;
+          border-right: solid 1px $color-dark-grey-compliment;
         }
+
+        .row {
+          margin: 0;
+        }
+
+        [class*="col-"] {
+          padding: 0;
+
+          &:last-child a {
+            border-right-width: 0;
+          }
+        }
+
+      }
     }
 
-    // Global Navbar toggle button
-    .navbar-toggle {
-        border: solid 1px $color-white;
+    .dropdown-menu li {
+      a {
+        display: block;
+        padding: 8px 16px;
+        color: $color-very-light-grey;
 
-        .icon-bar {
-            background-color: $color-white;
+        .icon {
+          color: lighten($color-medium-grey, 10%);
         }
 
-        &:hover,
         &:focus,
-        &:active {
-            background-color: $color-white;
-
-            .icon-bar {
-                background-color: $navbar-global-bg-color-start;
-            }
+        &:hover {
+          border-bottom-color: $color-light-grey;
+          background-color: rgba(67, 76, 80, .6);
+          color: $color-very-light-grey;
+          text-decoration: none;
         }
+      }
     }
+
+    // Notification navbar
+    .nav-notification {
+      > a {
+        position: relative;
+        .badge {
+          @extend .badge-danger;
+          position: absolute;
+          top: 8px;
+          right: 3px;
+          text-align: center;
+          line-height: .9;
+          padding: 2px 4px;
+          background-color: $color-red;
+          font-size: 11px;
+          color: $color-white;
+        }
+      }
+      .dropdown-menu {
+        li {
+          > a {
+            display: table;
+            border-top: solid 1px $color-dark-grey-compliment;
+            font-size: $theme-font-size-xs;
+            min-width: 240px;
+
+            .icon {
+              display: table-cell;
+              vertical-align: top;
+              color: $color-very-light-grey;
+            }
+
+            .icon-label {
+              display: table-cell;
+              vertical-align: top;
+            }
+          }
+
+          &:first-child > a {
+            border-top-color: transparent;
+          }
+
+          &.nav-notification-footer a {
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    // Divider
+    .divider {
+      margin: 0;
+    }
+
+  }
+
+  // Collapsible section inside global navigation
+  .navbar-collapse {
+    @include box-shadow(0, 0, 0, 0);
+    border: 0;
+    max-height: calc(100% - 60px);
+
+    &.in .icon-only {
+      margin-right: 6px;
+    }
+  }
+
+  // Global Navbar toggle button
+  .navbar-toggle {
+    border: solid 1px $color-white;
+
+    .icon-bar {
+      background-color: $color-white;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $color-white;
+
+      .icon-bar {
+        background-color: $navbar-global-bg-color-start;
+      }
+    }
+  }
 }
 
 // Primary Navigation
@@ -253,368 +250,363 @@ $navbar-primary-link-bg-active-color: $color-light-grey;
 $theme-gutter-size: 15px;
 
 .navbar-primary-container {
-    position: relative;
-    background-color: $navbar-primary-bg-color;
-    clear: both;
-    margin: 0 -#{$theme-gutter-size};
-    height: $navbar-primary-height;
+  position: relative;
+  background-color: $navbar-primary-bg-color;
+  clear: both;
+  margin: 0 -#{$theme-gutter-size};
+  height: $navbar-primary-height;
 
-    .navbar-primary-toggle {
-        display: none;
-        float: left;
-        border: 0;
-        padding: 0;
-        background-color: transparent;
-        border: solid 1px transparent;
-        color: $color-medium-grey;
-        font-size: 25px;
-        width: 34px;
-        height: 34px;
-        line-height: 1;
-        margin-left: 12px;
+  .navbar-primary-toggle {
+    display: none;
+    float: left;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    border: solid 1px transparent;
+    color: $color-medium-grey;
+    font-size: 25px;
+    width: 34px;
+    height: 34px;
+    line-height: 1;
+    margin-left: 12px;
 
-        &:hover,
-        &:focus,
-        &:active {
-            @include no-transition();
-            @include shadow-none();
-            border: 0;
-            background-color: $color-grey;
-            color: $color-dark-grey;
-            outline: none;
-        }
-
-        .icon {
-            margin-right: 0;
-        }
-
-        @include breakpoint(sm) {
-            display: block;
-        }
+    &:hover,
+    &:focus,
+    &:active {
+      @include no-transition();
+      @include shadow-none();
+      border: 0;
+      background-color: $color-grey;
+      color: $color-dark-grey;
+      outline: none;
     }
 
-    @include clearfix();
+    .icon {
+      margin-right: 0;
+    }
+
+    @include breakpoint(sm) {
+      display: block;
+    }
+  }
+
+  @include clearfix();
 }
 
 .navbar-primary-alt {
-    $navitem-padding-v: 7px;
-    $navitem-padding-h: 14px; 
+  $navitem-padding-v: 7px;
+  $navitem-padding-h: 14px;
 
-    display: none;
-    padding-left: 15px;
-    background-color: $navbar-primary-bg-color;
-    border-bottom: 1px solid $navbar-primary-bg-color;
-    $width-filler: $theme-gutter-size * 2;
-    width: calc(100% + #{$width-filler});
+  display: none;
+  padding-left: 15px;
+  background-color: $navbar-primary-bg-color;
+  border-bottom: 1px solid $navbar-primary-bg-color;
+  $width-filler: $theme-gutter-size * 2;
+  width: calc(100% + #{$width-filler});
 
+  > li {
+    float: left;
+  }
 
-    > li {
-        float: left;
+  > li > a {
+    padding: $navitem-padding-v $navitem-padding-h;
+    background-color: $navbar-primary-link-bg-color;
+    color: $navbar-primary-link-color;
+    font-size: $theme-font-size-base;
+    font-weight: $theme-font-weight-normal;
+
+    &:after {
+      //@include animation(shrinkX .2s linear);
+      content: "";
+      position: absolute;
+      width: 0;
+      bottom: 0;
+      left: 50%;
+      height: 2px;
+      background-color: $color-blue;
     }
 
-    > li > a {
-        padding: $navitem-padding-v $navitem-padding-h;
-        background-color: $navbar-primary-link-bg-color;
-        color: $navbar-primary-link-color;
-        font-size: $theme-font-size-base;
-        font-weight: $theme-font-weight-normal;
-
-        &:after {
-            //@include animation(shrinkX .2s linear);
-            content: "";
-            position: absolute;
-            width: 0;
-            bottom: 0;
-            left: 50%;
-            height: 2px;
-            background-color: $color-blue;
-        }
-
-        &:hover,
-        &:focus {
-            background-color: $navbar-primary-link-bg-hover-color;
-            color: $navbar-primary-link-hover-color;
-        }
-
+    &:hover,
+    &:focus {
+      background-color: $navbar-primary-link-bg-hover-color;
+      color: $navbar-primary-link-hover-color;
     }
 
-    // Tablet View
-    @include breakpoint(sm) {
-        display: block;
-    }
+  }
+
+  // Tablet View
+  @include breakpoint(sm) {
+    display: block;
+  }
 
 }
+
 .navbar-primary {
-    $navitem-padding-v: 7px;
-    $navitem-padding-h: 14px;
+  $navitem-padding-v: 7px;
+  $navitem-padding-h: 14px;
 
-    padding-left: 15px;
-    background-color: $navbar-primary-bg-color;
-    border-bottom: 1px solid $navbar-primary-bg-color;
-    $width-filler: $theme-gutter-size * 2;
-    width: calc(100% + #{$width-filler});
+  padding-left: 15px;
+  background-color: $navbar-primary-bg-color;
+  border-bottom: 1px solid $navbar-primary-bg-color;
+  $width-filler: $theme-gutter-size * 2;
+  width: calc(100% + #{$width-filler});
 
-    // Navbar Menu Item - Normal State
-    > li > a {
-        padding: $navitem-padding-v $navitem-padding-h;
-        background-color: $navbar-primary-link-bg-color;
-        color: $navbar-primary-link-color;
-        font-size: $theme-font-size-base;
-        font-weight: $theme-font-weight-normal;
+  // Navbar Menu Item - Normal State
+  > li > a {
+    padding: $navitem-padding-v $navitem-padding-h;
+    background-color: $navbar-primary-link-bg-color;
+    color: $navbar-primary-link-color;
+    font-size: $theme-font-size-base;
+    font-weight: $theme-font-weight-normal;
 
-        &:after {
-            //@include animation(shrinkX .2s linear);
-            content: "";
-            position: absolute;
-            width: 0;
-            bottom: 0;
-            left: 50%;
-            height: 2px;
-            background-color: $color-blue;
-        }
-
-        &:hover,
-        &:focus {
-            background-color: $navbar-primary-link-bg-hover-color;
-            color: $navbar-primary-link-hover-color;
-        }
-
-        .icon {
-            font-weight: $theme-font-weight-normal;
-        }
+    &:after {
+      //@include animation(shrinkX .2s linear);
+      content: "";
+      position: absolute;
+      width: 0;
+      bottom: 0;
+      left: 50%;
+      height: 2px;
+      background-color: $color-blue;
     }
 
-    // Navbar Menu Item - Active State
-    > .active > a {
-        &:after {
-            width: 100%;
-            bottom: 0;
-            left: 0;
-        }
-
-        &,
-        &:hover,
-        &:focus {
-            background-color: $navbar-primary-link-bg-active-color;
-            color: $navbar-primary-link-active-color;
-			font-weight: $theme-font-weight-semibold;
-            font-size: $theme-font-size-base + 1px;
-            border-left: solid 1px $color-grey;
-            border-right: solid 1px $color-grey;
-        }
+    &:hover,
+    &:focus {
+      background-color: $navbar-primary-link-bg-hover-color;
+      color: $navbar-primary-link-hover-color;
     }
 
-    // Navbar Menu Item - Active State if dropdown is open
-    > .active.open > a {
-        &:after {
-            background-color: transparent;
-        }
+    .icon {
+      font-weight: $theme-font-weight-normal;
+    }
+  }
+
+  // Navbar Menu Item - Active State
+  > .active > a {
+    &:after {
+      width: 100%;
+      bottom: 0;
+      left: 0;
     }
 
+    &,
+    &:hover,
+    &:focus {
+      background-color: $navbar-primary-link-bg-active-color;
+      color: $navbar-primary-link-active-color;
+      font-weight: $theme-font-weight-semibold;
+      font-size: $theme-font-size-base + 1px;
+      border-left: solid 1px $color-grey;
+      border-right: solid 1px $color-grey;
+    }
+  }
 
-    // Navbar Submenu
-    > .open > a {
-      &,
-      &:hover,
-      &:focus {
+  // Navbar Menu Item - Active State if dropdown is open
+  > .active.open > a {
+    &:after {
+      background-color: transparent;
+    }
+  }
+
+  // Navbar Submenu
+  > .open > a {
+    &,
+    &:hover,
+    &:focus {
+      background-color: $color-dark-grey-compliment;
+      color: $color-very-light-grey;
+    }
+  }
+
+  // Navbar Submenu - Open State
+  .open .dropdown-menu {
+    @include border-radius(3);
+    border-top: 0;
+    padding: $spacing-sm;
+    background-color: $color-dark-grey;
+  }
+
+  .dropdown-menu > li {
+    a {
+      display: block;
+      padding: 8px 16px;
+      background-color: $color-dark-grey;
+      color: $color-very-light-grey;
+
+      &:focus,
+      &:hover {
+        border-bottom-color: $color-light-grey;
         background-color: $color-dark-grey-compliment;
-        color: $color-very-light-grey;
+        text-decoration: none;
       }
     }
 
-    // Navbar Submenu - Open State
-    .open .dropdown-menu {
-        @include border-radius(3);
-        border-top: 0;
-        padding: $spacing-sm;
-		background-color: $color-dark-grey;
+    &.active a {
+      @include border-radius(2);
+      background-color: $color-blue;
+    }
+  }
+
+  // Caret
+  .caret {
+    @extend .icon;
+    border: 0;
+    height: auto;
+    width: auto;
+    margin-right: 0 !important;
+    font-size: 13px;
+    font-weight: $theme-font-weight-normal;
+
+    &:before {
+      @extend .icon-arrow-angle-down:before;
+    }
+  }
+
+  // Primary Action button
+  .primary-action-wrapper {
+    padding: $spacing-xs $spacing-base;
+
+    .btn-primary-action {
+      background-color: $color-dark-blue;
+      color: $color-white;
+      font-weight: $theme-font-weight-semibold;
+      padding: $spacing-xs $spacing-md;
+      margin-top: -3px;
+      margin-bottom: -3px;
+      height: auto;
     }
 
-    .dropdown-menu > li {
-        a {
-            display: block;
-            padding: 8px 16px;
-            background-color: $color-dark-grey;
-            color: $color-very-light-grey;
+  }
 
-            &:focus,
-            &:hover {
-                border-bottom-color: $color-light-grey;
-                background-color: $color-dark-grey-compliment;
-                text-decoration: none;               
-            }
-        } 
-
-        &.active a {
-	        @include border-radius(2);
-            background-color: $color-blue;
-        }
-    }
-
-    // Caret
-    .caret {
-        @extend .icon;
-        border: 0;
-        height: auto;
-        width: auto;
-        margin-right: 0 !important;
-        font-size: 13px;
-        font-weight: $theme-font-weight-normal;
-
-        &:before {
-            @extend .icon-arrow-angle-down:before;    
-        }
-    }
-
-      // Primary Action button
-      .primary-action-wrapper {
-        padding: $spacing-xs $spacing-base;
-
-        .btn-primary-action {
-            background-color: $color-dark-blue;
-            color: $color-white;
-            font-weight: $theme-font-weight-semibold;
-            padding: $spacing-xs $spacing-md;
-            margin-top: -3px;
-            margin-bottom: -3px;
-            height: auto;
-        }
-
-      }
-
-
-    
 }
 
 // Primary Navbar - Responsive Styles
 .navbar-primary {
 
-    // Tablet View
-    @include breakpoint(sm) {
-        @include simple-transition();
-        @include clearfix();
-        position: absolute;
-        min-width: 240px;
-        max-width: 300px;
-        width: auto;
-        margin-top: 0;
-        left: -320px;
-        top: $navbar-primary-height;
-        padding: $spacing-base $spacing-md;
-        background-color: $color-dark-grey;
+  // Tablet View
+  @include breakpoint(sm) {
+    @include simple-transition();
+    @include clearfix();
+    position: absolute;
+    min-width: 240px;
+    max-width: 300px;
+    width: auto;
+    margin-top: 0;
+    left: -320px;
+    top: $navbar-primary-height;
+    padding: $spacing-base $spacing-md;
+    background-color: $color-dark-grey;
 
-        // Navbar Menu Item - Normal State
-        > .active > a,
-        > li > a {
-            border: 0;
-            background-color: $color-dark-grey;
-            font-size: $theme-font-size-base;
-            font-weight: $theme-font-weight-normal;
-            color: $color-light-grey-alt;
-            white-space: normal;
-            word-break: normal;
-            word-wrap: break-word;
-            
-            &:focus,
-            &:hover {
-                border: 0;
-                background-color: $color-dark-grey-compliment;
-                font-size: $theme-font-size-base;
-                font-weight: $theme-font-weight-normal;
-                color: $color-very-light-grey;    
-            }
-        }
+    // Navbar Menu Item - Normal State
+    > .active > a,
+    > li > a {
+      border: 0;
+      background-color: $color-dark-grey;
+      font-size: $theme-font-size-base;
+      font-weight: $theme-font-weight-normal;
+      color: $color-light-grey-alt;
+      white-space: normal;
+      word-break: normal;
+      word-wrap: break-word;
 
-
-        .open > .dropdown-toggle,
-        .open > a {
-            background-color: $color-dark-grey;
-            color: $color-light-grey-alt;
-        }
-
-        .open .dropdown-menu,
-        .dropdown-menu {
-            @include border-radius(0);
-            @include shadow-none();
-            display: block;
-            float: none;
-            position: static;
-            border: 0;
-            padding: 8px;
-            background-color: $color-dark-grey;
-
-            > li > a {
-                padding: 8px 16px;
-                line-height: inherit;
-            }
-
-            > li.active a {
-                background-color: $color-dark-grey;                
-            }
-        }
-
+      &:focus,
+      &:hover {
+        border: 0;
+        background-color: $color-dark-grey-compliment;
+        font-size: $theme-font-size-base;
+        font-weight: $theme-font-weight-normal;
+        color: $color-very-light-grey;
+      }
     }
+
+    .open > .dropdown-toggle,
+    .open > a {
+      background-color: $color-dark-grey;
+      color: $color-light-grey-alt;
+    }
+
+    .open .dropdown-menu,
+    .dropdown-menu {
+      @include border-radius(0);
+      @include shadow-none();
+      display: block;
+      float: none;
+      position: static;
+      border: 0;
+      padding: 8px;
+      background-color: $color-dark-grey;
+
+      > li > a {
+        padding: 8px 16px;
+        line-height: inherit;
+      }
+
+      > li.active a {
+        background-color: $color-dark-grey;
+      }
+    }
+
+  }
 }
 
 // Primary Navbar - Toggle Styles
 .navbar-primary {
-    @include breakpoint(sm) {
-        .nav-visible & {
-            @include simple-transition();
-            left: -1px;
-        }    
+  @include breakpoint(sm) {
+    .nav-visible & {
+      @include simple-transition();
+      left: -1px;
     }
-    
+  }
+
 }
 
 // Navbar Aside - Basic
 .navbar-aside-basic {
-    &, & li {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
+  &, & li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 
-    li a {
-        @include border-radius(3px);
-        display: block;
-        font-size: $theme-font-size-md;
-        color: $color-blue-alt;
-        line-height: 16px;
-        padding: $spacing-sm 0;
-        white-space: normal;
+  li a {
+    @include border-radius(3px);
+    display: block;
+    font-size: $theme-font-size-md;
+    color: $color-blue-alt;
+    line-height: 16px;
+    padding: $spacing-sm 0;
+    white-space: normal;
 
-        &:hover,
-        &:focus {
-            background-color: $color-very-light-grey;
-            text-decoration: none;
-        }
+    &:hover,
+    &:focus {
+      background-color: $color-very-light-grey;
+      text-decoration: none;
     }
+  }
 
-    li.active a,
-    li.active a:hover {
-        color: $color-medium-grey;
-    }
+  li.active a,
+  li.active a:hover {
+    color: $color-medium-grey;
+  }
 }
 
 .dropdown-menu-default {
-    @include border-top-radius(0);
-    @include shadow-none();
+  @include border-top-radius(0);
+  @include shadow-none();
+  background-color: $color-dark-grey;
+
+  > li > a {
+    display: block;
+    padding: 8px 16px;
     background-color: $color-dark-grey;
+    color: $color-very-light-grey;
 
-
-    > li > a {
-        display: block;
-        padding: 8px 16px;
-        background-color: $color-dark-grey;
-        color: $color-very-light-grey;
-
-        &:focus,
-        &:hover {
-            border-bottom-color: $color-light-grey;
-            background-color: $color-dark-grey-compliment;
-            color: $color-white;
-            text-decoration: none;               
-        }
+    &:focus,
+    &:hover {
+      border-bottom-color: $color-light-grey;
+      background-color: $color-dark-grey-compliment;
+      color: $color-white;
+      text-decoration: none;
     }
+  }
 }
