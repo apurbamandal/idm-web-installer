@@ -144,7 +144,7 @@ module.exports = function (options) {
         }
       }),
 
-		new DllBundlesPlugin({
+      new DllBundlesPlugin({
         bundles: {
           polyfills: [
             'core-js',
@@ -187,8 +187,8 @@ module.exports = function (options) {
        * See: https://github.com/SimenB/add-asset-html-webpack-plugin
        */
       new AddAssetHtmlPlugin([
-        { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('polyfills')}`) },
-        { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('vendor')}`) }
+        {filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('polyfills')}`)},
+        {filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('vendor')}`)}
       ]),
 
       /**
@@ -231,9 +231,9 @@ module.exports = function (options) {
         // poll: 1000,
         ignored: /node_modules/
       },
-      proxy: {
-        '/idmtools': {
-          target: 'http://localhost:8080/',
+      proxy: {
+        '/idmtools': {
+          target: 'http://localhost:8080/',
           secure: false
         }
       }

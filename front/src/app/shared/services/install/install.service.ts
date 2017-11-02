@@ -19,8 +19,8 @@ export class InstallService {
     return this.http.post('/idmtools/api/install', {});
   }
 
-  public download() {
-    return this.http.post('/idmtools/api/download', {});
+  public download(body: any) {
+    return this.http.post('/idmtools/api/download', body);
   }
 
   public copyIso() {
@@ -34,11 +34,13 @@ export class InstallService {
   public s_configure() {
     return this.http.post('/idmtools/api/s_configure', {});
   }
-  public copysilent() {
-    return this.http.post('/idmtools/api/copysilent',{});
+  public copysilent(body: any) {
+    return this.http.post('/idmtools/api/copysilent',body);
   }
-
-  public save(body: object) {
+  public saveProperties(body: any) {
+    return this.http.post('/idmtools/api/saveProperties', body);
+  }
+  public save(body: any) {
     return this.http.post('/idmtools/api/save', body);
   }
 }
