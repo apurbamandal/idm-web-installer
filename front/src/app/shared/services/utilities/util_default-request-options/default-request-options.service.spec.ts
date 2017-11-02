@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { DefaultRequestOptionsService } from './default-request-options.service';
+import {DefaultRequestOptionsService} from './default-request-options.service';
 
 describe('DefaultRequestOptionsService', () => {
   beforeEach(() => {

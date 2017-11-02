@@ -14,5 +14,6 @@ export class InstallSchema {
   postgresuserpass = new FormControl('', []);
   postgresadminpass = new FormControl('', []);
   sentinelip = new FormControl('', []);
+  buildid = new FormControl('', []);
   vaultadminname = new FormControl('cn=admin,ou=sa,o=system', [Validators.required]);
 }

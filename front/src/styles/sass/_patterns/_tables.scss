@@ -6,190 +6,187 @@
 // Table
 .table {
 
-    // Header
-    thead > tr > th {
-        border-bottom: 0px solid $color-grey;
-        font-size: $theme-font-size-xs;
-        font-weight: $theme-font-weight-semibold;
-        color: $color-medium-grey;
-        vertical-align: top;
-		padding: 4px 8px;
-    }
-    
-    // Body
-    tbody {
-        > tr {
-            background-color: $color-white;
-        }
+  // Header
+  thead > tr > th {
+    border-bottom: 0px solid $color-grey;
+    font-size: $theme-font-size-xs;
+    font-weight: $theme-font-weight-semibold;
+    color: $color-medium-grey;
+    vertical-align: top;
+    padding: 4px 8px;
+  }
 
-        td {
-            border-top: solid 1px $color-light-grey;
-            background-color: $color-white;
-            font-size: $theme-font-size-base;
-            font-weight: $theme-font-weight-normal;
-            color: $color-primary-text;
-        }
+  // Body
+  tbody {
+    > tr {
+      background-color: $color-white;
     }
 
-    tfoot {
-        td {
-            background-color: lighten($color-light-grey, 5%);
-            border-top: solid 1px $color-light-grey;
-            border-bottom: solid 1px $color-light-grey;
-        }
+    td {
+      border-top: solid 1px $color-light-grey;
+      background-color: $color-white;
+      font-size: $theme-font-size-base;
+      font-weight: $theme-font-weight-normal;
+      color: $color-primary-text;
+    }
+  }
+
+  tfoot {
+    td {
+      background-color: lighten($color-light-grey, 5%);
+      border-top: solid 1px $color-light-grey;
+      border-bottom: solid 1px $color-light-grey;
+    }
+  }
+
+  .col-selection {
+    width: 24px;
+    vertical-align: top;
+    padding-left: 12px;
+  }
+
+  .table-header-sort {
+    &,
+    &:hover,
+    &:active {
+      text-decoration: none;
+    }
+    position: relative;
+    color: $color-medium-grey;
+    display: inline-block;
+    padding-right: $spacing-md;
+
+    > .icon {
+      position: absolute;
+      top: 2px;
+      right: 0;
     }
 
-    .col-selection {
-        width: 24px;
-        vertical-align: top;
-        padding-left: 12px;
+    &.sort-active {
+      color: $color-primary-text;
+      font-weight: 600;
     }
+  }
 
-    .table-header-sort {
-        &,
-        &:hover,
-        &:active {
-            text-decoration: none;
-        }
-        position: relative;
-        color: $color-medium-grey;
-        display: inline-block;
-        padding-right: $spacing-md;
-
-        > .icon {
-            position: absolute;
-            top: 2px;
-            right: 0;
-        }
-
-        &.sort-active {
-            color: $color-primary-text;
-			font-weight: 600;
-        }
+  .table-header-action {
+    &,
+    &:hover,
+    &:active {
+      float: right;
+      font-size: 25px;
+      line-height: 1;
+      text-decoration: none;
     }
+    color: $color-medium-grey;
 
-    .table-header-action {
-        &,
-        &:hover,
-        &:active {
-            float: right;
-            font-size: 25px;
-            line-height: 1;
-            text-decoration: none;
-        }
-        color: $color-medium-grey;
-
-        &:hover {
-            color: $color-blue-alt;
-        }
+    &:hover {
+      color: $color-blue-alt;
     }
+  }
 
-    .table-row-selected td {
-        background-color: $table-row-selected-bg;
-        border-bottom: solid 1px $table-row-selected-border-color;
-    }
-    
+  .table-row-selected td {
+    background-color: $table-row-selected-bg;
+    border-bottom: solid 1px $table-row-selected-border-color;
+  }
+
 }
-
-
 
 // Table Striped
 .table-striped {
-    thead th {
-        background-color: $table-row-striped;
-        font-size: $theme-font-size-xs;
-        font-weight: $theme-font-weight-semibold;
-        color: lighten($color-slate-grey, 20%);
+  thead th {
+    background-color: $table-row-striped;
+    font-size: $theme-font-size-xs;
+    font-weight: $theme-font-weight-semibold;
+    color: lighten($color-slate-grey, 20%);
+  }
+
+  tbody td {
+    @include simple-transition();
+    font-size: $theme-font-size-base;
+    font-weight: $theme-font-weight-normal;
+    color: $color-primary-text;
+  }
+
+  > tbody > tr {
+    &:nth-of-type(odd) {
+      background-color: $color-white;
     }
 
-    tbody td {
-        @include simple-transition();
-        font-size: $theme-font-size-base;
-        font-weight: $theme-font-weight-normal;
-        color: $color-primary-text;
+    &:nth-of-type(even) {
+      background-color: $table-row-striped;
     }
 
-    > tbody > tr {
-        &:nth-of-type(odd) {
-            background-color: $color-white;
-        }
+  }
 
-        &:nth-of-type(even) {
-            background-color: $table-row-striped;
-        }
-
-    }
-    
 }
 
 .table-wrapped {
-    border: solid 1px $color-grey;
+  border: solid 1px $color-grey;
 }
 
 // Table with hover color
 .table-hover tbody tr {
-    &:hover td {
-        background-color: $table-row-selected-bg;
-    }
+  &:hover td {
+    background-color: $table-row-selected-bg;
+  }
 }
 
 // Table Utility Classes
 .cell-value-break {
-    word-break: break-word;
+  word-break: break-word;
 }
 
 // Table Horizontal Overflow auto scroll wrapper
 .table-h-overflow-wrapper {
-    width: 100%;
-    overflow-x: auto;
+  width: 100%;
+  overflow-x: auto;
 }
 
 // Grid Pagination
 .pagination-grid {
-    font-size: $theme-font-size-xs;
-    padding: 0 $spacing-sm;
-    color: $color-medium-grey;
+  font-size: $theme-font-size-xs;
+  padding: 0 $spacing-sm;
+  color: $color-medium-grey;
+
+  .form-control {
+    display: inline-block;
+    width: auto;
+    padding: 2px;
+    height: 24px;
+    font-size: $theme-font-size-sm;
+  }
+
+  & &-position {
+    padding-right: $spacing-sm;
+    vertical-align: text-top;
+  }
+
+  & &-goto {
+    padding-left: $spacing-base;
 
     .form-control {
-        display: inline-block;
-        width: auto;
-        padding: 2px;
-        height: 24px;
-        font-size: $theme-font-size-sm;
+      width: 52px;
+      text-align: left;
     }
+  }
 
-    & &-position {
-        padding-right: $spacing-sm;
-        vertical-align: text-top;
+  .btn-goto {
+    margin: 0;
+    height: 25px;
+    border: solid 1px $color-grey-alt;
+    background-color: $color-grey-alt;
+    padding: 5px $spacing-sm;
+    color: $color-white;
+    font-size: $theme-font-size-sm;
+    font-weight: $theme-font-weight-normal;
+    line-height: 1;
+  }
+
+  & &-page-size {
+    padding-left: $spacing-base;
+    .form-control {
+      margin: 0 2px;
     }
+  }
 
-    & &-goto {
-        padding-left: $spacing-base;
-
-        .form-control {
-            width:52px;
-            text-align: left;
-        }
-    }
-
-    .btn-goto {
-        margin: 0;
-        height: 25px;
-        border: solid 1px $color-grey-alt;
-        background-color: $color-grey-alt;
-        padding: 5px $spacing-sm;
-        color: $color-white;
-        font-size: $theme-font-size-sm;
-        font-weight: $theme-font-weight-normal;
-        line-height: 1;
-    }
-
-    & &-page-size {
-        padding-left: $spacing-base;   
-        .form-control {
-            margin: 0 2px;
-        }
-    }   
-
-    
 }

@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from "rxjs";
-import { Http, Response } from "@angular/http";
-import { Context } from "../../schemas/app-context-schema";
-import { AppContextService } from "../context/app-context.service";
-import { PathConstats } from "../../constants/path-constants";
-import { handleError } from "../../factories/handle-error.factory";
-import { Locale, Locales } from "../../schemas/locale-schema";
+import {Injectable} from '@angular/core';
+import {Observable, ReplaySubject} from "rxjs";
+import {Http, Response} from "@angular/http";
+import {Context} from "../../schemas/app-context-schema";
+import {AppContextService} from "../context/app-context.service";
+import {PathConstats} from "../../constants/path-constants";
+import {handleError} from "../../factories/handle-error.factory";
+import {Locale, Locales} from "../../schemas/locale-schema";
 
 @Injectable()
 export class LocaleService {
@@ -16,7 +16,7 @@ export class LocaleService {
 
   private userLocaleSubject = new ReplaySubject<string[]>(1);
   userLocale$: Observable<String[]> = this.userLocaleSubject.asObservable();
-  
+
   private defaultLocaleSubject = new ReplaySubject<string[]>(1);
   defaultLocale$: Observable<String[]> = this.defaultLocaleSubject.asObservable();
 
@@ -56,7 +56,7 @@ export class LocaleService {
       .map(this.extractData)
       .catch(handleError)
       .subscribe(res => this.defaultLocaleSubject.next(res));
-    
+
   }
 
 }

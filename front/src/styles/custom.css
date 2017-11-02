@@ -11,7 +11,7 @@ GLOBAL NAVIGATION
 /* Navigation Bar */
 .navbar-global {
   background-color: #01A9E7;
-  background: -webkit-linear-gradient( left , #01A9E7, #007CD0) top repeat;
+  background: -webkit-linear-gradient(left, #01A9E7, #007CD0) top repeat;
   background: linear-gradient(to right, #01A9E7, #007CD0) top repeat;
 }
 
@@ -50,6 +50,7 @@ This is the general accent for selected/focused state for various form controls.
 .checkbox-inline input[type="checkbox"] + .checkbox-label:focus:before {
   color: #01A9E7;
 }
+
 .checkbox input[type="checkbox"]:checked + .checkbox-label:before,
 .checkbox-inline input[type="checkbox"]:checked + .checkbox-label:before {
   color: #01A9E7;
@@ -61,6 +62,7 @@ This is the general accent for selected/focused state for various form controls.
 .radio-inline input[type="radio"] + .rb-label:focus:before {
   color: #01A9E7;
 }
+
 .radio input[type="radio"]:checked + .rb-label:before,
 .radio-inline input[type="radio"]:checked + .rb-label:before {
   color: #01A9E7;
@@ -83,12 +85,15 @@ These are the styles for tiles in the applications page.
 .cards-landing .card {
   background-color: #eef2f2;
 }
+
 .cards-landing .card .card-title {
   color: #1f1f1f;
 }
+
 .cards-landing .card .card-description {
   color: #808080;
 }
+
 .cards-landing .card:hover {
   background-color: #f6f9f8;
   border: solid 1px #01A9E7;
@@ -99,34 +104,43 @@ These are the styles for tiles in the applications page.
   /* Add New Card */
   /* White card */
 }
+
 .cards-landing.cards-landing-edit .card .card-title {
   color: #434c50;
 }
+
 .cards-landing.cards-landing-edit .card .card-actions .card-action-left,
 .cards-landing.cards-landing-edit .card .card-actions .card-action-right {
   background-color: #007fbf;
   color: #FFFFFF;
 }
+
 .cards-landing.cards-landing-edit .card-add-new {
   color: #808080;
   border: dashed 1px #808080;
 }
+
 .cards-landing.cards-landing-edit .card-add-new:hover {
   border-color: #01A9E7;
 }
+
 .cards-landing.cards-landing-edit .card-add-new:hover .icon {
   color: #01A9E7;
 }
+
 .cards-landing.cards-landing-edit.cards-white .card {
   background-color: #FFFFFF;
   border-color: #dae1e1;
 }
+
 .cards-landing.cards-landing-edit.cards-white .card-add-new {
   border-color: #808080;
 }
+
 .cards-landing.cards-landing-edit.cards-white .card-add-new:hover {
   border-color: #01A9E7;
 }
+
 .cards-landing.cards-landing-edit.cards-white .card-add-new:hover .icon {
   color: #01A9E7;
 }
@@ -143,6 +157,7 @@ These are the styles for card that has been shown in the user's card view page.
   background-color: #eef2f2;
   border: solid 1px #eef2f2;
 }
+
 .card-user .card-user-wrapper:hover, .card-user .card-user-wrapper:focus, .card-user .card-user-wrapper:active {
   border-color: #01A9E7;
   background-color: #f7f9f9;
@@ -159,6 +174,7 @@ ABOUT - SPLASH SCREEN
   background-color: #434c50;
   color: #FFFFFF;
 }
+
 .splash-product-info .close {
   color: #FFFFFF;
 }

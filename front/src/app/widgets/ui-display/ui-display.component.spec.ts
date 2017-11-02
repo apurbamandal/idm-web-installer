@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UiDisplayComponent } from './ui-display.component';
+import {UiDisplayComponent} from './ui-display.component';
 
 describe('UiDisplayComponent', () => {
   let component: UiDisplayComponent;
@@ -8,9 +8,9 @@ describe('UiDisplayComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UiDisplayComponent ]
+      declarations: [UiDisplayComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

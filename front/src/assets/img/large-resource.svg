@@ -2,35 +2,35 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   version="1.1"
-   width="32"
-   height="32"
-   id="svg3000">
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:cc="http://creativecommons.org/ns#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns="http://www.w3.org/2000/svg"
+  version="1.1"
+  width="32"
+  height="32"
+  id="svg3000">
   <defs
-     id="defs3002" />
+    id="defs3002"/>
   <metadata
-     id="metadata3005">
+    id="metadata3005">
     <rdf:RDF>
       <cc:Work
-         rdf:about="">
+        rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+          rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
         <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     transform="matrix(0.97979437,0,0,0.91771508,0.26774609,1.1645698)"
-     id="layer1">
+    transform="matrix(0.97979437,0,0,0.91771508,0.26774609,1.1645698)"
+    id="layer1">
     <path
-       d="m 16,2 -14.232023,11.757574 6.0670296,15.393933 16.3299674,0 L 30.345402,13.757574 16,2 z m 0.170161,7.7575718 c 3.784287,0 6.860847,3.1425072 6.860847,7.0909142 0,3.948398 -3.07656,7.151514 -6.860847,7.151514 -3.784286,0 -6.804144,-3.203116 -6.804144,-7.151514 0,-3.948407 3.019858,-7.0909142 6.804144,-7.0909142 z"
-       id="path3938"
-       style="fill:#333333;fill-opacity:1;stroke:none" />
+      d="m 16,2 -14.232023,11.757574 6.0670296,15.393933 16.3299674,0 L 30.345402,13.757574 16,2 z m 0.170161,7.7575718 c 3.784287,0 6.860847,3.1425072 6.860847,7.0909142 0,3.948398 -3.07656,7.151514 -6.860847,7.151514 -3.784286,0 -6.804144,-3.203116 -6.804144,-7.151514 0,-3.948407 3.019858,-7.0909142 6.804144,-7.0909142 z"
+      id="path3938"
+      style="fill:#333333;fill-opacity:1;stroke:none"/>
   </g>
 </svg>

@@ -3,701 +3,692 @@
 @import "../_globals/variables";
 @import "../_globals/mixins";
 
-
 // Label
 label {
-    color: $color-secondary-text;
+  color: $color-secondary-text;
 }
-
 
 // Form Group
 .form-group {
-    margin-bottom: $spacing-base;
+  margin-bottom: $spacing-base;
 
-    label {
-		font-size: $theme-font-size-sm;
-        font-weight: $theme-font-weight-normal;
-        margin-bottom: $spacing-xxs;
-        margin-left: $spacing-xxs;
-    }
+  label {
+    font-size: $theme-font-size-sm;
+    font-weight: $theme-font-weight-normal;
+    margin-bottom: $spacing-xxs;
+    margin-left: $spacing-xxs;
+  }
 }
 
 // Form Footer
 .form-footer {
-    overflow: auto;
-    padding-bottom: $spacing-base;
+  overflow: auto;
+  padding-bottom: $spacing-base;
 
-    .btn {
-        margin-left: $spacing-xs;
-    }
+  .btn {
+    margin-left: $spacing-xs;
+  }
 }
 
 // Form Label
 .form-label {
-    font-weight: $theme-font-weight-semibold;
+  font-weight: $theme-font-weight-semibold;
 
-    .form-group &-normal {
-        font-weight: $theme-font-weight-normal;
-    }
+  .form-group &-normal {
+    font-weight: $theme-font-weight-normal;
+  }
 }
 
 // Form Control
 .form-control {
+  @include shadow-none();
+  border-radius: 2px;
+  padding: 6px 10px;
+  color: $color-black;
+
+  &:focus {
+    border-color: $color-blue;
     @include shadow-none();
-    border-radius: 2px;
-    padding: 6px 10px;
-    color: $color-black;
+  }
 
-    &:focus {
-        border-color: $color-blue;
-        @include shadow-none();
+  &.width-full {
+    width: 100%;
+
+    &-icon-1 {
+      width: calc(100% - 30px);
     }
 
-    &.width-full {
-        width: 100%;
+  }
 
-        &-icon-1 {
-            width: calc(100% - 30px);
-        }
-        
-    }
+  &.width-50 {
+    width: 50%;
+  }
 
-    &.width-50 {
-        width: 50%;
-    }
+  &.width-min {
+    width: 60px;
+  }
 
-    &.width-min {
-        width: 60px;
-    }
-
-    &.width-auto {
-        width: auto;
-    }
+  &.width-auto {
+    width: auto;
+  }
 
 }
 
 // Form Errors
 .has-error .form-control {
-    &,
-    &:focus,
-    &:active {
-        @include shadow-none();
-        border: solid 2px $color-danger;    
-    }
+  &,
+  &:focus,
+  &:active {
+    @include shadow-none();
+    border: solid 2px $color-danger;
+  }
 }
 
 // Form Errors
 .has-success .form-control {
-    &,
-    &:focus,
-    &:active {
-        @include shadow-none();
-        border: solid 2px $color-success;    
-    }
+  &,
+  &:focus,
+  &:active {
+    @include shadow-none();
+    border: solid 2px $color-success;
+  }
 }
 
 // Text Input
 input {
-    &[type="text"] {
-        font-weight: $theme-font-weight-normal;
-        color: $color-black;
-    }
+  &[type="text"] {
+    font-weight: $theme-font-weight-normal;
+    color: $color-black;
+  }
 }
 
 // Input Hint
 .input-hint {
-    @extend .text-watermark;
-    display: block;
-    margin-top: $spacing-xs;
+  @extend .text-watermark;
+  display: block;
+  margin-top: $spacing-xs;
 }
 
-// Radio 
+// Radio
 .radio,
 .radio-inline {
-    input {
-        &[type="radio"] {
-            margin-left: -$spacing-base;
-        }
+  input {
+    &[type="radio"] {
+      margin-left: -$spacing-base;
     }
+  }
 }
 
 .radio,
 .radio-inline {
-    input {
-        &[type="radio"] {
-            position: absolute;
-            margin: 0;
-            padding: 0;
-            border: 0;
-            outline: 0;
-            opacity: 0;
+  input {
+    &[type="radio"] {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      opacity: 0;
 
-            & + .rb-label {
-                @include simple-transition();
-                display: inline-block;
-                padding: 0 16px 0 0;
-                font-size: $theme-font-size-base;
-                font-weight: $theme-font-weight-normal;
+      & + .rb-label {
+        @include simple-transition();
+        display: inline-block;
+        padding: 0 16px 0 0;
+        font-size: $theme-font-size-base;
+        font-weight: $theme-font-weight-normal;
 
-
-                &:before {
-                    @extend .icon-radio-unchecked;
-                    width: 16px;
-                    font-size: $theme-font-size-md;
-                    margin-right: $spacing-xs;
-                    color: $color-light-grey-alt;
-                }
-
-                &:hover,
-                &:focus {
-                    cursor: pointer;
-
-                    &:before {
-                        color: $color-blue;
-                    }
-                }
-
-            }
-
-            &:checked + .rb-label {
-                &:before {
-                    @extend .icon-radio-checked;
-                    font-size: $theme-font-size-md;
-                    color: $color-blue;
-                }
-            }
-
+        &:before {
+          @extend .icon-radio-unchecked;
+          width: 16px;
+          font-size: $theme-font-size-md;
+          margin-right: $spacing-xs;
+          color: $color-light-grey-alt;
         }
+
+        &:hover,
+        &:focus {
+          cursor: pointer;
+
+          &:before {
+            color: $color-blue;
+          }
+        }
+
+      }
+
+      &:checked + .rb-label {
+        &:before {
+          @extend .icon-radio-checked;
+          font-size: $theme-font-size-md;
+          color: $color-blue;
+        }
+      }
+
     }
+  }
 
 }
-
 
 // Checkbox
 .checkbox,
 .checkbox-inline {
-    input {
-        &[type="checkbox"] {
-            @include opacity(0);
-            position: absolute;
-            width: 0;
-            height: 0;
-            margin: 0;
-            padding: 0;
-            border: 0;
-            outline: 0;
+  input {
+    &[type="checkbox"] {
+      @include opacity(0);
+      position: absolute;
+      width: 0;
+      height: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
 
-            & + .checkbox-label {
-                @include simple-transition();
-                display: inline-block;
-                padding: 0 16px 0 0;
-                font-size: $theme-font-size-base;
-                font-weight: $theme-font-weight-normal;
+      & + .checkbox-label {
+        @include simple-transition();
+        display: inline-block;
+        padding: 0 16px 0 0;
+        font-size: $theme-font-size-base;
+        font-weight: $theme-font-weight-normal;
 
-
-                &:before {
-                    @extend .icon-checkbox-normal;
-                    width: 16px;
-                    font-size: $theme-font-size-md;
-                    color: $color-light-grey-alt;
-                }
-
-                &:hover,
-                &:focus {
-                    cursor: pointer;
-
-                    &:before {
-                        color: $color-blue;
-                    }
-                }
-
-                &.empty {
-                    &,
-                    &:before {
-                        padding: 0;
-                        margin: 0;
-                    }
-                }
-
-            }
-
-            &:hover + .checkbox-label,
-            &:focus + .checkbox-label {
-                &:before {
-                    color: $color-blue;
-                }
-            }
-
-            &:checked + .checkbox-label {
-                &:before {
-                    @extend .icon-checkbox-checked;
-                    color: $color-blue;
-                }
-            }
-
+        &:before {
+          @extend .icon-checkbox-normal;
+          width: 16px;
+          font-size: $theme-font-size-md;
+          color: $color-light-grey-alt;
         }
+
+        &:hover,
+        &:focus {
+          cursor: pointer;
+
+          &:before {
+            color: $color-blue;
+          }
+        }
+
+        &.empty {
+          &,
+          &:before {
+            padding: 0;
+            margin: 0;
+          }
+        }
+
+      }
+
+      &:hover + .checkbox-label,
+      &:focus + .checkbox-label {
+        &:before {
+          color: $color-blue;
+        }
+      }
+
+      &:checked + .checkbox-label {
+        &:before {
+          @extend .icon-checkbox-checked;
+          color: $color-blue;
+        }
+      }
+
     }
+  }
 }
 
 .checkbox,
 .radio {
-    label {
-        padding-left: 0;
-    }
+  label {
+    padding-left: 0;
+  }
 }
 
 .dropdown-menu {
-    .checkbox,
-    .checkbox-inline {
-        padding: 0 $spacing-base;
-        label {
-            display: inline;
-        }
+  .checkbox,
+  .checkbox-inline {
+    padding: 0 $spacing-base;
+    label {
+      display: inline;
     }
+  }
 }
 
 // iOS Checkbox
 .checkbox-ios {
-    display: block;
-    overflow: auto;
-    min-height: 26px;
+  display: block;
+  overflow: auto;
+  min-height: 26px;
 
-    input {
-        display: none;
+  input {
+    display: none;
+  }
+
+  &-label {
+    float: left;
+    font-size: $theme-font-size-md;
+    font-weight: $theme-font-weight-normal;
+    margin-top: $spacing-xs;
+  }
+
+  i {
+    @include box-shadow(inset, 0, 0, 2px, $color-grey);
+    @include border-radius(25px);
+    position: relative;
+    display: inline-block;
+    height: 25px;
+    float: right;
+    background-color: $color-grey;
+    padding-right: 25px;
+    cursor: pointer;
+
+    &:before {
+      @extend .icon;
+      @extend .icon-cross;
+      position: absolute;
+      top: 0;
+      left: auto;
+      right: 2px;
+      color: $color-medium-grey;
+      line-height: 25px;
+      z-index: 0;
     }
 
-    &-label {
-        float: left;
-        font-size: $theme-font-size-md;
-        font-weight: $theme-font-weight-normal;
-        margin-top: $spacing-xs;
+    &:after {
+      @include border-radius(25px);
+      content: '';
+      position: relative;
+      display: block;
+      width: 25px;
+      height: 25px;
+      background: $color-white;
+      border: solid 1px $color-grey;
+    }
+  }
+
+  &.checkbox-only {
+    .radio-toggle-ios-label {
+      display: none;
     }
 
     i {
-        @include box-shadow(inset, 0, 0, 2px, $color-grey);
-        @include border-radius(25px);
-        position: relative;
-        display: inline-block;
-        height: 25px;
-        float: right;
-        background-color: $color-grey;
-        padding-right: 25px;
-        cursor: pointer;
-
-        &:before {
-            @extend .icon;
-            @extend .icon-cross;
-            position: absolute;
-            top: 0;
-            left: auto;
-            right: 2px;
-            color: $color-medium-grey;
-            line-height: 25px;
-            z-index: 0;
-        }
-        
-
-        &:after {
-            @include border-radius(25px);
-            content: '';
-            position: relative;
-            display: block;
-            width: 25px;
-            height: 25px;
-            background: $color-white;
-            border: solid 1px $color-grey;
-        }
+      float: none;
     }
+  }
 
-    &.checkbox-only {
-        .radio-toggle-ios-label {
-            display: none;
-        }
+  &.checkbox-ios-inline {
+    display: inline-block;
+    padding-top: $spacing-sm;
+  }
 
-        i {
-            float: none;
-        }
+  &.checkbox-ios-inline i {
+    float: none;
+    margin-left: $spacing-sm;
+  }
+
+  :checked + i {
+    padding-right: 0;
+    padding-left: 25px;
+    background: $color-blue;
+
+    &:before {
+      @extend .icon-check;
+      color: $color-white;
+      left: 8px;
+      right: auto;
     }
-
-    &.checkbox-ios-inline {
-        display: inline-block;
-        padding-top: $spacing-sm;
-    }
-
-    &.checkbox-ios-inline i {
-        float: none;
-        margin-left: $spacing-sm;
-    }
-
-    :checked + i {
-        padding-right: 0;
-        padding-left: 25px;
-        background: $color-blue;
-
-        &:before {
-            @extend .icon-check;
-            color: $color-white;
-            left: 8px;
-            right: auto;
-        }
-    }
+  }
 }
-
 
 // Radio Button iOS
 .radio-toggle-ios {
-    display: block;
-    overflow: auto;
-    min-height: 26px;
+  display: block;
+  overflow: auto;
+  min-height: 26px;
 
-    input {
-        display: none;
+  input {
+    display: none;
+  }
+
+  &-label {
+    float: left;
+    font-weight: $theme-font-weight-normal;
+    margin-top: $spacing-xs;
+  }
+
+  i {
+    @include simple-transition();
+    @include box-shadow(inset, 0, 0, 2px, $color-grey);
+    @include border-radius(25px);
+    position: relative;
+    display: inline-block;
+    float: right;
+    background-color: $color-grey;
+    cursor: pointer;
+    padding-right: 25px;
+
+    &:before {
+      @extend .icon;
+      @extend .icon-cross;
+      position: absolute;
+      top: 0;
+      left: auto;
+      right: 2px;
+      color: $color-medium-grey;
+      line-height: 25px;
+      z-index: 0;
     }
 
-    &-label {
-        float: left;
-        font-weight: $theme-font-weight-normal;
-        margin-top: $spacing-xs;
+    &:after {
+      @include border-radius(25px);
+      display: block;
+      content: '';
+      width: 25px;
+      height: 25px;
+      background: $color-white;
+      border: solid 1px $color-grey;
+    }
+  }
+
+  &.radio-only {
+    .radio-toggle-ios-label {
+      display: none;
     }
 
     i {
-        @include simple-transition();
-        @include box-shadow(inset, 0, 0, 2px, $color-grey);
-        @include border-radius(25px);
-        position: relative;
-        display: inline-block;
-        float: right;
-        background-color: $color-grey;
-        cursor: pointer;
-        padding-right: 25px;
-
-        &:before {
-            @extend .icon;
-            @extend .icon-cross;
-            position: absolute;
-            top: 0;
-            left: auto;
-            right: 2px;
-            color: $color-medium-grey;
-            line-height: 25px;
-            z-index: 0;
-        }
-
-        &:after {
-            @include border-radius(25px);
-            display: block;
-            content: '';
-            width: 25px;
-            height: 25px;
-            background: $color-white;
-            border: solid 1px $color-grey;
-        }
+      float: none;
     }
+  }
 
-    &.radio-only {
-        .radio-toggle-ios-label {
-            display: none;
-        }
+  &.radio-toggle-ios-inline i {
+    float: none;
+  }
 
-        i {
-            float: none;
-        }
+  :checked + i {
+    padding-right: 0;
+    padding-left: 25px;
+    background: $color-blue;
+
+    &:before {
+      @extend .icon-check;
+      color: $color-white;
+      left: 8px;
+      right: auto;
     }
-
-    &.radio-toggle-ios-inline i {
-        float: none;
-    }
-
-    :checked + i {
-        padding-right: 0;
-        padding-left: 25px;
-        background: $color-blue;
-
-        &:before {
-            @extend .icon-check;
-            color: $color-white;
-            left: 8px;
-            right: auto;
-        }
-    }
+  }
 }
-
 
 // Radio and checkbox inline
 .radio-inline,
 .checkbox-inline {
-    padding-left: 0;   
+  padding-left: 0;
 }
 
 .radio-inline + .radio-inline,
 .checkbox-inline + .checkbox-inline {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 // Form Input Search
 .form-input-search,
 .form-input-search.input-group {
-    position: relative;
+  position: relative;
 
-    &:before {
-        position: absolute;
-        @extend .icon;
-        @extend .icon-search:before;
-        top: 9px;
-        left: 12px;
-        z-index: 10;
-        color: $color-secondary-text;
-        font-size: $theme-font-size-md;
+  &:before {
+    position: absolute;
+    @extend .icon;
+    @extend .icon-search:before;
+    top: 9px;
+    left: 12px;
+    z-index: 10;
+    color: $color-secondary-text;
+    font-size: $theme-font-size-md;
+  }
+
+  .form-control {
+    &,
+    &:not(:first-child),
+    &:not(:last-child) {
+      @include border-radius(3px);
+    }
+    padding-left: 32px;
+
+    &:focus {
+      @include shadow-none();
     }
 
-    .form-control {
-        &,
-        &:not(:first-child),
-        &:not(:last-child) {
-            @include border-radius(3px);    
-        }
-        padding-left: 32px;
+  }
 
-        &:focus {
-            @include shadow-none();
-        }
-
+  &.input-group {
+    .form-control:not(:last-child) {
+      @include border-right-radius(0px);
     }
+  }
 
-    &.input-group {
-        .form-control:not(:last-child) {
-            @include border-right-radius(0px);
-        }
+  .input-group-btn {
+    padding-left: $spacing-sm;
+
+    .btn {
+      margin-left: $spacing-xs;
+      margin-right: $spacing-xs;
     }
-
-    .input-group-btn {
-        padding-left: $spacing-sm;
-
-        .btn {
-            margin-left: $spacing-xs;
-            margin-right: $spacing-xs;
-        }
-    }
+  }
 
 }
 
 // Form Search Filters
 .form-search-filters {
-    margin-bottom: $spacing-sm;
+  margin-bottom: $spacing-sm;
 
-    .form-search-filter-item {
-        display: inline-block;
-        background-color: $color-light-grey;
-        padding: $spacing-xs/2 $spacing-sm;
-        color: $color-primary-text;
-        @include border-radius(3px);
-        font-size: $theme-font-size-xs;
-        margin-bottom: $spacing-xs;
+  .form-search-filter-item {
+    display: inline-block;
+    background-color: $color-light-grey;
+    padding: $spacing-xs/2 $spacing-sm;
+    color: $color-primary-text;
+    @include border-radius(3px);
+    font-size: $theme-font-size-xs;
+    margin-bottom: $spacing-xs;
 
-        .remove {
-            @extend .icon;
-            @extend .icon-cross;
-            @include opacity(.7);
-            background-color: transparent;
-            border: 0;
-            color: $color-black;
-            margin-right: 0;
-            margin-left: $spacing-sm;
-            padding: 0;
-            vertical-align: middle;
-        }
-
-        &:hover {
-            .remove {
-                @include opacity(1);
-            }
-        }
+    .remove {
+      @extend .icon;
+      @extend .icon-cross;
+      @include opacity(.7);
+      background-color: transparent;
+      border: 0;
+      color: $color-black;
+      margin-right: 0;
+      margin-left: $spacing-sm;
+      padding: 0;
+      vertical-align: middle;
     }
+
+    &:hover {
+      .remove {
+        @include opacity(1);
+      }
+    }
+  }
 }
 
 // Filter Dropdown
 .input-group-btn .dropdown-filter {
-    li {
-        padding-left: 8px;
-        padding-right: 8px;
-    }
+  li {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 }
 
 // Radio Switch Group
 .radio-switch-group {
+  input {
+    &[type=radio] {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      opacity: 0;
+    }
+  }
+
+  label {
+    display: inline-block;
+    width: auto;
+    cursor: pointer;
+    margin-top: 2px;
+    margin-right: -6px;
+
+    .radio-label {
+      @include border-radius(0);
+      @include simple-transition();
+      border: solid 1px;
+      background-color: $color-white;
+      font-size: $theme-font-size-xs;
+      font-weight: $theme-font-weight-semibold;
+      padding: 4px 12px;
+      line-height: 22px;
+      box-sizing: border-box;
+    }
+
+    &:first-child .radio-label {
+      @include border-left-radius(4px);
+    }
+
+    &:last-child .radio-label {
+      @include border-right-radius(4px);
+    }
+
     input {
-        &[type=radio] {
-            position: absolute;
-            margin: 0;
-            padding: 0;
-            border: 0;
-            outline: 0;  
-            opacity: 0;
+      &[type=radio] {
+
+        &:focus + .radio-label {
+          border-color: $color-blue;
         }
+
+        &:checked + .radio-label {
+          border-color: $color-blue;
+          background-color: $color-blue;
+          padding-left: 10px;
+          color: $color-white;
+
+          &:before {
+            content: "\2713";
+            padding-right: 4px;
+          }
+        }
+
+      }
+
     }
 
-    label {
-        display: inline-block;
-        width: auto;
-        cursor: pointer;
-        margin-top: 2px;
-        margin-right: -6px;
-
-        .radio-label { 
-            @include border-radius(0);
-            @include simple-transition();
-            border: solid 1px;
-            background-color: $color-white;
-            font-size: $theme-font-size-xs;
-            font-weight: $theme-font-weight-semibold;
-            padding: 4px 12px;
-            line-height: 22px;
-            box-sizing: border-box;
-        }
-
-        &:first-child .radio-label {
-            @include border-left-radius(4px);
-        }
-
-        &:last-child .radio-label {
-            @include border-right-radius(4px);
-        }
-
-        input {
-            &[type=radio] {
-
-                &:focus + .radio-label {
-                    border-color: $color-blue;
-                }
-
-                &:checked + .radio-label {
-                    border-color: $color-blue;
-                    background-color: $color-blue;
-                    padding-left: 10px;
-                    color: $color-white;
-
-                    &:before {
-                        content: "\2713";
-                        padding-right: 4px;
-                    }
-                }
-
-            }
-
-        }
-
-    }
+  }
 }
 
 // Tag Input
 .input-tags {
-    display: table;
-    width: 100%;
+  display: table;
+  width: 100%;
 
-    .tag-list {
-        display: table-cell;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        border: solid 1px $color-grey;
-        background-color: $color-white;
-        padding: $spacing-sm;
+  .tag-list {
+    display: table-cell;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: solid 1px $color-grey;
+    background-color: $color-white;
+    padding: $spacing-sm;
+  }
+
+  .tag-list-item {
+    display: inline-block;
+    background-color: $color-medium-grey;
+    padding: $spacing-xs/2 $spacing-sm;
+    color: $color-white;
+    @include border-radius(3px);
+    font-size: $theme-font-size-xs;
+    margin-bottom: $spacing-xs;
+
+    .remove {
+      @extend .icon;
+      @extend .icon-minus-circle;
+      @include opacity(.5);
+      color: $color-white;
+      margin-right: 0;
+      margin-left: $spacing-xs;
     }
 
-    .tag-list-item {
-        display: inline-block;
-        background-color: $color-medium-grey;
-        padding: $spacing-xs/2 $spacing-sm;
-        color: $color-white;
-        @include border-radius(3px);
-        font-size: $theme-font-size-xs;
-        margin-bottom: $spacing-xs;
+    &:hover {
+      background-color: $color-black;
 
-        .remove {
-            @extend .icon;
-            @extend .icon-minus-circle;
-            @include opacity(.5);
-            color: $color-white;
-            margin-right: 0;
-            margin-left: $spacing-xs;
-        }
-
-        &:hover {
-           background-color: $color-black;
-
-           .remove {
-                @include opacity(1);
-           }
-        }
+      .remove {
+        @include opacity(1);
+      }
     }
+  }
 
-    .tag-input-action {
-        display: table-cell;
-        width: 32px;
-        padding-left: $spacing-xs;
-        vertical-align: top;
-    }
+  .tag-input-action {
+    display: table-cell;
+    width: 32px;
+    padding-left: $spacing-xs;
+    vertical-align: top;
+  }
 }
-
 
 // Date Range Picker
 .daterange-picker {
-    position: relative;
+  position: relative;
 
-    .form-control {
-        padding-right: 42px;
+  .form-control {
+    padding-right: 42px;
+  }
+
+  .clear {
+    @extend .icon;
+    @extend .icon-cross;
+    @include opacity(.7);
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    padding: $spacing-sm;
+    font-size: $theme-font-size-md;
+    color: $color-black;
+
+    &:hover {
+      @include opacity(1);
     }
-
-    .clear {
-        @extend .icon;
-        @extend .icon-cross;
-        @include opacity(.7);
-        position: absolute;
-        top: 0;
-        right: 0;
-        background-color: transparent;
-        border: 0;
-        margin: 0;        
-        padding: $spacing-sm;
-        font-size: $theme-font-size-md;
-        color: $color-black;
-
-        &:hover {
-            @include opacity(1);
-        }
-    }
+  }
 }
 
 // Date Range Picker 384 670
 .daterangepicker {
+  &.single {
+    min-width: 260px;
+  }
+
+  @include breakpoint(md) {
+    min-width: 690px;
+    top: 50% !important;
+    left: 50% !important;
+    @include transform(translate(-50%, -50%));
+
+    &:before,
+    &:after {
+      display: none;
+    }
+
     &.single {
-        min-width: 260px;
+      min-width: auto;
+      width: 260px;
     }
+  }
 
-    @include breakpoint(md) {
-        min-width: 690px;
-        top: 50% !important;
-        left: 50% !important;
-        @include transform(translate(-50%, -50%));
+  .applyBtn,
+  .cancelBtn {
+    @extend .btn;
+    @extend .btn-default;
+    margin-left: 0;
+    margin-right: $spacing-xs;
+    margin-bottom: $spacing-xs;
+  }
 
-        &:before,
-        &:after {
-            display: none;
-        }
-
-        &.single {
-            min-width: auto;
-            width: 260px;
-        }
-    }
-
-    .applyBtn,
-    .cancelBtn {
-        @extend .btn;
-        @extend .btn-default;
-        margin-left: 0;
-        margin-right: $spacing-xs;
-        margin-bottom: $spacing-xs;
-    }
-    
 }

@@ -1,90 +1,99 @@
 <!--Table Starts here -->
 <div *ngIf="tableConfigObject.tableData.rows != undefined">
- <div class="spacer-out-bottom-sm" [hidden]="!showButton()" >
+  <div class="spacer-out-bottom-sm" [hidden]="!showButton()">
     <ng-container *ngFor="let actionButtons of tableConfigObject?.multiSelectButtons">
-      <button type="button" class="btn btn-default ng-binding" (click)='actionButtonClickHandler($event,actionButtons.btnId)'>
+      <button type="button" class="btn btn-default ng-binding"
+              (click)='actionButtonClickHandler($event,actionButtons.btnId)'>
         <span class="ng-scope">
           {{actionButtons.btnName}}  ( {{selectedRowCount}} )
         </span>
       </button>
     </ng-container>
   </div>
-<table class="table table-responsive table-hover" >
-  <thead>
-  <tr class="cursor-pointer">
-    <th  width="5%" class="col-selection" >
-      <label class="checkbox-inline">
-       <input id="task" type="checkbox" [checked]="isAllSelected()" (change)="selectAllRows($event.target.checked)" >
-        <span class="checkbox-label empty"></span>
-      </label>
-    </th>
-    <th width="auto" *ngFor="let header of this.tableConfigObject?.columnCustomData?.columns" class="table-view-heading ng-scope">
-         <ng-template [ngIf]="isSortable(header.column)">
+  <table class="table table-responsive table-hover">
+    <thead>
+    <tr class="cursor-pointer">
+      <th width="5%" class="col-selection">
+        <label class="checkbox-inline">
+          <input id="task" type="checkbox" [checked]="isAllSelected()" (change)="selectAllRows($event.target.checked)">
+          <span class="checkbox-label empty"></span>
+        </label>
+      </th>
+      <th width="auto" *ngFor="let header of this.tableConfigObject?.columnCustomData?.columns"
+          class="table-view-heading ng-scope">
+        <ng-template [ngIf]="isSortable(header.column)">
           <a class="table-header-sort" (click)="sortBY(header.column)">
-              {{header.displayLabel||header.column}}
-              <ng-template [ngIf]="tableConfigObject?.tableData?.sortBy==header.column && tableConfigObject?.tableData?.sortOrder=='asc' ">
-                <span class="icon icon-arrow-up"></span>
-              </ng-template>
-              <ng-template [ngIf]="tableConfigObject?.tableData?.sortBy==header.column && tableConfigObject?.tableData?.sortOrder=='desc' ">
-                <span class="icon icon-arrow-down"></span>
-              </ng-template>
-              <ng-template [ngIf]="tableConfigObject?.tableData?.sortBy!=header.column ">
-                <span class="icon icon-sortable"></span>
-              </ng-template>  
-              
-            
-            </a>
-         </ng-template>   
-          <ng-template [ngIf]="!isSortable(header.column)">
-            <a class="table-header-sort" disable >
-              {{header.displayLabel||header.column}}
-            </a>
-          </ng-template> 
-    </th>
-    <th width="5%" style="font-size: 20px;padding: 0px;">
-      <a class="pull-right" (click)="columnCustomization()" ><span class="sr-only">
-            <span class="ng-scope">Customize Columns</span></span><i class="icon icon-manage" aria-hidden="true"></i></a>
-    </th>
-  </tr>
-  </thead>
-  <tbody >
-      <ng-container *ngFor="let rows of this.tableConfigObject?.tableData?.rows; let rowNum= index">
-        <tr [ngClass]="{'table-row-selected':isSelected(rows)}">
-          <td class="col-selection">
-            <!--pending -->
-            <label class="checkbox-inline">
-              <input id="row_{{rowNum}}" name="row_{{rowNum}}"  [checked]="isSelected(rows)" type="checkbox" (change)='selectRows($event,rows)' >
-              <span class="checkbox-label empty">
+            {{header.displayLabel||header.column}}
+            <ng-template
+              [ngIf]="tableConfigObject?.tableData?.sortBy==header.column && tableConfigObject?.tableData?.sortOrder=='asc' ">
+              <span class="icon icon-arrow-up"></span>
+            </ng-template>
+            <ng-template
+              [ngIf]="tableConfigObject?.tableData?.sortBy==header.column && tableConfigObject?.tableData?.sortOrder=='desc' ">
+              <span class="icon icon-arrow-down"></span>
+            </ng-template>
+            <ng-template [ngIf]="tableConfigObject?.tableData?.sortBy!=header.column ">
+              <span class="icon icon-sortable"></span>
+            </ng-template>
+
+
+          </a>
+        </ng-template>
+        <ng-template [ngIf]="!isSortable(header.column)">
+          <a class="table-header-sort" disable>
+            {{header.displayLabel||header.column}}
+          </a>
+        </ng-template>
+      </th>
+      <th width="5%" style="font-size: 20px;padding: 0px;">
+        <a class="pull-right" (click)="columnCustomization()"><span class="sr-only">
+            <span class="ng-scope">Customize Columns</span></span><i class="icon icon-manage"
+                                                                     aria-hidden="true"></i></a>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let rows of this.tableConfigObject?.tableData?.rows; let rowNum= index">
+      <tr [ngClass]="{'table-row-selected':isSelected(rows)}">
+        <td class="col-selection">
+          <!--pending -->
+          <label class="checkbox-inline">
+            <input id="row_{{rowNum}}" name="row_{{rowNum}}" [checked]="isSelected(rows)" type="checkbox"
+                   (change)='selectRows($event,rows)'>
+            <span class="checkbox-label empty">
               </span>
-            </label>
-          </td>
-          <td *ngFor="let header of this.tableConfigObject?.columnCustomData.columns; let i=index" class="no-select cursor-default">
-            <div>
-                    <idm-ui-display [uiData]="rows[header.column]" [isClickable]='header.isclickable' [rowNumber]="rowNum" [columnHeader]="header.column" [rowData]="rows"></idm-ui-display>
-            </div>
-            <div *ngIf="header.column == 'comments'">
-              <a class="cursor-pointer ng-binding" (click)="elementClickHandler(rows,header.column)">
-                <i class="fa fa-comment-o ">
-                </i>
-              </a>
-            </div>
-          </td>
-          <td class="no-select cursor-default ng-binding"></td>
-        </tr>
-       
-      </ng-container>
-      
-  </tbody>
+          </label>
+        </td>
+        <td *ngFor="let header of this.tableConfigObject?.columnCustomData.columns; let i=index"
+            class="no-select cursor-default">
+          <div>
+            <idm-ui-display [uiData]="rows[header.column]" [isClickable]='header.isclickable' [rowNumber]="rowNum"
+                            [columnHeader]="header.column" [rowData]="rows"></idm-ui-display>
+          </div>
+          <div *ngIf="header.column == 'comments'">
+            <a class="cursor-pointer ng-binding" (click)="elementClickHandler(rows,header.column)">
+              <i class="fa fa-comment-o ">
+              </i>
+            </a>
+          </div>
+        </td>
+        <td class="no-select cursor-default ng-binding"></td>
+      </tr>
+
+    </ng-container>
+
+    </tbody>
     <tfoot *ngIf="showPagination()" class="page-table-footer">
-  <tr>
-    <td colspan="9">
-      <idm-pagination [tableConfigObject]="tableConfigObject" (tableConfigObjectChange)="painationEvent($event)">/</idm-pagination>
-    </td>
-  </tr>
-  </tfoot>
-</table>
+    <tr>
+      <td colspan="9">
+        <idm-pagination [tableConfigObject]="tableConfigObject" (tableConfigObjectChange)="painationEvent($event)">/
+        </idm-pagination>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
 </div>
 <div *ngIf="tableConfigObject.tableData.rows == undefined">
-    <h3 class="text-center"><span translate>No {{tableName}} Found</span></h3>
+  <h3 class="text-center"><span translate>No {{tableName}} Found</span></h3>
 </div>
 <!--Table ends here-->

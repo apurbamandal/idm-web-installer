@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ClientSettingsObject } from "../shared/schemas/client-settings-object";
+import {Component, OnInit} from '@angular/core';
+import {ClientSettingsObject} from "../shared/schemas/client-settings-object";
 
 
 @Component({
@@ -9,7 +9,6 @@ import { ClientSettingsObject } from "../shared/schemas/client-settings-object";
 })
 export class FooterComponent implements OnInit {
 
-  
 
   constructor() {
   }
@@ -17,7 +16,6 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
 
   }
-
 
 
 }

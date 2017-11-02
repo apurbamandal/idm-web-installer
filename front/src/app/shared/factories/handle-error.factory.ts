@@ -1,6 +1,6 @@
 import {Observable} from "rxjs";
 
-export function handleError (error: Response | any) {
+export function handleError(error: Response | any) {
   // In a real world app, you might use a remote logging infrastructure
   let errMsg: string;
   if (error instanceof Response) {
@@ -14,13 +14,13 @@ export function handleError (error: Response | any) {
   return Observable.throw(errMsg);
 }
 
-export function handleErrorReason (error: Response | any) {
+export function handleErrorReason(error: Response | any) {
   // In a real world app, you might use a remote logging infrastructure
   let body = error.json() || {};
   let reason = "Error Something went wrong ";
-        if (body.hasOwnProperty("Fault")) {
-          reason = body.Fault.Reason.Text;
-        }
+  if (body.hasOwnProperty("Fault")) {
+    reason = body.Fault.Reason.Text;
+  }
 
   return Observable.throw(reason);
 }

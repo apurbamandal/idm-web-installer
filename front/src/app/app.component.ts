@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { AppLoadingService } from "./shared/services/loading/app-loading.service";
-import { TranslateService } from "@ngx-translate/core";
+import {Component} from '@angular/core';
+import {AppLoadingService} from "./shared/services/loading/app-loading.service";
+import {TranslateService} from "@ngx-translate/core";
+
 declare var jQuery: any;
 
 @Component({
@@ -13,7 +14,7 @@ export class AppComponent {
   errorMessage: string;
 
 
-  constructor( private appLoadingService: AppLoadingService, translate: TranslateService) {
+  constructor(private appLoadingService: AppLoadingService, translate: TranslateService) {
     //set this variable to true to show spinner and a load all the important modules and then set it to false
     this.appLoadingService.appLoading = true;
     ///important modules goes here

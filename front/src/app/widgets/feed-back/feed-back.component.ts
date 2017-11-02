@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { EmitterService } from "../../shared/services/emitter/emitter.service";
+import {Component, OnInit, Input} from '@angular/core';
+import {EmitterService} from "../../shared/services/emitter/emitter.service";
+
 declare var $: any;
+
 @Component({
   selector: 'idm-feed-back',
   templateUrl: './feed-back.component.html',
@@ -12,6 +14,7 @@ export class FeedBackComponent implements OnInit {
   messageType: boolean;
   showFeedBack: boolean;
   treeNotification: boolean
+
   constructor(private EmitterService: EmitterService) {
     this.eventListener();
     this.showFeedBack = false;
@@ -50,6 +53,7 @@ export class FeedBackComponent implements OnInit {
 
     });
   }
+
   ngOnInit() {
     $(".alert").hide();
   }

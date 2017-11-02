@@ -1,6 +1,5 @@
-
-import { ValidationService } from './validation.service';
-import { TestBed, inject } from '@angular/core/testing';
+import {ValidationService} from './validation.service';
+import {TestBed, inject} from '@angular/core/testing';
 
 describe('ValidationService', () => {
   beforeEach(() => {

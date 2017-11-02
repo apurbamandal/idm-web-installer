@@ -5,118 +5,116 @@
 
 html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
 .clear {
-    clear: both;
+  clear: both;
 }
 
 .break-all {
-    word-break: break-all;
+  word-break: break-all;
 }
 
 .height-auto {
-    height: auto !important;
+  height: auto !important;
 }
 
 .height-full {
-    height: 100%;
+  height: 100%;
 }
 
 // Fixed height
 .height-xs {
-    height: 100px;
-    overflow-y: auto;
+  height: 100px;
+  overflow-y: auto;
 }
 
 .height-sm {
-    height: 200px;
-    overflow-y: auto;
+  height: 200px;
+  overflow-y: auto;
 }
 
 .height-md {
-    height: 320px;
-    overflow-y: auto;
+  height: 320px;
+  overflow-y: auto;
 }
 
 // Max height variants
 .maxheight-xs {
-    max-height: 100px;
-    overflow-y: auto;
+  max-height: 100px;
+  overflow-y: auto;
 }
 
 .maxheight-sm {
-    max-height: 200px;
-    overflow-y: auto;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .maxheight-md {
-    max-height: 320px;
-    overflow-y: auto;
+  max-height: 320px;
+  overflow-y: auto;
 }
 
 // Horizontal Rules
 // Default
 .hr-default {
-    border: 0;
-    border-top: 1px solid $color-light-grey;
-    margin: $spacing-base 0;
+  border: 0;
+  border-top: 1px solid $color-light-grey;
+  margin: $spacing-base 0;
 }
 
 // Default
 .hr-dark {
-    border: 0;
-    border-top: 1px solid $color-grey;
-    margin: $spacing-base 0;
+  border: 0;
+  border-top: 1px solid $color-grey;
+  margin: $spacing-base 0;
 }
 
 // Dashed
 .hr-dashed {
-    border: 0;
-    border-top: 1px dashed lighten($color-medium-grey, 35%);
-    margin: $spacing-sm 0;
+  border: 0;
+  border-top: 1px dashed lighten($color-medium-grey, 35%);
+  margin: $spacing-sm 0;
 }
 
 //
 .hr-page-main {
-    margin: 0;
-    border-top: 1px solid $color-grey;
+  margin: 0;
+  border-top: 1px solid $color-grey;
 
-    .heading-page-main + & {
-        margin-top: -$spacing-base;
-        margin-bottom: $spacing-sm;
-    }
+  .heading-page-main + & {
+    margin-top: -$spacing-base;
+    margin-bottom: $spacing-sm;
+  }
 }
 
 .hr-form-footer {
-    @extend .hr-dark;    
+  @extend .hr-dark;
 }
 
 // Vertical Divider
 .divider-vertical {
-    border-left: solid 1px $color-grey;
-    padding-left: $spacing-md;
+  border-left: solid 1px $color-grey;
+  padding-left: $spacing-md;
 }
 
 // HR Spacers
 [class^="hr-"] {
-    &.hr-spacer {
-        &-none {
-            margin: 0;
-        }
-
-        &-xs {
-            margin: $spacing-xs 0;
-        }
-
-        &-sm {
-            margin: $spacing-sm 0;
-        }
+  &.hr-spacer {
+    &-none {
+      margin: 0;
     }
+
+    &-xs {
+      margin: $spacing-xs 0;
+    }
+
+    &-sm {
+      margin: $spacing-sm 0;
+    }
+  }
 }
-
-
 
 // ----------------------------------------------
 // Spacers
@@ -159,51 +157,50 @@ body {
 // <div class="spacer-out-top-sm"></div> - Small margin at the top
 // <div class="spacer-in-bottom-lg"></div> - Large padding at the bottom
 .spacer {
-    @each $boundary, $boundary-property in $box-boundary-list {
-        &-#{$boundary} {
-            @each $current-size, $current-size-value in $spacer-size-list {
-                @each $side in $spacer-sides {
-                    &-#{$side}-#{$current-size} {
-                        #{$boundary-property}-#{$side}: $current-size-value !important;
-                    }
-                }
-                &-#{$current-size} {
-                    #{$boundary-property}: $current-size-value !important;
-                }
-                &-v-#{$current-size} {
-                    #{$boundary-property}-top: $current-size-value !important;
-                    #{$boundary-property}-bottom: $current-size-value !important;
-                }
-                &-h-#{$current-size} {
-                    #{$boundary-property}-left: $current-size-value !important;
-                    #{$boundary-property}-right: $current-size-value !important;
-                }
-            }
+  @each $boundary, $boundary-property in $box-boundary-list {
+    &-#{$boundary} {
+      @each $current-size, $current-size-value in $spacer-size-list {
+        @each $side in $spacer-sides {
+          &-#{$side}-#{$current-size} {
+            #{$boundary-property}-#{$side}: $current-size-value !important;
+          }
         }
+        &-#{$current-size} {
+          #{$boundary-property}: $current-size-value !important;
+        }
+        &-v-#{$current-size} {
+          #{$boundary-property}-top: $current-size-value !important;
+          #{$boundary-property}-bottom: $current-size-value !important;
+        }
+        &-h-#{$current-size} {
+          #{$boundary-property}-left: $current-size-value !important;
+          #{$boundary-property}-right: $current-size-value !important;
+        }
+      }
     }
+  }
 }
 
-
 .shadow-default {
-    @include shadow-default();
+  @include shadow-default();
 }
 
 .shadow-thin {
-    @include shadow-thin();
+  @include shadow-thin();
 }
 
 .shadow-none {
-    @include shadow-none();
+  @include shadow-none();
 }
 
-// Text Colors 
+// Text Colors
 
 .text-color-normal {
-    color: $color-black;
+  color: $color-black;
 }
 
 // Text Decorations
 
 .text-bold {
-    font-weight: bold;
+  font-weight: bold;
 }

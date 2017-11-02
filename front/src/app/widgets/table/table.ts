@@ -1,13 +1,13 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import {Component, Input, EventEmitter, Output} from '@angular/core';
 import {GetTaskDetails} from "../../shared/services/get-task-details/get-task-details.service";
 import {PathConstats} from "../../shared/constants/path-constants";
-import { TableConfigObject } from "../../shared/schemas/table-config-schema";
-import { ColumnCustomizationSchema, TableRowSchema } from "../../shared/schemas/table-row-schema";
-import { EmitterService } from "../../shared/services/emitter/emitter.service";
-import { TableRows, EmitSelectedRows,EmitClickedElement} from "../../shared/schemas/table-rows";
-import { UIConstants } from "../../shared/constants/ui-constants";
-import { LoadingComponent } from "../loading/loading.component";
-import { AppLoadingService } from "../../shared/services/loading/app-loading.service";
+import {TableConfigObject} from "../../shared/schemas/table-config-schema";
+import {ColumnCustomizationSchema, TableRowSchema} from "../../shared/schemas/table-row-schema";
+import {EmitterService} from "../../shared/services/emitter/emitter.service";
+import {TableRows, EmitSelectedRows, EmitClickedElement} from "../../shared/schemas/table-rows";
+import {UIConstants} from "../../shared/constants/ui-constants";
+import {LoadingComponent} from "../loading/loading.component";
+import {AppLoadingService} from "../../shared/services/loading/app-loading.service";
 
 
 @Component({
@@ -16,7 +16,7 @@ import { AppLoadingService } from "../../shared/services/loading/app-loading.ser
   styles: [require('./table.css')]
 })
 
-export class Table{
+export class Table {
 
   check: boolean;
 
@@ -26,37 +26,39 @@ export class Table{
   @Input("tableName") tableName: string;
   @Output() tableConfigObjectChange = new EventEmitter<TableConfigObject>();
   @Output() onRowSelection? = new EventEmitter();
-  ColumnCustomization:ColumnCustomizationSchema;
-  isTableLoading=true;
-  selectedRows : Array<TableRows> =[];
-  checkboxes :Array<boolean> =[];
+  ColumnCustomization: ColumnCustomizationSchema;
+  isTableLoading = true;
+  selectedRows: Array<TableRows> = [];
+  checkboxes: Array<boolean> = [];
   selectedRowEmitter;
   elementClickedEmitter;
-  showButtons:boolean;
-  selectedRowCount : number;
-  selectAllCheck:boolean;
-  emitSelectedRows:EmitSelectedRows;
+  showButtons: boolean;
+  selectedRowCount: number;
+  selectAllCheck: boolean;
+  emitSelectedRows: EmitSelectedRows;
   emitClickedElement: EmitClickedElement;
   sortDataEmitter: any;
   tableColumnCustomization: any;
 
-  constructor(private getTaskDetails:GetTaskDetails,public  EmitterService:EmitterService,private appLoadingService: AppLoadingService)  {
-      this.eventCreateor();
-      this.emitSelectedRows = new EmitSelectedRows();
-      this.emitClickedElement = new EmitClickedElement();
+  constructor(private getTaskDetails: GetTaskDetails, public  EmitterService: EmitterService, private appLoadingService: AppLoadingService) {
+    this.eventCreateor();
+    this.emitSelectedRows = new EmitSelectedRows();
+    this.emitClickedElement = new EmitClickedElement();
   }
+
   ngOnInit() {
 
   }
-  eventCreateor(){
+
+  eventCreateor() {
     this.selectedRowEmitter = this.EmitterService.get("SelectedRows");
     this.elementClickedEmitter = this.EmitterService.get("elementClicked");
-    this.sortDataEmitter=this.EmitterService.get("sortBy");
-    this.tableColumnCustomization=this.EmitterService.get("tableColumnCustomization");
+    this.sortDataEmitter = this.EmitterService.get("sortBy");
+    this.tableColumnCustomization = this.EmitterService.get("tableColumnCustomization");
 
   }
 
-  isRowsLoading(){
+  isRowsLoading() {
     return this.appLoadingService.TableDataLoading;
   }
 
@@ -68,6 +70,7 @@ export class Table{
     // tableConfigObject?.columnCustomData?.columns?.length
     //console.log();
   }
+
   elementClickHandler(row, header) {
     this.emitClickedElement.selectedRows = row;
     this.emitClickedElement.actionName = header;
@@ -154,17 +157,17 @@ export class Table{
     }
   }
 
-  painationEvent ($event: TableConfigObject) {
+  painationEvent($event: TableConfigObject) {
     this.tableConfigObject = $event;
     this.tableConfigObjectChange.emit(this.tableConfigObject);
   }
 
-  showPagination () {
+  showPagination() {
     return this.tableConfigObject != undefined && this.tableConfigObject.tableData != undefined
-            && this.tableConfigObject.tableData.rows != undefined && this.tableConfigObject.tableData.rows.length != 0;
+      && this.tableConfigObject.tableData.rows != undefined && this.tableConfigObject.tableData.rows.length != 0;
   }
 
-  showPaginationLoader () {
+  showPaginationLoader() {
     return this.tableConfigObject != undefined && this.tableConfigObject.tableData != undefined;
   }
 
@@ -200,20 +203,21 @@ export class Table{
     this.sortDataEmitter.emit(sortBY);
 
   }
-  isSortable(header){
+
+  isSortable(header) {
     for (var object of this.tableConfigObject.columnCustomData.columns) {
       if (object.hasOwnProperty('isclickable')) {
-        if(header==object.column)
-          {
-            return object.isclickable;
-          }
-        
+        if (header == object.column) {
+          return object.isclickable;
+        }
+
       }
     }
-   // this.tableConfigObject.columnCustomData.columns
+    // this.tableConfigObject.columnCustomData.columns
   }
-  columnCustomization(){
-     this.tableColumnCustomization.emit();
+
+  columnCustomization() {
+    this.tableColumnCustomization.emit();
   }
 
 

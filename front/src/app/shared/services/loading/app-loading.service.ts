@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class AppLoadingService {
-   get appLoading(): boolean {
+  get appLoading(): boolean {
     return this._appLoading;
   }
 
-   set appLoading(value: boolean) {
+  set appLoading(value: boolean) {
     this._appLoading = value;
   }
 
-   get TableDataLoading(): boolean {
+  get TableDataLoading(): boolean {
     return this._TableDataLoading;
   }
 
@@ -21,6 +21,7 @@ export class AppLoadingService {
   private _appLoading: boolean = true;
   private _TableDataLoading: boolean = false;
 
-  constructor() { }
+  constructor() {
+  }
 
 }
