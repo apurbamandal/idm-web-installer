@@ -137,16 +137,6 @@ def install_standalone():
     vaultip = params.get('vaultip', None)
     boxpass = params.get('boxpass', None)
     boxusername = params.get('boxusername', None)
-    vaulttreename = params.get('vaulttreename', None)
-    vaultadminname = params.get('vaultadminname', None)
-    vaultadminpass = params.get('vaultadminpass', None)
-    ssopass = params.get('ssopass', None)
-    appsadminname = params.get('appsadminname', None)
-    appsadminpass = params.get('appsadminpass', None)
-    postgresusername = params.get('postgresusername', None)
-    postgresuserpass = params.get('postgresuserpass', None)
-    postgresadminpass = params.get('postgresadminpass', None)
-    sentinelip = params.get('sentinelip', None)
     buildid = params.get('buildid', None)
 
 
@@ -159,13 +149,7 @@ def install_standalone():
     if not identity:
         return jsonify({"error": "Token invalid"}), Status.HTTP_BAD_UNAUTHORIZED
 
-    params = request.get_json()
-    hostname = params.get('hostname', None)
-    username = params.get('hostUsername', None)
-    password = params.get('hostPassword', None)
-    buildISO = params.get('buildLocation', None)
-
-    if (hostname == None or username == None or password == None or buildISO == None):
+    if (vaultip == None or boxusername == None or boxpass == None or buildid == None):
         logger.info("Params Missing ")
         # return jsonify(msg="Params Missing"), Status.HTTP_BAD_CONFLICT
 
@@ -173,7 +157,6 @@ def install_standalone():
     port = 22
     username = boxusername
     password = boxpass
-    buildISO='http://164.99.91.109:8080/job/IDMLinuxInstaller_idm4.7.0/80/artifact/Identity_Manager_4.7_Linux.iso'
     #command = 'wget -P /tmp/ http://blr-iam-jenkins.labs.blr.novell.com:8080/view/IDM_4.7.0/view/Install/job/IDMLinuxInstaller_idm4.7.0/lastSuccessfulBuild/artifact/Identity_Manager_4.7_Linux.iso'
     command = './install_idm.sh &> output.log '+buildid+' &'
     command2 = 'cd /tmp/'

@@ -9,3 +9,5 @@ cd /tmp/idm/
 ./install.sh -s -f /tmp/silent.properties
 ./configure.sh -s -f /tmp/silent.properties
 rm -rf /tmp/idm
+umount /mnt
+rm -rf /tmp/a.iso

@@ -128,8 +128,8 @@ export class InstallComponent implements OnInit {
     this.webservice.install(body)
       .subscribe(
         (data) => {
-          console.log('got data');
-          //this.copyIso();
+          console.log('Installation Successfully triggered.');
+
         },
         (err) => this.logError(err),
         () => console.log('got data')
