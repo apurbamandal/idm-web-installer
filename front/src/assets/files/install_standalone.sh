@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 curl -o /tmp/a.iso http://blr-iam-jenkins.labs.blr.novell.com:8080/view/IDM_4.7.0/view/Install/job/IDMLinuxInstaller_idm4.7.0/$1/artifact/Identity_Manager_4.7_Linux.iso &> /tmp/download.log
 mount -o loop /tmp/a.iso /mnt
 mkdir /tmp/idm/
