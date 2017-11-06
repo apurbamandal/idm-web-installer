@@ -46,7 +46,7 @@ export class InstallComponent implements OnInit {
   public saveProperties(body) {
     this.webservice.saveProperties(body)
       .subscribe((data) => {
-          this.download(this.body);
+          this.install(this.body);
           console.log('got data');
         },
         (err) => this.logError(err));
@@ -76,7 +76,7 @@ export class InstallComponent implements OnInit {
         (err) => this.logError(err));
   }
   public copysilent(body) {
-    this.webservice.copysilent(body)
+    this.webservice.copyRequiredFiles(body)
       .subscribe(
         (data) => {
           this.saveProperties(this.body);
@@ -124,8 +124,8 @@ export class InstallComponent implements OnInit {
 
   }
 
-  public download(body) {
-    this.webservice.download(body)
+  public install(body) {
+    this.webservice.install(body)
       .subscribe(
         (data) => {
           console.log('got data');

@@ -15,12 +15,10 @@ export class InstallService {
     return this.http.get('/idmtools/api/loginCheck');
   }
 
-  public install() {
-    return this.http.post('/idmtools/api/install', {});
-  }
 
-  public download(body: any) {
-    return this.http.post('/idmtools/api/download', body);
+
+  public install(body: any) {
+    return this.http.post('/idmtools/api/install_standalone', body);
   }
 
   public copyIso() {
@@ -34,8 +32,8 @@ export class InstallService {
   public s_configure() {
     return this.http.post('/idmtools/api/s_configure', {});
   }
-  public copysilent(body: any) {
-    return this.http.post('/idmtools/api/copysilent',body);
+  public copyRequiredFiles(body: any) {
+    return this.http.post('/idmtools/api/copyRequiredFiles',body);
   }
   public saveProperties(body: any) {
     return this.http.post('/idmtools/api/saveProperties', body);

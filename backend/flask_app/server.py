@@ -129,9 +129,9 @@ def main():
         pass
 
 
-@app.route('/idmtools/api/download', methods=['POST'])
+@app.route('/idmtools/api/install_standalone', methods=['POST'])
 @jwt_required
-def download():
+def install_standalone():
 
     params = request.get_json()
     vaultip = params.get('vaultip', None)
@@ -485,8 +485,8 @@ def save():
 
     return jsonify("Installation will be started shortly in "+vaultip+'.'), 200
 
-@app.route('/idmtools/api/copysilent', methods=['POST'])
-def copysilent():
+@app.route('/idmtools/api/copyRequiredFiles', methods=['POST'])
+def copyRequiredFiles():
 
     params = request.get_json()
     vaultip = params.get('vaultip', None)
@@ -522,7 +522,7 @@ def copysilent():
     sftp.put('../front/src/assets/files/silent.properties', '/tmp/silent.properties')
     sftp.close()
     sftp = client.open_sftp()
-    sftp.put('../front/src/assets/files/a.sh', '/tmp/install_idm.sh')
+    sftp.put('../front/src/assets/files/install_standalone.sh', '/tmp/install_idm.sh')
     sftp.close()
 
     client.close()
