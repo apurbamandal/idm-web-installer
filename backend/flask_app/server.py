@@ -13,6 +13,9 @@ from flask_jwt_simple import (
 )
 import paramiko
 import socket
+import select
+import base64
+
 
 try:
     from StringIO import StringIO
@@ -109,7 +112,6 @@ def get_data():
                     status=Status.HTTP_OK_BASIC,
                     mimetype='application/json')
 
-
 def main():
     """Main entry point of the app."""
     try:
@@ -127,7 +129,6 @@ def main():
     finally:
         # Do something here
         pass
-
 
 @app.route('/idmtools/api/download', methods=['POST'])
 @jwt_required
@@ -159,11 +160,7 @@ def download():
     if not identity:
         return jsonify({"error": "Token invalid"}), Status.HTTP_BAD_UNAUTHORIZED
 
-    params = request.get_json()
-    hostname = params.get('hostname', None)
-    username = params.get('hostUsername', None)
-    password = params.get('hostPassword', None)
-    buildISO = params.get('buildLocation', None)
+
 
     if (hostname == None or username == None or password == None or buildISO == None):
         logger.info("Params Missing ")
@@ -481,7 +478,7 @@ def save():
     #asd
     # var1=copyIso()
     #copysilent()
-    #download()
+    download()
 
     return jsonify("Installation will be started shortly in "+vaultip+'.'), 200
 
@@ -640,4 +637,31 @@ def LoginCheck():
     json_response = json.dumps(data)
     return Response(json_response,
                     status=Status.HTTP_OK_BASIC,
-                    mimetype='application/json')
+                    mimetype='application/json')\
+
+@app.route('/idmtools/api/Logs', methods=['POST'])
+def Logs():
+    """Get dummy data returned from the server."""
+    # params = request.get_json()
+    # vaultip = params.get('vaultip', '164.99.91.35')
+    # boxpass = params.get('boxpass', 'novell')
+    # boxusername = params.get('boxusername', 'root')
+    hostname = '164.99.91.35'
+    port = 22
+    username = 'root'
+    password = 'novell'
+    # jwt_data = get_jwt
+
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.connect(hostname=hostname, username=username, password=password, port=port)
+    try:
+        sftp = client.open_sftp()
+        # stdin = sftp.open('/var/opt/netiq/idm/log/idminstall.log','r')
+        stdin = sftp.open('/tmp/download.log','r')
+    except Exception:
+        sftp.close()
+        return jsonify('no file'),489
+    data = stdin.readlines()
+    print (data)
+    return jsonify(data),200

@@ -5,6 +5,8 @@ import {FormGroup} from '@angular/forms';
 import {InstallSchema} from "../shared/schemas/install";
 import {VariableService} from "../shared/services/utilities/util_variable/variable.service";
 import {InstallService} from "../shared/services/install/install.service";
+import { Observable } from 'rxjs/Observable';
+declare var jQuery: any;
 
 @Component({
   selector: 'idm-install',
@@ -17,14 +19,20 @@ export class InstallComponent implements OnInit {
   private installFormGroup: FormGroup;
   private installForm: InstallSchema = new InstallSchema();
   body:any;
-
+  data:string;
+  showm:boolean=false;
+  regex = /((?:2|1)\d{3}(?:-|\/)(?:(?:0[1-9])|(?:1[0-2]))(?:-|\/)(?:(?:0[1-9])|(?:[1-2][0-9])|(?:3[0-1]))(?:T|\s)(?:(?:[0-1][0-9])|(?:2[0-3])):(?:[0-5][0-9]):(?:[0-5][0-9]))(\+)((?:(?:[0-1][0-9])|(?:[2][0-3])|(?:[0-9])):(?:[0-5][0-9])(?::[0-5][0-9])?(?:\s?(?:am|AM|pm|PM))?)(\s+)(.)/igm;
+  regex2=/,/igm;
+  regex3=/\r/igm;
   constructor(private http: Http, private router: Router, private webservice: InstallService, private variableService: VariableService) {
     this.createForm();
+
   }
 
   public ngOnInit() {
     this.webservice.loginCheck().subscribe(res => console.log(res));
   }
+
   public createForm() {
     this.installFormGroup = new FormGroup({
       vaultip: this.installForm.vaultip,
@@ -43,6 +51,7 @@ export class InstallComponent implements OnInit {
       buildid: this.installForm.buildid
     });
   }
+
   public saveProperties(body) {
     this.webservice.saveProperties(body)
       .subscribe((data) => {
@@ -51,6 +60,7 @@ export class InstallComponent implements OnInit {
         },
         (err) => this.logError(err));
   }
+
   public  save() {
     this.body = {
       vaultip: this.installForm.vaultip.value,
@@ -72,9 +82,11 @@ export class InstallComponent implements OnInit {
       .subscribe((data) => {
           this.copysilent(this.body);
           console.log('got data');
+          this.showLogs(this.body);
         },
         (err) => this.logError(err));
   }
+
   public copysilent(body) {
     this.webservice.copysilent(body)
       .subscribe(
@@ -86,6 +98,7 @@ export class InstallComponent implements OnInit {
         () => console.log('got data')
       );
   }
+
   public isFormValid() {
     let isValid: boolean = this.installFormGroup.valid && !(this.variableService.isEmptyArray(this.installForm.vaultadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.appsadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.vaultip.value)) && !(this.variableService.isEmptyArray(this.installForm.boxusername.value));
     return isValid;
@@ -128,12 +141,25 @@ export class InstallComponent implements OnInit {
     this.webservice.download(body)
       .subscribe(
         (data) => {
-          console.log('got data');
-          //this.copyIso();
-        },
-        (err) => this.logError(err),
-        () => console.log('got data')
+         // this.displayLog(data);
+        }
       );
+
+  }
+
+  public showLogs(body) {
+    this.webservice.showLogs(body)
+      .subscribe(
+        (data) => {
+         this.displayLog(data);
+        }
+      );
+
+  }
+
+  public scroll(){
+    setTimeout(function(){ jQuery('#log').animate({
+      scrollTop: jQuery('#log')[0].scrollHeight}, 200); }, 1000);
   }
 
   public copyIso() {
@@ -146,6 +172,7 @@ export class InstallComponent implements OnInit {
         () => console.log('got data')
       );
   }
+
   private logError(err: Response) {
     console.log('There was an error: ' + err.status);
     if (err.status === 0) {
@@ -156,4 +183,19 @@ export class InstallComponent implements OnInit {
     }
   }
 
+  public showModal(){
+
+    jQuery('#RoleQuickInfo').modal('show');
+    this.scroll();
+  }
+
+  public displayLog(data){
+
+    jQuery('#RoleQuickInfo').modal('show');
+    let result = data.json().toString();
+    this.data=result.replace(this.regex3, '\n');;
+    // result = result.replace(this.regex, '');
+    // this.data = result.replace(this.regex2, '');
+    this.scroll();
+  }
 }

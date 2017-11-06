@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http} from "@angular/http";
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class InstallService {
@@ -21,6 +22,12 @@ export class InstallService {
 
   public download(body: any) {
     return this.http.post('/idmtools/api/download', body);
+
+  }
+  public showLogs(body: any) {
+    //return this.http.post('/idmtools/api/download', body);
+    return Observable.interval(2000)
+      .switchMap(() => this.http.post('/idmtools/api/Logs', body ));
   }
 
   public copyIso() {
@@ -42,5 +49,10 @@ export class InstallService {
   }
   public save(body: any) {
     return this.http.post('/idmtools/api/save', body);
+  }
+  private extractFeedbackMessage(res:Response){
+    let body=res.json() ||{};
+    return body;
+
   }
 }
