@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http} from "@angular/http";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class InstallService {
@@ -39,6 +40,13 @@ export class InstallService {
     return this.http.post('/idmtools/api/copyRequiredFiles_apps', body);
   }
 
+  public showLogs(body: any) {
+    //return this.http.post('/idmtools/api/download', body);
+    return Observable.interval(2000)
+      .switchMap(() => this.http.post('/idmtools/api/Logs', body ));
+  }
+
+
 
   public copyRequiredFiles(body: any) {
     return this.http.post('/idmtools/api/copyRequiredFiles',body);
@@ -54,7 +62,7 @@ export class InstallService {
     return this.http.post('/idmtools/api/saveProperties_vault', body);
   }
   public save(body: any) {
-    return this.http.post('/idmtools/api/save', body);
+    return this.http.post('/idmtools/api/save5', body);
   }
   public save_distributed(body: any) {
     return this.http.post('/idmtools/api/save_distributed', body);

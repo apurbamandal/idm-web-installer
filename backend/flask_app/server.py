@@ -714,6 +714,71 @@ def save():
 
     return jsonify("Installation will be started shortly in "+vaultip+'.'), 200
 
+@app.route('/idmtools/api/save5', methods=['POST'])
+def save5():
+
+    logger.info('api called')
+
+    params = request.get_json()
+    vaultip = params.get('vaultip', None)
+    boxpass = params.get('boxpass', None)
+    boxusername = params.get('boxusername', None)
+    vaulttreename = params.get('vaulttreename', None)
+    vaultadminname = params.get('vaultadminname', None)
+    vaultadminpass = params.get('vaultadminpass', None)
+    ssopass = params.get('ssopass', None)
+    appsadminname = params.get('appsadminname', None)
+    appsadminpass = params.get('appsadminpass', None)
+    postgresusername = params.get('postgresusername', None)
+    postgresuserpass = params.get('postgresuserpass', None)
+    postgresadminpass = params.get('postgresadminpass', None)
+    sentinelip = params.get('sentinelip', None)
+    buildid = params.get('buildid', None)
+
+    logger.info(vaultip)
+
+    if not vaultip:
+        return jsonify(
+            {"msg": "Please provide a proper ip where you want to create Identity Vault."}), Status.HTTP_BAD_REQUEST
+    if not vaulttreename:
+        return jsonify({"msg": "Plese provide a valid and unique Tree name."})
+    if not boxusername:
+        return jsonify({"msg": "Please provide your machine login credentials."}), Status.HTTP_BAD_REQUEST
+    if not boxpass:
+        return jsonify({"msg": "Please provide your machine login credentials."}), Status.HTTP_BAD_REQUEST
+    if not vaultadminname:
+        return jsonify({"msg": "Please provide your vault admin username in LDAP format"}), Status.HTTP_BAD_REQUEST
+    if not appsadminname:
+        return jsonify(
+            {"msg": "Please provide you Identity apps admin username in LDAP format."}), Status.HTTP_BAD_REQUEST
+    if not buildid:
+        buildid = 'lastSuccessfulBuild'
+    if not vaultadminpass:
+        vaultadminpass = "novell"
+    if not ssopass:
+        ssopass = "novell"
+    # if buildid == None:
+    #     buildid = "lastSuccessfulBuild"
+    if not appsadminpass:
+        appsadminpass = "novell"
+    if not postgresusername:
+        postgresusername = "idmadmin"
+    if not postgresuserpass:
+        postgresuserpass = "novell"
+    if not postgresadminpass:
+        postgresadminpass = "novell"
+    if not sentinelip:
+        sentinelip = "127.0.0.1"
+
+    # var=download()
+    #asd
+    #asd
+    # var1=copyIso()
+    #copysilent()
+    #download()
+
+    return jsonify("Installation will be started shortly in "+vaultip+'.'), 200
+
 @app.route('/idmtools/api/copyRequiredFiles', methods=['POST'])
 def copyRequiredFiles():
 
@@ -897,3 +962,36 @@ def LoginCheck():
     return Response(json_response,
                     status=Status.HTTP_OK_BASIC,
                     mimetype='application/json')
+
+@app.route('/idmtools/api/Logs', methods=['POST'])
+def Logs():
+    """Get dummy data returned from the server."""
+    # params = request.get_json()
+    # vaultip = params.get('vaultip', '164.99.91.35')
+    # boxpass = params.get('boxpass', 'novell')
+    # boxusername = params.get('boxusername', 'root')
+    hostname = '164.99.91.35'
+    port = 22
+    username = 'root'
+    password = 'novell'
+    # jwt_data = get_jwt
+    logType = 'download'
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.connect(hostname=hostname, username=username, password=password, port=port)
+    try:
+        sftp = client.open_sftp()
+        # stdin = sftp.open('/var/opt/netiq/idm/log/idminstall.log','r')
+        stdin = sftp.open('/tmp/download.log','r')
+    except Exception:
+        #sftp.close()
+        logType= 'install'
+        try:
+            stdin = sftp.open('/var/opt/netiq/idm/log/idminstall.log','r')
+        except Exception:
+            sftp.close()
+            return jsonify('no file'),489
+            # return jsonify('no file'),489
+    log = stdin.readlines()
+    data={'type':logType,'log':log}
+    return jsonify(data),200
