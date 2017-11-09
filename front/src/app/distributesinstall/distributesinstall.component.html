@@ -29,7 +29,7 @@
       <!-- Text input-->
 
       <div class="form-group">
-        <label class="col-md-4 control-label">Enter Machine hostname/IP address</label>
+        <label class="col-md-4 control-label">Enter Vault hostname/IP address</label>
         <div class="col-md-4 inputGroupContainer">
           <span *ngIf="!vaultip"
                 [ngClass]="{'has-error' : installForm.vaultip?.errors && (installForm.vaultip?.dirty || installForm.vaultip?.touched), 'has-success':!installForm.vaultip?.errors && (installForm.vaultip?.dirty || installForm.vaultip?.touched)}">
@@ -132,7 +132,7 @@
       <!-- Text input-->
 
 
-      <!--<div class="form-group">
+      <div class="form-group">
         <label class="col-md-4 control-label">Enter Identity Applications DNS/IP address</label>
         <div class="col-md-4 inputGroupContainer">
           <span *ngIf="!appsip" [ngClass]="{'has-error' : installForm.appsip?.errors && (installForm.appsip?.dirty || installForm.appsip?.touched), 'has-success':!installForm.appsip?.errors && (installForm.appsip?.dirty || installForm.appsip?.touched)}">
@@ -142,25 +142,41 @@
             </div>
           </span>
         </div>
-      </div>-->
+      </div>
 
       <div class="form-group">
-        <label class="col-md-4 control-label" >Enter SSPR/One SSO configuration password</label>
+        <label class="col-md-4 control-label">Enter Machine login Username</label>
         <div class="col-md-4 inputGroupContainer">
-          <span *ngIf="!ssopass"
-                [ngClass]="{'has-error' : installForm.ssopass?.errors && (installForm.ssopass?.dirty || installForm.ssopass?.touched), 'has-success':!installForm.ssopass?.errors && (installForm.ssopass?.dirty || installForm.ssopass?.touched)}">
+          <span *ngIf="!boxappsusername"
+                [ngClass]="{'has-error' : installForm.boxappsusername?.errors && (installForm.boxappsusername?.dirty || installForm.boxappsusername?.touched), 'has-success':!installForm.boxappsusername?.errors && (installForm.boxappsusername?.dirty || installForm.boxappsusername?.touched)}">
             <div class="input-group">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-              <input name="ssopass" placeholder="password" class="form-control" formControlName="ssopass"
-                     type="password">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+              <input name="boxappsusername" placeholder="root" class="form-control" formControlName="boxappsusername"
+                     type="text"
+                     required>
             </div>
           </span>
         </div>
       </div>
 
       <div class="form-group">
-      <label class="col-md-4 control-label">Enter Identity Applications Administrator name.</label>
-      <div class="col-md-4 inputGroupContainer">
+        <label class="col-md-4 control-label">Enter Machine password</label>
+        <div class="col-md-4 inputGroupContainer">
+          <span *ngIf="!boxappspass"
+                [ngClass]="{'has-error' : installForm.boxappspass?.errors && (installForm.boxappspass?.dirty || installForm.boxappspass?.touched), 'has-success':!installForm.boxappspass?.errors && (installForm.boxappspass?.dirty || installForm.boxappspass?.touched)}">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+              <input name="boxappspass" placeholder="password" class="form-control" formControlName="boxappspass"
+                     type="password" required>
+            </div>
+          </span>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="col-md-4 control-label">Enter Identity Applications Administrator name.</label>
+        <div class="col-md-4 inputGroupContainer">
         <span *ngIf="!appsadminname"
               [ngClass]="{'has-error' : installForm.appsadminname?.errors && (installForm.appsadminname?.dirty || installForm.appsadminname?.touched), 'has-success':!installForm.appsadminname?.errors && (installForm.appsadminname?.dirty || installForm.appsadminname?.touched)}">
           <div class="input-group">
@@ -169,7 +185,7 @@
                    formControlName="appsadminname" type="text">
           </div>
         </span>
-      </div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -180,6 +196,20 @@
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
               <input name="appsadminpass" placeholder="password" class="form-control" formControlName="appsadminpass"
+                     type="password">
+            </div>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" >Enter SSPR/One SSO configuration password</label>
+        <div class="col-md-4 inputGroupContainer">
+          <span *ngIf="!ssopass"
+                [ngClass]="{'has-error' : installForm.ssopass?.errors && (installForm.ssopass?.dirty || installForm.ssopass?.touched), 'has-success':!installForm.ssopass?.errors && (installForm.ssopass?.dirty || installForm.ssopass?.touched)}">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+              <input name="ssopass" placeholder="password" class="form-control" formControlName="ssopass"
                      type="password">
             </div>
           </span>
@@ -329,23 +359,5 @@
 
     </fieldset>
   </form>
-</div>
-
-<div class="modal modal-size-md modal-height-md fade in"  id="RoleQuickInfo" style="z-index: 90000000">
-  <div class="modal-dialog"  >
-    <div class="modal-content">
-      <div class="modal-body spacer-in-none">
-        <button class="close" data-dismiss="modal"><span class="sr-only" translate>Close</span></button>
-        <!--<button class="close" (click)="scroll()" ><span class="sr-only" translate>Close</span></button>-->
-
-        <pre class="log-area" id="log">
-              <code data-language="python" autofocus>{{data }}</code>
-            </pre>
-        <!--<textarea ref-textarea  class="log-area" readonly [(ngModel)]="data" rows="4"></textarea><br/>-->
-
-      </div>
-
-    </div>
-  </div>
 </div>
 <!-- /.container -->

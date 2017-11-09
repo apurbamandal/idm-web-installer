@@ -5,30 +5,23 @@ import {FormGroup} from '@angular/forms';
 import {InstallSchema} from "../shared/schemas/install";
 import {VariableService} from "../shared/services/utilities/util_variable/variable.service";
 import {InstallService} from "../shared/services/install/install.service";
-declare var jQuery: any;
 
 @Component({
-  selector: 'idm-install',
-  templateUrl: './install.component.html',
-  styleUrls: ['./install.component.css' ],
+  selector: 'idm-distributesinstall',
+  templateUrl: './distributesinstall.component.html',
+  styleUrls: ['./distributesinstall.component.css'],
   encapsulation: ViewEncapsulation.None,
   providers: [InstallService]
 })
-export class InstallComponent implements OnInit {
+export class DistributesinstallComponent implements OnInit {
   private installFormGroup: FormGroup;
   private installForm: InstallSchema = new InstallSchema();
   body:any;
-  data:string;
-  showm:boolean=false;
-  regex = /((?:2|1)\d{3}(?:-|\/)(?:(?:0[1-9])|(?:1[0-2]))(?:-|\/)(?:(?:0[1-9])|(?:[1-2][0-9])|(?:3[0-1]))(?:T|\s)(?:(?:[0-1][0-9])|(?:2[0-3])):(?:[0-5][0-9]):(?:[0-5][0-9]))(\+)((?:(?:[0-1][0-9])|(?:[2][0-3])|(?:[0-9])):(?:[0-5][0-9])(?::[0-5][0-9])?(?:\s?(?:am|AM|pm|PM))?)(\s+)(.)/igm;
-  regex2=/,/igm;
-  regex3=/\r/igm;
-
   constructor(private http: Http, private router: Router, private webservice: InstallService, private variableService: VariableService) {
     this.createForm();
   }
 
-  public ngOnInit() {
+  ngOnInit() {
     this.webservice.loginCheck().subscribe(res => console.log(res));
   }
   public createForm() {
@@ -39,6 +32,9 @@ export class InstallComponent implements OnInit {
       vaultadminname: this.installForm.vaultadminname,
       vaultadminpass: this.installForm.vaultadminpass,
       ssopass: this.installForm.ssopass,
+      appsip: this.installForm.appsip,
+      boxappsusername: this.installForm.boxappsusername,
+      boxappspass: this.installForm.boxappspass,
       appsadminname: this.installForm.appsadminname,
       appsadminpass: this.installForm.appsadminpass,
       postgresusername: this.installForm.postgresusername,
@@ -49,16 +45,6 @@ export class InstallComponent implements OnInit {
       buildid: this.installForm.buildid
     });
   }
-  public saveProperties(body) {
-    this.webservice.saveProperties(body)
-      .subscribe((data) => {
-          this.install(this.body);
-          console.log('got data');
-        },
-        (err) => this.logError(err));
-  }
-
-
   public  save() {
     this.body = {
       vaultip: this.installForm.vaultip.value,
@@ -67,6 +53,9 @@ export class InstallComponent implements OnInit {
       vaultadminname: this.installForm.vaultadminname.value,
       vaultadminpass: this.installForm.vaultadminpass.value||'novell',
       ssopass: this.installForm.ssopass.value||'novell',
+      appsip: this.installForm.appsip.value,
+      boxappsusername: this.installForm.boxappsusername.value,
+      boxappspass: this.installForm.boxappspass.value,
       boxusername: this.installForm.boxusername.value,
       appsadminname: this.installForm.appsadminname.value||'novell',
       appsadminpass: this.installForm.appsadminpass.value||'novell',
@@ -76,63 +65,12 @@ export class InstallComponent implements OnInit {
       buildid: this.installForm.buildid.value||'lastSuccessfulBuild'
     };
     console.log(this.body.buildid);
-    this.webservice.save(this.body)
+    this.webservice.save_distributed(this.body)
       .subscribe((data) => {
-          this.copysilent(this.body);
-
+          this.copysilent_vault(this.body);
           console.log('got data');
         },
         (err) => this.logError(err));
-  }
-  public copysilent(body) {
-    this.webservice.copyRequiredFiles(body)
-      .subscribe(
-        (data) => {
-          this.saveProperties(this.body);
-          console.log('files copied');
-        },
-        (err) => this.logError(err),
-        () => console.log('got data')
-      );
-  }
-  public isFormValid() {
-    let isValid: boolean = this.installFormGroup.valid && !(this.variableService.isEmptyArray(this.installForm.vaultadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.appsadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.vaultip.value)) && !(this.variableService.isEmptyArray(this.installForm.boxusername.value));
-    return isValid;
-  }
-
-  public getData() {
-    this.webservice.getDataFromBackend()
-      .subscribe(
-        (data) => console.log(data),
-        (err) => this.logError(err),
-        () => console.log('got data')
-      );
-  }
-
-
-
-  public install(body) {
-    this.webservice.install(body)
-      .subscribe(
-        (data) => {
-          console.log('Installation Successfully triggered.');
-          this.showLogs(this.body)
-
-        },
-        (err) => this.logError(err),
-        () => console.log('got data')
-      );
-  }
-
-  public copyIso() {
-    this.webservice.copyIso()
-      .subscribe(
-        (data) => {
-          console.log('got data');
-        },
-        (err) => this.logError(err),
-        () => console.log('got data')
-      );
   }
   private logError(err: Response) {
     console.log('There was an error: ' + err.status);
@@ -143,44 +81,71 @@ export class InstallComponent implements OnInit {
       this.router.navigate(['/sessionexpired']);
     }
   }
+  public isFormValid() {
+    let isValid: boolean = this.installFormGroup.valid && !(this.variableService.isEmptyArray(this.installForm.vaultadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.appsadminname.value)) && !(this.variableService.isEmptyArray(this.installForm.vaultip.value)) && !(this.variableService.isEmptyArray(this.installForm.boxusername.value)) && !(this.variableService.isEmptyArray(this.installForm.boxappsusername.value)) && !(this.variableService.isEmptyArray(this.installForm.boxappspass.value));
+    return isValid;
+  }
 
-  public showLogs(body) {
-    this.webservice.showLogs(body)
+  private saveProperties_apps(body: any) {
+    this.webservice.saveProperties_apps(body)
+      .subscribe((data) => {
+          this.install_apps(this.body);
+          console.log('got data');
+        },
+        (err) => this.logError(err));
+  }
+  private saveProperties_vault(body: any) {
+    this.webservice.saveProperties_vault(body)
+      .subscribe((data) => {
+          this.install_vault(this.body);
+          console.log('got data');
+        },
+        (err) => this.logError(err));
+  }
+
+  public copysilent_apps(body) {
+    this.webservice.copyRequiredFiles_apps(body)
       .subscribe(
         (data) => {
-
-          this.displayLog(data);
-        }
+          this.saveProperties_apps(this.body);
+          console.log('files copied');
+        },
+        (err) => this.logError(err),
+        () => console.log('got data')
       );
-
+  }
+  public copysilent_vault(body) {
+    this.webservice.copyRequiredFiles_vault(body)
+      .subscribe(
+        (data) => {
+          this.saveProperties_vault(this.body);
+          console.log('files copied');
+        },
+        (err) => this.logError(err),
+        () => console.log('got data')
+      );
   }
 
-  public scroll(){
-    setTimeout(function(){ jQuery('#log').animate({
-      scrollTop: jQuery('#log')[0].scrollHeight}, 200); }, 1000);
+  public install_vault(body) {
+    this.webservice.install_vault(body)
+      .subscribe(
+        (data) => {
+          this.copysilent_apps(this.body);
+          console.log('files copied');
+        },
+        (err) => this.logError(err),
+        () => console.log('got data')
+      );
   }
-
-  public showModal(){
-
-    jQuery('#RoleQuickInfo').modal('show');
-    this.scroll();
+  public install_apps(body) {
+    this.webservice.install_apps(body)
+      .subscribe(
+        (data) => {
+          //this.saveProperties_apps(this.body);
+          console.log('files copied');
+        },
+        (err) => this.logError(err),
+        () => console.log('got data')
+      );
   }
-
-  public displayLog(data){
-
-    jQuery('#RoleQuickInfo').modal('show');
-    let result = data.json();
-    let result1 = result.log.toString();
-    if ( result.type === 'download') {
-
-      this.data = result1.replace(this.regex3, '\n');
-    }else if (  result.type === 'install') {
-      result1 = result1.replace(this.regex, '');
-      this.data = result1.replace(this.regex2, '');
-    }
-    // result = result.replace(this.regex, '');
-    // this.data = result.replace(this.regex2, '');
-    this.scroll();
-  }
-
 }
