@@ -112,6 +112,7 @@ def get_data():
                     status=Status.HTTP_OK_BASIC,
                     mimetype='application/json')
 
+
 def main():
     """Main entry point of the app."""
     try:
@@ -130,9 +131,10 @@ def main():
         # Do something here
         pass
 
-@app.route('/idmtools/api/download', methods=['POST'])
+
+@app.route('/idmtools/api/install_standalone', methods=['POST'])
 @jwt_required
-def download():
+def install_standalone():
 
     params = request.get_json()
     vaultip = params.get('vaultip', None)
@@ -160,7 +162,11 @@ def download():
     if not identity:
         return jsonify({"error": "Token invalid"}), Status.HTTP_BAD_UNAUTHORIZED
 
-
+    params = request.get_json()
+    hostname = params.get('hostname', None)
+    username = params.get('hostUsername', None)
+    password = params.get('hostPassword', None)
+    buildISO = params.get('buildLocation', None)
 
     if (hostname == None or username == None or password == None or buildISO == None):
         logger.info("Params Missing ")
@@ -478,12 +484,12 @@ def save():
     #asd
     # var1=copyIso()
     #copysilent()
-    download()
+    #download()
 
     return jsonify("Installation will be started shortly in "+vaultip+'.'), 200
 
-@app.route('/idmtools/api/copysilent', methods=['POST'])
-def copysilent():
+@app.route('/idmtools/api/copyRequiredFiles', methods=['POST'])
+def copyRequiredFiles():
 
     params = request.get_json()
     vaultip = params.get('vaultip', None)
@@ -519,7 +525,7 @@ def copysilent():
     sftp.put('../front/src/assets/files/silent.properties', '/tmp/silent.properties')
     sftp.close()
     sftp = client.open_sftp()
-    sftp.put('../front/src/assets/files/a.sh', '/tmp/install_idm.sh')
+    sftp.put('../front/src/assets/files/install_standalone.sh', '/tmp/install_idm.sh')
     sftp.close()
 
     client.close()
@@ -637,7 +643,7 @@ def LoginCheck():
     json_response = json.dumps(data)
     return Response(json_response,
                     status=Status.HTTP_OK_BASIC,
-                    mimetype='application/json')\
+                    mimetype='application/json')
 
 @app.route('/idmtools/api/Logs', methods=['POST'])
 def Logs():
