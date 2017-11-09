@@ -100,29 +100,7 @@ export class InstallComponent implements OnInit {
       );
   }
 
-  public s_install() {
-    this.webservice.s_install()
-      .subscribe(
-        (data) => {
-          console.log('installation started');
-        },
-        (err) => this.logError(err),
-        () => console.log('got data')
-      );
 
-  }
-
-  public s_confiugre() {
-    this.webservice.s_configure()
-      .subscribe(
-        (data) => {
-          console.log('configuration started');
-        },
-        (err) => this.logError(err),
-        () => console.log('got data')
-      );
-
-  }
 
   public install(body) {
     this.webservice.install(body)
