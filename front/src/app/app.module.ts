@@ -68,6 +68,7 @@ import {HeaderComponent} from "./header/header.component";
 import {FooterComponent} from "./footer/footer.component";
 import {LoginComponent} from './login/login.component';
 import {InstallComponent} from "./install/install.component";
+import { DistributesinstallComponent } from './distributesinstall/distributesinstall.component';
 
 
 // Application wide providers
@@ -111,7 +112,8 @@ export function HttpLoaderFactory(http: Http) {
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    InstallComponent
+    InstallComponent,
+    DistributesinstallComponent
   ],
   /**
    * Import Angular's modules.

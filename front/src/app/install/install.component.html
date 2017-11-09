@@ -6,10 +6,10 @@
 
       </h2>
       <div class="header-actions">
-        <button type="button" (click)="download()" class="btn btn-primary">Download</button>
+        <!--<button type="button" (click)="download()" class="btn btn-primary">Download</button>
         <button type="button" (click)="copyIso()" class="btn btn-primary">Mount</button>
         <button type="button" (click)="s_install()" class="btn btn-primary">Install</button>
-        <button type="button" (click)="s_confiugre()" class="btn btn-primary">Configure</button>
+        <button type="button" (click)="s_confiugre()" class="btn btn-primary">Configure</button>-->
       </div>
     </div>
   </div>
@@ -189,15 +189,15 @@
 
       <!--<div class="form-group">
         <label class="col-md-4 control-label">Do you want to enable clustering?</label>
-        <div class="col-md-4">
+        <div class="col-md-4 inputGroupContainer">
           <div class="radio">
             <label>
-              <input type="radio" name="clustering" value="yes" /> True
+              <input type="radio" name="clustering" value="yes" class="form-control" formControlName="clus_true" /> True
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="clustering" value="no" checked/> False
+              <input type="radio" name="clustering" class="form-control" formControlName="clus_false" value="no" checked/> False
             </label>
           </div>
         </div>
@@ -329,5 +329,23 @@
 
     </fieldset>
   </form>
+</div>
+
+<div class="modal modal-size-md modal-height-md fade in"  id="RoleQuickInfo" style="z-index: 90000000">
+  <div class="modal-dialog"  >
+    <div class="modal-content">
+      <div class="modal-body spacer-in-none">
+        <button class="close" data-dismiss="modal"><span class="sr-only" translate>Close</span></button>
+        <!--<button class="close" (click)="scroll()" ><span class="sr-only" translate>Close</span></button>-->
+
+        <pre class="log-area" id="log">
+              <code data-language="python" autofocus>{{data }}</code>
+            </pre>
+        <!--<textarea ref-textarea  class="log-area" readonly [(ngModel)]="data" rows="4"></textarea><br/>-->
+
+      </div>
+
+    </div>
+  </div>
 </div>
 <!-- /.container -->

@@ -15,5 +15,7 @@ export class InstallSchema {
   postgresadminpass = new FormControl('', []);
   sentinelip = new FormControl('', []);
   buildid = new FormControl('', []);
+  boxappsusername =  new FormControl('',[]);
+  boxappspass =  new FormControl('',[]);
   vaultadminname = new FormControl('cn=admin,ou=sa,o=system', [Validators.required]);
 }
