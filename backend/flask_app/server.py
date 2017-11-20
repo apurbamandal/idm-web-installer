@@ -1000,8 +1000,8 @@ def Logs():
                     stdin = sftp.open('/tmp/download.log','r')
                 except Exception:
                     sftp.close()
-                    return jsonify('no file'),489
-        sftp.close()
+                    return jsonify('no file'),200
+        #sftp.close()
         log = stdin.readlines()
         data={'type':logType,'log':log}
         return jsonify(data),200
