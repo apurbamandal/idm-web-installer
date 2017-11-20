@@ -13,3 +13,16 @@
   box-shadow: 0 0 0 0 transparent;
 
 }
+
+displaym{
+  display: flex !important;
+}
+
+.log-area{
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  white-space: pre;
+  background-color:black;
+  color: white;
+  margin: 0px;
+}
