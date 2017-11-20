@@ -174,12 +174,11 @@ export class InstallComponent implements OnInit {
     if ( result.type === 'download') {
 
       this.data = result1.replace(this.regex3, '\n');
-    }else if (  result.type === 'install') {
+    }else  {
       result1 = result1.replace(this.regex, '');
       this.data = result1.replace(this.regex2, '');
     }
-    // result = result.replace(this.regex, '');
-    // this.data = result.replace(this.regex2, '');
+
     this.scroll();
   }
 
