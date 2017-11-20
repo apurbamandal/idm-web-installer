@@ -12,7 +12,8 @@ from flask_jwt_simple import (
     JWTManager, jwt_required, create_jwt, get_jwt_identity, get_jwt
 )
 import paramiko
-import socket
+import socket,time
+
 
 try:
     from StringIO import StringIO
@@ -118,7 +119,8 @@ def main():
         http_server = WSGIServer((ip, port),
                                  app,
                                  log=logging,
-                                 error_log=logging)
+                                 error_log=logging,
+                                 )
         print("Server started at: {0}:{1}".format(ip, port))
         http_server.serve_forever()
     except Exception as exc:
@@ -862,7 +864,7 @@ def copyRequiredFiles_apps():
     sftp.put('../front/src/assets/files/silent_apps.properties', '/tmp/silent.properties')
     sftp.close()
     sftp = client.open_sftp()
-    sftp.put('../front/src/assets/files/install_apps.sh', '/tmp/install_idm.sh')
+    sftp.put('backend/flask_app/assets/files/install_standalone.sh', '/tmp/install_idm.sh')
     sftp.close()
     client.close()
     return jsonify("return"), 200
@@ -964,34 +966,43 @@ def LoginCheck():
                     mimetype='application/json')
 
 @app.route('/idmtools/api/Logs', methods=['POST'])
+@jwt_required
 def Logs():
-    """Get dummy data returned from the server."""
-    # params = request.get_json()
-    # vaultip = params.get('vaultip', '164.99.91.35')
-    # boxpass = params.get('boxpass', 'novell')
-    # boxusername = params.get('boxusername', 'root')
-    hostname = '164.99.91.35'
-    port = 22
-    username = 'root'
-    password = 'novell'
-    # jwt_data = get_jwt
-    logType = 'download'
-    client = paramiko.SSHClient()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(hostname=hostname, username=username, password=password, port=port)
-    try:
-        sftp = client.open_sftp()
-        # stdin = sftp.open('/var/opt/netiq/idm/log/idminstall.log','r')
-        stdin = sftp.open('/tmp/download.log','r')
-    except Exception:
-        #sftp.close()
-        logType= 'install'
+        """Get dummy data returned from the server."""
+       # time.sleep(100)
+        params = request.get_json()
+        hostname = params.get('vaultip', '164.99.91.35')
+        password = params.get('boxpass', 'novell')
+        username = params.get('boxusername', 'root')
+        port = 22
+        logType = 'download'
+        client = paramiko.SSHClient()
+        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        client.connect(hostname=hostname, username=username, password=password, port=port)
+
         try:
-            stdin = sftp.open('/var/opt/netiq/idm/log/idminstall.log','r')
+            print('configure')
+            logType= 'configure'
+            sftp = client.open_sftp()
+            stdin = sftp.open('/var/opt/netiq/idm/log/idmconfigure.log','r')
+            # sftp.close();
         except Exception:
-            sftp.close()
-            return jsonify('no file'),489
-            # return jsonify('no file'),489
-    log = stdin.readlines()
-    data={'type':logType,'log':log}
-    return jsonify(data),200
+            try:
+                print('install')
+                logType= 'install'
+                # sftp = client.open_sftp()
+                stdin = sftp.open('/var/opt/netiq/idm/log/idminstall.log','r')
+            except Exception:
+                #sftp.close()
+                print('download')
+                logType= 'download'
+                try:
+                    stdin = sftp.open('/tmp/download.log','r')
+                except Exception:
+                    sftp.close()
+                    return jsonify('no file'),489
+        sftp.close()
+        log = stdin.readlines()
+        data={'type':logType,'log':log}
+        return jsonify(data),200
+
