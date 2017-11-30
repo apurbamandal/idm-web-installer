@@ -7,6 +7,7 @@ import logging
 import traceback
 from datetime import datetime
 from flask import Response, request, jsonify, current_app
+from gevent import os
 from gevent.wsgi import WSGIServer
 from flask_jwt_simple import (
     JWTManager, jwt_required, create_jwt, get_jwt_identity, get_jwt
@@ -495,7 +496,7 @@ def saveProperties():
     port = 22
     username = boxusername
     password = boxpass
-    command1 = 'sed -i -e "/ID_VAULT_ADMIN_LDAP=/ s/=.*/=' + vaultadminname + '/" -e "/ID_VAULT_TREENAME=/ s/=.*/=' + vaulttreename + '/" -e "/ID_VAULT_PASSWORD=/ s/=.*/=' + vaultadminpass + '/" -e "/ID_VAULT_HOST=/ s/=.*/=' + vaultip + '/" -e "/TOMCAT_SERVLET_HOSTNAME=/ s/=.*/=' + vaultip + '/" -e "/SSO_SERVER_HOST=/ s/=.*/=' + vaultip + '/" -e "/SSO_SERVER_HOST=/ s/=.*/=' + vaultip + '/" -e "/CONFIGURATION_PWD=/ s/=.*/=' + ssopass + '/" -e "/SSO_SERVICE_PWD=/ s/=.*/=' + ssopass + '/" -e "/UA_ADMIN=/ s/=.*/=' + appsadminname + '/" -e "/UA_ADMIN_PWD=/ s/=.*/=' + appsadminpass + '/" -e "/UA_DATABASE_USER=/ s/=.*/=' + postgresusername + '/" -e "/UA_DATABASE_PWD=/ s/=.*/=' + postgresusername + '/" -e "/SENTINEL_AUDIT_SERVER=/ s/=.*/=' + sentinelip + '/" /tmp/silent.properties'
+    command1 = """sed -i -e "/ID_VAULT_ADMIN_LDAP='/ s/=.*/='""" + vaultadminname + """'/" -e "/ID_VAULT_TREENAME='/ s/=.*/='""" + vaulttreename + """'/" -e "/ID_VAULT_PASSWORD='/ s/=.*/='""" + vaultadminpass + """'/" -e "/ID_VAULT_HOST='/ s/=.*/='""" + vaultip + """'/" -e "/TOMCAT_SERVLET_HOSTNAME='/ s/=.*/='""" + vaultip + """'/" -e "/SSO_SERVER_HOST='/ s/=.*/='""" + vaultip + """'/" -e "/SSO_SERVER_HOST='/ s/=.*/='""" + vaultip + """'/" -e "/CONFIGURATION_PWD='/ s/=.*/='""" + ssopass + """'/" -e "/SSO_SERVICE_PWD='/ s/=.*/='""" + ssopass + """'/" -e "/UA_ADMIN='/ s/=.*/='""" + appsadminname + """'/" -e "/UA_ADMIN_PWD='/ s/=.*/='""" + appsadminpass + """'/" -e "/UA_DATABASE_USER='/ s/=.*/='""" + postgresusername + """'/" -e "/UA_DATABASE_PWD='/ s/=.*/='""" + postgresusername + """'/" -e "/SENTINEL_AUDIT_SERVER='/ s/=.*/='""" + sentinelip + """'/" /tmp/silent.properties"""
     print(command1)
 
     client = paramiko.SSHClient()
@@ -790,11 +791,12 @@ def copyRequiredFiles():
     boxusername = params.get('boxusername', None)
     logger.info('copy silent called.')
 
+
     hostname = vaultip
     port = 22
     username = boxusername
     password = boxpass
-
+    print(os.path.realpath('./flask_app/files/silent.properties'))
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=hostname, username=username, password=password, port=port)
@@ -802,10 +804,12 @@ def copyRequiredFiles():
     # channel.settimeout(180000)
 
     sftp = client.open_sftp()
-    sftp.put('../front/src/assets/files/silent.properties', '/tmp/silent.properties')
+
+
+    sftp.put('./flask_app/files/silent.properties', '/tmp/silent.properties')
     sftp.close()
     sftp = client.open_sftp()
-    sftp.put('../front/src/assets/files/install_standalone.sh', '/tmp/install_idm.sh')
+    sftp.put('./flask_app/files/install_standalone.sh', '/tmp/install_idm.sh')
     sftp.close()
 
     client.close()
@@ -832,10 +836,10 @@ def copyRequiredFiles_vault():
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=hostname, username=username, password=password, port=port)
     sftp = client.open_sftp()
-    sftp.put('../front/src/assets/files/silent_apps.properties', '/tmp/silent.properties')
+    sftp.put('files/silent_apps.properties', '/tmp/silent.properties')
     sftp.close()
     sftp = client.open_sftp()
-    sftp.put('../front/src/assets/files/install_apps.sh', '/tmp/install_idm.sh')
+    sftp.put('files/install_apps.sh', '/tmp/install_idm.sh')
     sftp.close()
     client.close()
     return jsonify("return"), 200
@@ -861,10 +865,10 @@ def copyRequiredFiles_apps():
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=hostname, username=username, password=password, port=port)
     sftp = client.open_sftp()
-    sftp.put('../front/src/assets/files/silent_apps.properties', '/tmp/silent.properties')
+    sftp.put('files/silent_apps.properties', '/tmp/silent.properties')
     sftp.close()
     sftp = client.open_sftp()
-    sftp.put('backend/flask_app/assets/files/install_standalone.sh', '/tmp/install_idm.sh')
+    sftp.put('files/install_standalone.sh', '/tmp/install_idm.sh')
     sftp.close()
     client.close()
     return jsonify("return"), 200
